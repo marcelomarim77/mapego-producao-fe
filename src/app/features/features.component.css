@@ -1,0 +1,15 @@
+mat-sidenav-container, mat-sidenav-content, mat-sidenav {
+    height: 90vh;
+}
+  
+.mat-sidenav {
+    width: 180px;
+}
+  
+button.menu-button {
+    color: inherit;
+    background: transparent;
+    cursor: pointer;
+    border: none;
+    outline: none;
+}
