@@ -24,7 +24,7 @@ export let menu: NavItem[] = [
             {
                 displayName: 'Transportadoras',
                 iconName: 'local_shipping',
-                route: 'cadastros/produtos'
+                route: 'cadastros/transportadoras'
             },
         ]
     },
@@ -36,7 +36,7 @@ export let menu: NavItem[] = [
     {
         displayName: 'Vendas',
         iconName: 'paid',
-        route: 'Vendas'
+        route: 'vendas'
     },
     {
         displayName: 'Estoque',

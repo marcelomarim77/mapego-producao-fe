@@ -1,1 +1,17 @@
-<p>clientes works!</p>
+<form [formGroup]="clienteForm" (ngSubmit)="onSubmitUserDetails()">
+    <mat-form-field class="full-width">
+       <input matInput placeholder="Nome ou Razão Social" formControlName="razaoSocial" maxlength="60" required>
+        <mat-error *ngFor="let validation of validationMessages.razaoSocial">
+            <mat-error class="error-message" *ngIf="clienteForm.get('razaoSocial').hasError(validation.type) && (clienteForm.get('razaoSocial').dirty || clienteForm.get('razaoSocial').touched)">{{validation.message}}</mat-error>
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+        <input matInput type="email" placeholder="E-mail" formControlName="email" maxlength="60" required>
+         <mat-error *ngFor="let validation of validationMessages.email">
+            <mat-error class="error-message" *ngIf="clienteForm.get('email').hasError(validation.type) && (clienteForm.get('email').dirty || clienteForm.get('email').touched)">{{validation.message}}</mat-error>
+        </mat-error>
+     </mat-form-field>
+ 
+     <button class="submit-btn" color="primary" mat-raised-button type="submit" [disabled]="!clienteForm.valid">Salvar</button>
+</form>
