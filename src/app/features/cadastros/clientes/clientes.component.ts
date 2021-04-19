@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 
+import { TipoPessoa } from './../../../core/tipo-pessoa';
+
+interface Animal {
+    name: string;
+    sound: string;
+}
 @Component({
   selector: 'app-clientes',
   templateUrl: './clientes.component.html',
@@ -10,12 +16,39 @@ export class ClientesComponent implements OnInit {
 
     constructor(public formBuilder: FormBuilder) { }
 
+    tipoPessoa: TipoPessoa[] = [
+        {value: 0, viewValue: 'Física'},
+        {value: 1, viewValue: 'Jurídica'},
+    ];
+
     clienteForm = this.formBuilder.group({
-        razaoSocial: ['',
+        tipoPessoa: ['',
             Validators.required
         ],
+        cpfCnpj: ['',
+            Validators.required,
+        ],
+        rgIe: [''],
+        razaoSocial: ['',
+            Validators.required,
+        ],
+        nomeFantasia: [''],
+        apelido: [''],
+        cep: [''],
+        endereco: [''],
+        numero: [''],
+        complemento: [''],
+        bairro: [''],
+        cidade: [''],
+        uf: [''],
+        contato: [''],
+        telefone: [''],
+        celular: [''],
         email: ['',
             Validators.email
+        ],
+        dadosAdicionais: ['',
+            Validators.maxLength(255),
         ],
     });
 
@@ -23,9 +56,15 @@ export class ClientesComponent implements OnInit {
     }
 
     validationMessages = {
+        'tipoPessoa': [
+            { type: 'required', message: 'Informe Pessoa Física ou Jurídica' },
+        ],
+        'cpfCnpj': [
+            { type: 'required', message: 'Informe o CPF ou CNPJ' },
+            { type: 'pattern', message: 'Informe somente números' },
+        ],
         'razaoSocial': [
           { type: 'required', message: 'Informe o nome ou razão social' },
-          { type: 'maxlength', message: 'Nome ou razão social não pode ter mais que 60 caracteres' },
         ],
         'email': [
           { type: 'required', message: 'E-mail é obrigatório' },
@@ -33,7 +72,20 @@ export class ClientesComponent implements OnInit {
         ],
     }    
 
+    pesquisaCnpj() {
+        alert('Chamar API de consulta CNPJ')
+    }
+
+    pesquisaCep() {
+        alert('Chamar API de consulta CEP')
+    }
+
     onSubmitUserDetails() {
-        console.warn(this.clienteForm.value)
+        alert('Salvar o cliente')
+    }
+
+    cancelar() {
+        this.clienteForm.reset
+        alert('Cancelar')
     }
 }
