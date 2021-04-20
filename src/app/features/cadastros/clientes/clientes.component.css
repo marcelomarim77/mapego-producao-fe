@@ -2,118 +2,40 @@
     padding-left: 10px;
     padding-top: 10px;
     color: rgb(8, 41, 131);
-
 }
 
-.pessoa {
-    width: 7%;
+.botao-incluir {
     margin: 10px;
-    padding: 6px;
+    float: inline-end;
 }
 
-.cpf-cnpj {
-    width: 12%;
-    margin: 10px;
-    padding: 6px;
+table {
+    width: 100%;
 }
 
-.rg-ie {
-    width: 12%;
-    margin: 10px;
-    padding: 6px;
+.mat-form-field {
+    margin-left: 10px;
+    font-size: 14px;
+    width: 90%;
+    float: left;
 }
-
-.razao-social {
-    width: 35%;
-    margin: 10px;
-    padding: 6px;
-}
-
-.nome-fantasia {
-    width: 30%;
-    margin: 10px;
-    padding: 6px;
-}
-
-.apelido {
-    width: 25%;
-    margin: 10px;
-    padding: 6px;
-}
-
-.cep {
-    width: 5%;
-    margin: 10px;
-    padding: 6px;
-}
-
-.endereco {
-    width: 50%;
-    margin: 10px;
-    padding: 6px;
-}
-
-.numero {
+  
+.th-cnpj {
     width: 10%;
-    margin: 10px;
-    padding: 6px;
 }
 
-.complemento {
-    width: 20%;
-    margin: 10px;
-    padding: 6px;
+.th-nome {
+    width: 18%;
 }
 
-.bairro {
-    width: 40%;
-    margin: 10px;
-    padding: 6px;
-}
-
-.cidade {
-    width: 40%;
-    margin: 10px;
-    padding: 6px;
-}
-
-.uf {
-    width: 5%;
-    margin: 10px;
-    padding: 6px;
-}
-
-.contato {
-    width: 35%;
-    margin: 10px;
-    padding: 6px;
-}
-
-.telefone {
+.th-contato {
     width: 15%;
-    margin: 10px;
-    padding: 6px;
 }
 
-.celular {
-    width: 15%;
-    margin: 10px;
-    padding: 6px;
+.th-fone {
+    width: 10%;
 }
 
-.email {
-    width: 35%;
-    margin: 10px;
-    padding: 6px;
-}
-
-.dados-adicionais {
-    width: 60%;
-    margin: 10px;
-    padding: 6px;
-}
-
-.botoes {
-    margin-left: 8px;
-    width: 100px;
+.botao-td {
+    width: 0.5px;
 }
