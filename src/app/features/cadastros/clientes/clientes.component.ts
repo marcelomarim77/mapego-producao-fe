@@ -81,7 +81,7 @@ export class ClientesComponent implements AfterViewInit {
     }
     
     btnEdit(cliente: Cliente) {
-        this.router.navigateByUrl(`cadastros/cliente/${cliente.idCliente}`);
+        this.router.navigate([`cadastros/cliente/${cliente.idCliente}`]);
     }
     
     btnDelete(cliente: Cliente) {

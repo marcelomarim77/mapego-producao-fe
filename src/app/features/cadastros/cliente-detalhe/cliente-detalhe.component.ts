@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router, Params } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { TipoPessoa } from './../../../core/tipo-pessoa';
+import { Cliente } from '../clientes/cliente';
 
 @Component({
   selector: 'app-cliente-detalhe',
@@ -14,7 +15,8 @@ export class ClienteDetalheComponent implements OnInit {
 
     constructor(private snackBar: MatSnackBar,
                 private router: Router,
-                public formBuilder: FormBuilder) { }
+                public formBuilder: FormBuilder,
+                private route: ActivatedRoute) { }
 
     tipoPessoa: TipoPessoa[] = [
         {value: 0, viewValue: 'Física'},
@@ -53,6 +55,10 @@ export class ClienteDetalheComponent implements OnInit {
     });
 
     ngOnInit(): void {
+        this.route.params.forEach((params: Params)=>{
+            let id: number = params['id'];
+            console.log(id);
+        });
     };
 
     validationMessages = {
