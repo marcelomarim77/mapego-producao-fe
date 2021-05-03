@@ -63,8 +63,9 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "mapego-producao-fe:build"
-          },
+            "browserTarget": "mapego-producao-fe:build",
+            "disableHostCheck": true
+        },
           "configurations": {
             "production": {
               "browserTarget": "mapego-producao-fe:build:production"

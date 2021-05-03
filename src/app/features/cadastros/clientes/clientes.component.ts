@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ViewChild } from "@angular/core";
+import { OnInit, AfterViewInit, Component, ViewChild } from "@angular/core";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatSort } from "@angular/material/sort";
 import { MatTableDataSource } from "@angular/material/table";
@@ -6,35 +6,16 @@ import { Router } from "@angular/router";
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { Cliente } from './cliente';
+import { ClienteService } from './cliente.service';
 
-const NAMES: string[] = [
-    "Maia",
-    "Asher",
-    "Olivia",
-    "Atticus",
-    "Amelia",
-    "Jack",
-    "Charlotte",
-    "Theodore",
-    "Isla",
-    "Oliver",
-    "Isabella",
-    "Jasper",
-    "Cora",
-    "Levi",
-    "Violet",
-    "Arthur",
-    "Mia",
-    "Thomas",
-    "Elizabeth"
-];
-  
 @Component({
   selector: 'app-clientes',
   templateUrl: './clientes.component.html',
   styleUrls: ['./clientes.component.css']
 })
-export class ClientesComponent implements AfterViewInit {
+export class ClientesComponent implements OnInit, AfterViewInit {
+
+    clientes: Cliente[] = [];
 
     displayedColumns: string[] = [
         "cpfCnpj",
@@ -54,14 +35,18 @@ export class ClientesComponent implements AfterViewInit {
     @ViewChild(MatSort) sort: MatSort;
     
     constructor(private snackBar: MatSnackBar,
-                private router: Router) {
-        // Create 100 users
-        const clientes = Array.from({ length: 50 }, (_, k) => createNewUser(k + 1));
-    
-        // Assign the data to the data source for the table to render
-        this.dataSource = new MatTableDataSource(clientes);
+                private router: Router,
+                private clienteService: ClienteService) {
     }
     
+    ngOnInit() {
+        this.getClientes(1);
+        console.log(this.getClientes(1));
+    
+        // Assign the data to the data source for the table to render
+        this.dataSource = new MatTableDataSource(this.clientes);
+    }
+
     ngAfterViewInit() {
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
@@ -77,7 +62,7 @@ export class ClientesComponent implements AfterViewInit {
     }
     
     btnIncluir() {
-        this.router.navigateByUrl(`cadastros/cliente/0`);
+        this.router.navigate([`cadastros/cliente/0`]);
     }
     
     btnEdit(cliente: Cliente) {
@@ -95,32 +80,11 @@ export class ClientesComponent implements AfterViewInit {
             duration: 2000,
         });
     }
-}
-    
-/** Builds and returns a new User. */
-function createNewUser(id: number): Cliente {
-    const name = NAMES[Math.round(Math.random() * (NAMES.length - 1))] + " " + NAMES[Math.round(Math.random() * (NAMES.length - 1))].charAt(0) + ".";
 
-    return {
-        idEmpresa: 1,
-        idCliente: id,
-        tipoPessoa: 'Física',
-        cpfCnpj: '12345678901234',
-        rgIe: 'string',
-        razaoSocial: name,
-        nomeFantasia: name + ' Fantasia',
-        apelido: 'Apelido',
-        cep: 'string',
-        endereco: 'string',
-        numero: 'string',
-        complemento: 'string',
-        bairro: 'string',
-        cidade: 'string',
-        uf: 'string',
-        contato: 'Contato',
-        telefone: '11 1234-5678',
-        celular: '11 98765-4321',
-        email: 'string',
-        dadosAdicionais: 'string',
-    };
+    getClientes(idEmpresa: number): void {
+        this.clienteService.getClientes(idEmpresa)
+            .subscribe(
+                clientes => this.clientes = clientes,
+            );
+    }
 }
