@@ -1,4 +1,4 @@
-import { OnInit, AfterViewInit, Component, ViewChild } from "@angular/core";
+import { OnInit, Component, ViewChild } from "@angular/core";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatSort } from "@angular/material/sort";
 import { MatTableDataSource } from "@angular/material/table";
@@ -13,9 +13,9 @@ import { ClienteService } from './cliente.service';
   templateUrl: './clientes.component.html',
   styleUrls: ['./clientes.component.css']
 })
-export class ClientesComponent implements OnInit, AfterViewInit {
+export class ClientesComponent implements OnInit {
 
-    clientes: Cliente[] = [];
+    clientes: Cliente[];
 
     displayedColumns: string[] = [
         "cpfCnpj",
@@ -40,16 +40,8 @@ export class ClientesComponent implements OnInit, AfterViewInit {
     }
     
     ngOnInit() {
+        // Obtem a lista de clientes
         this.getClientes(1);
-        console.log(this.getClientes(1));
-    
-        // Assign the data to the data source for the table to render
-        this.dataSource = new MatTableDataSource(this.clientes);
-    }
-
-    ngAfterViewInit() {
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
     }
     
     applyFilter(event: Event) {
@@ -71,6 +63,7 @@ export class ClientesComponent implements OnInit, AfterViewInit {
     
     btnDelete(cliente: Cliente) {
         if (confirm(`Excluir o cliente id: ${cliente.idCliente} - ${cliente.razaoSocial}`)) {
+            this.deleteCliente(cliente);
             this.openSnackBar('Cliente excluído com sucesso', 'OK');
         };
     }
@@ -84,7 +77,19 @@ export class ClientesComponent implements OnInit, AfterViewInit {
     getClientes(idEmpresa: number): void {
         this.clienteService.getClientes(idEmpresa)
             .subscribe(
-                clientes => this.clientes = clientes,
+                response => {
+                    this.clientes = response;
+                    // Assign the data to the data source for the table to render
+                    this.dataSource = new MatTableDataSource(response);
+                    this.dataSource.paginator = this.paginator;
+                    this.dataSource.sort = this.sort;
+            
+                },
+                error => console.log(error.message)
             );
+    }
+
+    deleteCliente(cliente: Cliente): void {
+        this.clienteService.deleteCliente(cliente);
     }
 }

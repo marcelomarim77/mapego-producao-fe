@@ -1,7 +1,7 @@
 export interface Cliente {
     idEmpresa: number;
     idCliente: number;
-    tipoPessoa: string;
+    pessoa: string;
     cpfCnpj: string;
     rgIe: string;
     razaoSocial: string;

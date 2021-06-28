@@ -5,6 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { TipoPessoa } from './../../../core/tipo-pessoa';
 import { Cliente } from '../clientes/cliente';
+import { ClienteService } from '../clientes/cliente.service';
 
 @Component({
   selector: 'app-cliente-detalhe',
@@ -13,18 +14,15 @@ import { Cliente } from '../clientes/cliente';
 })
 export class ClienteDetalheComponent implements OnInit {
 
-    constructor(private snackBar: MatSnackBar,
-                private router: Router,
-                public formBuilder: FormBuilder,
-                private route: ActivatedRoute) { }
+    cliente: Cliente;
 
-    tipoPessoa: TipoPessoa[] = [
+    pessoa: TipoPessoa[] = [
         {value: 0, viewValue: 'Física'},
         {value: 1, viewValue: 'Jurídica'},
     ];
 
     clienteForm = this.formBuilder.group({
-        tipoPessoa: ['',
+        pessoa: ['',
             Validators.required
         ],
         cpfCnpj: ['',
@@ -54,15 +52,24 @@ export class ClienteDetalheComponent implements OnInit {
         ],
     });
 
+    constructor(private snackBar: MatSnackBar,
+        private router: Router,
+        public formBuilder: FormBuilder,
+        private route: ActivatedRoute,
+        private clienteService: ClienteService) { }
+
     ngOnInit(): void {
-        this.route.params.forEach((params: Params)=>{
-            let id: number = params['id'];
-            console.log(id);
+        this.route.params.forEach((params: Params) => {
+            const id: number = params['id'];
+
+            if (id) {
+                this.getCliente(id);
+            }
         });
     };
 
     validationMessages = {
-        'tipoPessoa': [
+        'pessoa': [
             { type: 'required', message: 'Informe Pessoa Física ou Jurídica' },
         ],
         'cpfCnpj': [
@@ -101,5 +108,13 @@ export class ClienteDetalheComponent implements OnInit {
         this.snackBar.open(message, action, {
             duration: 2000,
         });
+    }
+
+    getCliente(idCliente: number): void {
+        this.clienteService.getCliente(idCliente)
+            .subscribe(
+                response => {this.cliente = response, console.log(this.cliente)},
+                error => console.log(error.message)
+            );
     }
 }

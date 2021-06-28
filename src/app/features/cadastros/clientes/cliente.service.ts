@@ -5,14 +5,16 @@ import { catchError, tap } from 'rxjs/operators';
 
 import { Cliente } from "./cliente";
 import { MessageService } from './../../../message.service';
+import { environment } from './../../../../environments/environment';
+
 @Injectable({
   providedIn: 'root'
 })
 export class ClienteService {
 
-    private clienteUrl = 'http://localhost:8081';
+    private clienteUrl = environment.API_CLIENTE.URL;
     httpOptions = {
-        headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+        headers: new HttpHeaders({ 'Content-Type': environment.API_CLIENTE.CONTENT_TYPE })
     };
 
     constructor(
@@ -22,14 +24,11 @@ export class ClienteService {
 
     getClientes(idEmpresa: number): Observable<Cliente[]> {
         const url = `${this.clienteUrl}/idEmpresa/${idEmpresa}`;
-        return this.http.get<Cliente[]>(url);
-/*
         return this.http.get<Cliente[]>(url)
             .pipe(
-                tap(_ => this.log('fetched Clientes with Clientes API')),
+                tap(_ => this.log(`Fetched Clientes with Clientes API <${url}>`)),
                 catchError(this.handleError<Cliente[]>('getClientes', []))
             );
-*/
     }
 
     getCliente(id: number): Observable<Cliente> {
@@ -40,6 +39,21 @@ export class ClienteService {
                 catchError(this.handleError<Cliente>(`getCliente idCliente=${id}`))
             );
     }
+
+    deleteCliente(cliente: Cliente): void {
+        console.log(`cliente excluido: ${cliente.razaoSocial}`);
+/*
+        const id = typeof Cliente === 'number' ? Cliente : Cliente.idCliente;
+        const url = `${this.clienteUrl}/id/${id}`;
+    
+        return this.http.delete<Cliente>(url, this.httpOptions)
+            .pipe(
+                tap(_ => this.log(`deleted Cliente id=${id}`)),
+                catchError(this.handleError<Cliente>('deleteCliente'))
+        );
+*/
+    }
+    
 
 /*
   updateCliente(Cliente: Cliente): Observable<Cliente> {
@@ -55,16 +69,6 @@ export class ClienteService {
     return this.http.post<Cliente>(url, Cliente, this.httpOptions).pipe(
       tap((newCliente: Cliente) => this.log(`added Cliente with id=${newCliente.id}`)),
       catchError(this.handleError<Cliente>('addCliente'))
-    );
-  }
-
-  deleteCliente(Cliente: Cliente | number): Observable<Cliente> {
-    const id = typeof Cliente === 'number' ? Cliente : Cliente.id;
-    const url = `${this.clienteUrl}/id/${id}`;
-
-    return this.http.delete<Cliente>(url, this.httpOptions).pipe(
-      tap(_ => this.log(`deleted Cliente id=${id}`)),
-      catchError(this.handleError<Cliente>('deleteCliente'))
     );
   }
 

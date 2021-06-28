@@ -5,7 +5,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatPaginatorModule } from "@angular/material/paginator";
 
 import { ClientesComponent } from './clientes/clientes.component';
@@ -34,6 +34,7 @@ export const routes = [
     ],
     imports: [
         CommonModule,
+        FormsModule,
         FlexLayoutModule,
         MatIconModule,
         MatInputModule,
