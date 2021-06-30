@@ -13,7 +13,7 @@ import { environment } from './../../../../environments/environment';
 export class ClienteService {
 
     private clienteUrl = environment.API_CLIENTE.URL;
-    httpOptions = {
+    private httpOptions = {
         headers: new HttpHeaders({ 'Content-Type': environment.API_CLIENTE.CONTENT_TYPE })
     };
 
@@ -40,46 +40,31 @@ export class ClienteService {
             );
     }
 
-    deleteCliente(cliente: Cliente): void {
-        console.log(`cliente excluido: ${cliente.razaoSocial}`);
-/*
-        const id = typeof Cliente === 'number' ? Cliente : Cliente.idCliente;
+    deleteCliente(id: number): Observable<Cliente> {
         const url = `${this.clienteUrl}/id/${id}`;
-    
         return this.http.delete<Cliente>(url, this.httpOptions)
             .pipe(
                 tap(_ => this.log(`deleted Cliente id=${id}`)),
                 catchError(this.handleError<Cliente>('deleteCliente'))
         );
-*/
     }
     
+    updateCliente(cliente: Cliente): Observable<Cliente> {
+        console.log(cliente);
+        const url = `${this.clienteUrl}/id/${cliente.idCliente}`;
+        return this.http.put(url, cliente, this.httpOptions)
+            .pipe(
+                tap(_ => this.log(`updated Cliente id=${cliente.idCliente}`)),
+                catchError(this.handleError<any>('updateCliente'))
+        );
+    }
 
 /*
-  updateCliente(Cliente: Cliente): Observable<Cliente> {
-    const url = `${this.clienteUrl}/id/${Cliente.id}`;
-    return this.http.put(url, Cliente, this.httpOptions).pipe(
-      tap(_ => this.log(`updated Cliente id=${Cliente.id}`)),
-      catchError(this.handleError<any>('updateCliente'))
-    );
-  }
-
   addCliente(Cliente: Cliente): Observable<Cliente> {
     const url = `${this.clienteUrl}/create`;
     return this.http.post<Cliente>(url, Cliente, this.httpOptions).pipe(
       tap((newCliente: Cliente) => this.log(`added Cliente with id=${newCliente.id}`)),
       catchError(this.handleError<Cliente>('addCliente'))
-    );
-  }
-
-  searchClientes(term: string): Observable<Cliente[]> {
-    if (!term.trim()) {
-      // if not search term, return empty Cliente array.
-      return of([]);
-    }
-    return this.http.get<Cliente[]>(`${this.clienteUrl}/search/${term}`).pipe(
-      tap(x => x.length ? this.log(`found Clientes matching "${term}"`) : this.log(`no Clientes matching "${term}"`)),
-      catchError(this.handleError<Cliente[]>('searchClientes', []))
     );
   }
 */

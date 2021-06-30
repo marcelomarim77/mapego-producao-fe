@@ -4,10 +4,18 @@
 
 export const environment = {
     production: false,
+
     API_CLIENTE: {
         URL: 'http://localhost:8081',
         CONTENT_TYPE: 'application/json'
     },
+
+    API_CEP: {
+        URL: 'https://webmaniabr.com/api/1/cep/',
+        CONTENT_TYPE: 'application/json',
+        APP_KEY: '/?app_key=MXjyVuowlRxpvJ2ESKhasqQ3Z2yc1opV',
+        APP_SECRET: '&app_secret=YeRnuEIW8Ug63iVuhr6t1whrfCRQEGEvHl0KCRdFcaym71Dt'
+    }
 };
 
 /*

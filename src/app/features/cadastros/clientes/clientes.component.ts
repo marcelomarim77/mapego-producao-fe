@@ -62,7 +62,7 @@ export class ClientesComponent implements OnInit {
     }
     
     btnDelete(cliente: Cliente) {
-        if (confirm(`Excluir o cliente id: ${cliente.idCliente} - ${cliente.razaoSocial}`)) {
+        if (confirm(`Confirma a exclusão do cliente <id: ${cliente.idCliente}> [${cliente.razaoSocial}]`)) {
             this.deleteCliente(cliente);
             this.openSnackBar('Cliente excluído com sucesso', 'OK');
         };
@@ -90,6 +90,12 @@ export class ClientesComponent implements OnInit {
     }
 
     deleteCliente(cliente: Cliente): void {
-        this.clienteService.deleteCliente(cliente);
+        this.clienteService.deleteCliente(cliente.idCliente)
+            .subscribe(
+                response => {
+                    this.getClientes(1);
+                },
+                error => console.log(error.message)
+            );
     }
 }

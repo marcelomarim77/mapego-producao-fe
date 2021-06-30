@@ -14,6 +14,7 @@ export interface Cliente {
     bairro: string;
     cidade: string;
     uf: string;
+    ibge: string;
     contato: string;
     telefone: string;
     celular: string;

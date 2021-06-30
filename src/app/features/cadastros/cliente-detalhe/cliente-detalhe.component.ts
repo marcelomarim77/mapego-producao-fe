@@ -6,6 +6,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { TipoPessoa } from './../../../core/tipo-pessoa';
 import { Cliente } from '../clientes/cliente';
 import { ClienteService } from '../clientes/cliente.service';
+import { Cep } from './../../../core/cep';
+import { CepService } from 'src/app/services/cep.service';
 
 @Component({
   selector: 'app-cliente-detalhe',
@@ -14,11 +16,14 @@ import { ClienteService } from '../clientes/cliente.service';
 })
 export class ClienteDetalheComponent implements OnInit {
 
-    cliente: Cliente;
+    cep: Cep;
 
-    pessoa: TipoPessoa[] = [
-        {value: 0, viewValue: 'Física'},
-        {value: 1, viewValue: 'Jurídica'},
+    cliente: Cliente;
+    novoCliente: number;
+
+    tiposPessoa: TipoPessoa[] = [
+        { value: 'F', viewValue: 'Física' },
+        { value: 'J', viewValue: 'Jurídica' },
     ];
 
     clienteForm = this.formBuilder.group({
@@ -26,7 +31,7 @@ export class ClienteDetalheComponent implements OnInit {
             Validators.required
         ],
         cpfCnpj: ['',
-            Validators.required,
+            Validators.required
         ],
         rgIe: [''],
         razaoSocial: ['',
@@ -56,13 +61,15 @@ export class ClienteDetalheComponent implements OnInit {
         private router: Router,
         public formBuilder: FormBuilder,
         private route: ActivatedRoute,
-        private clienteService: ClienteService) { }
+        private clienteService: ClienteService,
+        private cepService: CepService) { }
 
     ngOnInit(): void {
         this.route.params.forEach((params: Params) => {
             const id: number = params['id'];
+            this.novoCliente = id;
 
-            if (id) {
+            if (id != 0) { // novo cliente
                 this.getCliente(id);
             }
         });
@@ -90,13 +97,37 @@ export class ClienteDetalheComponent implements OnInit {
     };
 
     pesquisaCep() {
-        alert('Chamar API de consulta CEP');
+        if (this.cliente.cep.length === 0) {
+            alert('Informe o CEP para efetuar a busca');
+            return;
+        }
+
+        this.cepService.getCep(this.cliente.cep)
+            .subscribe(
+                response => {
+                    this.cep = response,
+                    this.cliente.endereco = this.cep.endereco,
+                    this.cliente.bairro = this.cep.bairro,
+                    this.cliente.cidade = this.cep.cidade,
+                    this.cliente.uf = this.cep.uf,
+                    this.cliente.cep = this.cep.cep,
+                    this.cliente.ibge = this.cep.ibge
+                },
+                error => console.log(error.message)
+        );
     };
 
     onSubmit() {
         this.clienteForm.reset;
         this.router.navigateByUrl(`cadastros/clientes`);
-        this.openSnackBar('Cliente inserido com sucesso', 'OK');
+
+        if (this.novoCliente === 0) { // novo cliente
+            this.openSnackBar('Cliente inserido com sucesso', 'OK');
+        }
+        else {
+            this.openSnackBar('Cliente alterado com sucesso', 'OK');
+            this.updateCliente(this.cliente);
+        };
     };
 
     cancelar() {
@@ -116,5 +147,14 @@ export class ClienteDetalheComponent implements OnInit {
                 response => {this.cliente = response, console.log(this.cliente)},
                 error => console.log(error.message)
             );
+    }
+
+    updateCliente(cliente: Cliente) {
+        this.clienteService.updateCliente(cliente)
+        .subscribe(
+            response => {
+            },
+            error => console.log(error.message)
+        );
     }
 }

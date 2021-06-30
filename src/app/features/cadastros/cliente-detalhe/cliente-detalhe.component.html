@@ -4,7 +4,10 @@
 
     <div>
         <mat-form-field class="pessoa">
-            <input matInput type="text" placeholder="Pessoa" formControlName="pessoa" required [(ngModel)]="cliente.pessoa">
+            <mat-label>Pessoa</mat-label>
+            <mat-select formControlName="pessoa" [(ngModel)]="cliente.pessoa">
+                <mat-option *ngFor="let tipoPessoa of tiposPessoa" value="{{tipoPessoa.value}}"> {{tipoPessoa.viewValue}} </mat-option>
+            </mat-select>
             <mat-error *ngFor="let validation of validationMessages.pessoa">
                 <mat-error class="error-message" *ngIf="clienteForm.get('pessoa').hasError(validation.type) && (clienteForm.get('pessoa').dirty || clienteForm.get('pessoa').touched)">{{validation.message}}</mat-error>
             </mat-error>
@@ -24,7 +27,6 @@
         <mat-form-field class="rg-ie">
             <input matInput type="text" placeholder="RG/IE" formControlName="rgIe" maxlength="14" [(ngModel)]="cliente.rgIe">
         </mat-form-field>
-
     </div>
 
     <div>

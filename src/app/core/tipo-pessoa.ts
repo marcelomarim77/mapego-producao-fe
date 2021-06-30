@@ -1,4 +1,4 @@
 export interface TipoPessoa {
-    value: number;
+    value: string;
     viewValue: string;
 }
