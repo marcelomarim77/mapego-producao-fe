@@ -5,7 +5,7 @@
     <div>
         <mat-form-field class="pessoa">
             <mat-label>Pessoa</mat-label>
-            <mat-select formControlName="pessoa" [(ngModel)]="cliente.pessoa">
+            <mat-select formControlName="pessoa" required [(ngModel)]="cliente.pessoa">
                 <mat-option *ngFor="let tipoPessoa of tiposPessoa" value="{{tipoPessoa.value}}"> {{tipoPessoa.viewValue}} </mat-option>
             </mat-select>
             <mat-error *ngFor="let validation of validationMessages.pessoa">
@@ -77,8 +77,11 @@
             <input matInput type="text" placeholder="Cidade" formControlName="cidade" maxlength="60" [(ngModel)]="cliente.cidade">
         </mat-form-field>
 
-        <mat-form-field class="uf">
-            <input matInput type="text" placeholder="UF" formControlName="uf" maxlength="2" [(ngModel)]="cliente.uf">
+        <mat-form-field class="pessoa">
+            <mat-label>UF</mat-label>
+            <mat-select formControlName="uf" [(ngModel)]="cliente.uf">
+                <mat-option *ngFor="let uf of ufS" value="{{uf.sigla}}"> {{uf.descricao}} </mat-option>
+            </mat-select>
         </mat-form-field>
     </div>
 

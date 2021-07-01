@@ -10,6 +10,17 @@ export const environment = {
         CONTENT_TYPE: 'application/json'
     },
 
+    API_UF: {
+        URL: 'http://localhost:8083',
+        CONTENT_TYPE: 'application/json'
+    },
+
+    API_CNPJ: {
+        URL: 'https://www.receitaws.com.br/v1/cnpj/',
+        CONTENT_TYPE: 'application/json',
+        ACCEPT: '*/*'
+    },
+
     API_CEP: {
         URL: 'https://webmaniabr.com/api/1/cep/',
         CONTENT_TYPE: 'application/json',

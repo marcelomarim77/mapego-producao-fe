@@ -55,10 +55,12 @@ export class ClientesComponent implements OnInit {
     
     btnIncluir() {
         this.router.navigate([`cadastros/cliente/0`]);
+        this.getClientes(1);
     }
     
     btnEdit(cliente: Cliente) {
         this.router.navigate([`cadastros/cliente/${cliente.idCliente}`]);
+        this.getClientes(1);
     }
     
     btnDelete(cliente: Cliente) {

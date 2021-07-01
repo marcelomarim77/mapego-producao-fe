@@ -59,15 +59,14 @@ export class ClienteService {
         );
     }
 
-/*
-  addCliente(Cliente: Cliente): Observable<Cliente> {
-    const url = `${this.clienteUrl}/create`;
-    return this.http.post<Cliente>(url, Cliente, this.httpOptions).pipe(
-      tap((newCliente: Cliente) => this.log(`added Cliente with id=${newCliente.id}`)),
-      catchError(this.handleError<Cliente>('addCliente'))
-    );
-  }
-*/
+    createCliente(Cliente: Cliente): Observable<Cliente> {
+        const url = `${this.clienteUrl}/id/0`;
+        return this.http.post<Cliente>(url, Cliente, this.httpOptions).
+            pipe(
+                tap((newCliente: Cliente) => this.log(`added Cliente with id=${newCliente.idCliente}`)),
+                catchError(this.handleError<Cliente>('addCliente'))
+        );
+    }
 
     private log(message: string) {
         this.messageService.add(`ClienteService: ${message}`);

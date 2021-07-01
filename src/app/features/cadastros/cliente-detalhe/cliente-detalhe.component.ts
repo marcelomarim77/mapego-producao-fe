@@ -8,6 +8,9 @@ import { Cliente } from '../clientes/cliente';
 import { ClienteService } from '../clientes/cliente.service';
 import { Cep } from './../../../core/cep';
 import { CepService } from 'src/app/services/cep.service';
+import { Uf } from './../../../core/uf';
+import { UfService } from 'src/app/services/uf.service';
+import { CnpjService } from 'src/app/services/cnpj.service';
 
 @Component({
   selector: 'app-cliente-detalhe',
@@ -17,6 +20,7 @@ import { CepService } from 'src/app/services/cep.service';
 export class ClienteDetalheComponent implements OnInit {
 
     cep: Cep;
+    ufS: Uf[];
 
     cliente: Cliente;
     novoCliente: number;
@@ -62,9 +66,16 @@ export class ClienteDetalheComponent implements OnInit {
         public formBuilder: FormBuilder,
         private route: ActivatedRoute,
         private clienteService: ClienteService,
-        private cepService: CepService) { }
+        private cepService: CepService,
+        private ufService: UfService,
+        private cnpjService: CnpjService) { }
 
     ngOnInit(): void {
+
+        this.inicializaCliente();
+
+        this.getUf();
+
         this.route.params.forEach((params: Params) => {
             const id: number = params['id'];
             this.novoCliente = id;
@@ -93,7 +104,22 @@ export class ClienteDetalheComponent implements OnInit {
     };
 
     pesquisaCnpj() {
-        alert('Chamar API de consulta CNPJ');
+        if (this.cliente.pessoa !== 'J') {
+            alert('Pesquisa disponível apenas para Pessoa Jurídica');
+            return;
+        }
+
+        if (this.cliente.cpfCnpj.length === 0) {
+            alert('Informe o CNPJ para efetuar a busca');
+            return;
+        }
+
+        this.cnpjService.getCnpj(this.cliente.cpfCnpj)
+            .subscribe(
+                response => { console.log(response)
+                },
+                error => console.log(error.message)
+        );
     };
 
     pesquisaCep() {
@@ -121,8 +147,11 @@ export class ClienteDetalheComponent implements OnInit {
         this.clienteForm.reset;
         this.router.navigateByUrl(`cadastros/clientes`);
 
-        if (this.novoCliente === 0) { // novo cliente
+        console.log(this.novoCliente);
+
+        if (this.novoCliente == 0) { // novo cliente
             this.openSnackBar('Cliente inserido com sucesso', 'OK');
+            this.createCliente(this.cliente);
         }
         else {
             this.openSnackBar('Cliente alterado com sucesso', 'OK');
@@ -144,7 +173,7 @@ export class ClienteDetalheComponent implements OnInit {
     getCliente(idCliente: number): void {
         this.clienteService.getCliente(idCliente)
             .subscribe(
-                response => {this.cliente = response, console.log(this.cliente)},
+                response => this.cliente = response,
                 error => console.log(error.message)
             );
     }
@@ -152,9 +181,55 @@ export class ClienteDetalheComponent implements OnInit {
     updateCliente(cliente: Cliente) {
         this.clienteService.updateCliente(cliente)
         .subscribe(
-            response => {
-            },
+            response => {},
             error => console.log(error.message)
         );
+    }
+
+    createCliente(cliente: Cliente) {
+        this.clienteService.createCliente(cliente)
+        .subscribe(
+            response => {},
+            error => console.log(error.message)
+        );
+    }
+
+    getUf() {
+        this.ufService.getUf()
+            .subscribe(
+                response => {
+                    this.ufS = response,
+                    this.ufS.sort(function(a,b) {
+                        return a.descricao < b.descricao ? -1 : a.descricao > b.descricao ? 1 : 0;
+                    });
+                },
+                error => console.log(error.message)
+        );
+    }
+
+    inicializaCliente() {
+        this.cliente = {
+            idEmpresa: 0,
+            idCliente: 0,
+            pessoa: '',
+            cpfCnpj: '',
+            rgIe: '',
+            razaoSocial: '',
+            nomeFantasia: '',
+            apelido: '',
+            cep: '',
+            endereco: '',
+            numero: '',
+            complemento: '',
+            bairro: '',
+            cidade: '',
+            uf: '',
+            ibge: '',
+            contato: '',
+            telefone: '',
+            celular: '',
+            email: '',
+            dadosAdicionais: ''
+        };
     }
 }
