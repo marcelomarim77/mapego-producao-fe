@@ -6,8 +6,8 @@ import { Router } from "@angular/router";
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { Produto } from './produto';
-import { ProdutoService } from './produto.service';
 import { LoaderService } from './../../../services/loader.service';
+import { ProdutoService } from "src/app/services/produto.service";
 
 @Component({
   selector: 'app-produtos',

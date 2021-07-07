@@ -5,12 +5,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { TipoPessoa } from './../../../core/tipo-pessoa';
 import { Cliente } from '../clientes/cliente';
-import { ClienteService } from '../clientes/cliente.service';
 import { Cep } from './../../../core/cep';
 import { CepService } from 'src/app/services/cep.service';
 import { Uf } from './../../../core/uf';
 import { UfService } from 'src/app/services/uf.service';
 import { CnpjService } from 'src/app/services/cnpj.service';
+import { ClienteService } from 'src/app/services/cliente.service';
 
 @Component({
   selector: 'app-cliente-detalhe',
@@ -150,11 +150,9 @@ export class ClienteDetalheComponent implements OnInit {
         this.router.navigateByUrl(`cadastros/clientes`);
 
         if (this.novoCliente == 0) { // novo cliente
-            this.openSnackBar('Cliente inserido com sucesso', 'OK');
             this.createCliente(this.cliente);
         }
         else {
-            this.openSnackBar('Cliente alterado com sucesso', 'OK');
             this.updateCliente(this.cliente);
         };
     };
@@ -180,18 +178,22 @@ export class ClienteDetalheComponent implements OnInit {
 
     updateCliente(cliente: Cliente) {
         this.clienteService.updateCliente(cliente)
-        .subscribe(
-            response => {},
-            error => console.log(error.message)
-        );
+            .subscribe(
+                response => {
+                    this.openSnackBar('Cliente alterado com sucesso', 'OK');
+                },
+                error => console.log(error.message)
+            );
     }
 
     createCliente(cliente: Cliente) {
         this.clienteService.createCliente(cliente)
-        .subscribe(
-            response => {},
-            error => console.log(error.message)
-        );
+            .subscribe(
+                response => {
+                    this.openSnackBar('Cliente inserido com sucesso', 'OK');
+                },
+                error => console.log(error.message)
+            );
     }
 
     getUf() {

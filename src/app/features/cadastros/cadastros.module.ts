@@ -14,6 +14,7 @@ import { ProdutosComponent } from './produtos/produtos.component';
 import { TransportadorasComponent } from './transportadoras/transportadoras.component';
 import { ClienteDetalheComponent } from './cliente-detalhe/cliente-detalhe.component';
 import { TableMaterialModule } from './../../core/material-module';
+import { ProdutoDetalheComponent } from './produto-detalhe/produto-detalhe.component';
 
 export const routes = [
     { path: '', pathMatch: 'full', redirectTo: 'clientes' },
@@ -22,7 +23,7 @@ export const routes = [
     { path: 'fornecedores', component: FornecedoresComponent },
     { path: 'unidades', component: ProdutosComponent },
     { path: 'produtos', component: ProdutosComponent },
-    { path: 'produto/:id', component: ProdutosComponent },
+    { path: 'produto/:id', component: ProdutoDetalheComponent },
     { path: 'transportadoras', component: TransportadorasComponent },
 ];
 
@@ -32,7 +33,8 @@ export const routes = [
         FornecedoresComponent,
         ProdutosComponent,
         TransportadorasComponent,
-        ClienteDetalheComponent
+        ClienteDetalheComponent,
+        ProdutoDetalheComponent
     ],
     imports: [
         CommonModule,

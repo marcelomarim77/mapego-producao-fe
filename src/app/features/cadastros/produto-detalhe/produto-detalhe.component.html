@@ -1,0 +1,74 @@
+<form [formGroup]="produtoForm" >
+
+    <h2 class="titulo"><strong>Cadastro de Produtos</strong></h2>
+
+    <div>
+        <mat-form-field class="codigo">
+            <mat-label>Código</mat-label>
+            <input matInput type="text" placeholder="Código do Produto" formControlName="codigo" maxlength="20" required [(ngModel)]="produto.codigo">
+            <mat-error *ngFor="let validation of validationMessages.codigo">
+                <mat-error class="error-message" *ngIf="produtoForm.get('codigo').hasError(validation.type) && (produtoForm.get('codigo').dirty || produtoForm.get('codigo').touched)">{{validation.message}}</mat-error>
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="descricao">
+            <mat-label>Descrição do Produto</mat-label>
+            <input matInput type="text" placeholder="Descrição do Produto" formControlName="descricao" maxlength="30" required [(ngModel)]="produto.descricao">
+            <mat-error *ngFor="let validation of validationMessages.descricao">
+                <mat-error class="error-message" *ngIf="produtoForm.get('descricao').hasError(validation.type) && (produtoForm.get('descricao').dirty || produtoForm.get('descricao').touched)">{{validation.message}}</mat-error>
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="tipo-produto">
+            <mat-label>Tipo Produto</mat-label>
+            <mat-select formControlName="tipoProduto" [(ngModel)]="produto.tipoProduto.idTipoProduto">
+                <!--mat-option *ngFor="let uf of ufS" value="{{uf.sigla}}"> {{uf.descricao}} </mat-option-->
+                <mat-option> {{produto.tipoProduto.descricao}} </mat-option>
+                <mat-option>Produto Semi-Acabado</mat-option>
+                <mat-option>Matéria Prima</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="unidade-medida">
+            <mat-label>Unidade de Medida</mat-label>
+            <mat-select formControlName="unidadeMedida" [(ngModel)]="produto.unidadeMedida.descricao">
+                <!--mat-option *ngFor="let uf of ufS" value="{{uf.sigla}}"> {{uf.descricao}} </mat-option-->
+                <mat-option>Metro</mat-option>
+                <mat-option>Quilo</mat-option>
+                <mat-option>Unidade</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <div>
+        <mat-form-field class="estoque-minimo">
+            <mat-label>Estoque Mínimo</mat-label>
+            <input matInput type="text" placeholder="Estoque Mínimo" formControlName="estoqueMinimo" [(ngModel)]="produto.estoqueMinimo">
+        </mat-form-field>
+
+        <mat-form-field class="custo-produto">
+            <mat-label>Preço de Custo</mat-label>
+            <input matInput type="number" placeholder="Preço de Custo" formControlName="custoProduto" [(ngModel)]="produto.custoProduto">
+        </mat-form-field>
+
+        <mat-form-field class="preco-venda">
+            <mat-label>Preço de Venda</mat-label>
+            <input matInput type="number" placeholder="Preço de Venda" formControlName="precoVenda" [(ngModel)]="produto.precoVenda">
+        </mat-form-field>
+
+        <mat-form-field class="margem">
+            <mat-label>Margem de Venda</mat-label>
+            <input matInput type="number" placeholder="Margem de Venda" formControlName="margem" [(ngModel)]="produto.margem">
+        </mat-form-field>
+
+        <!--mat-form-field class="margem">
+            <mat-checkbox formControlName="controlaEstoque" [(ngModel)]="produto.controlaEstoque">Controla Estoque</mat-checkbox>
+        </mat-form-field-->
+    </div>
+
+    <div>
+        <button class="submit-btn botoes" color="primary" mat-raised-button type="submit" [disabled]="!produtoForm.valid" (click)=onSubmit()>Salvar</button>
+        <button class="botoes" color="warn" mat-raised-button type="reset" (click)=cancelar()>Cancelar</button>
+    </div>
+
+</form>
