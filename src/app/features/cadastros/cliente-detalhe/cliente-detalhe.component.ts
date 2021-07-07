@@ -131,13 +131,15 @@ export class ClienteDetalheComponent implements OnInit {
         this.cepService.getCep(this.cliente.cep)
             .subscribe(
                 response => {
-                    this.cep = response,
-                    this.cliente.endereco = this.cep.endereco,
-                    this.cliente.bairro = this.cep.bairro,
-                    this.cliente.cidade = this.cep.cidade,
-                    this.cliente.uf = this.cep.uf,
-                    this.cliente.cep = this.cep.cep,
-                    this.cliente.ibge = this.cep.ibge
+                    this.cep = response;
+                    if (this.novoCliente == 0) { // novo cliente
+                        this.cliente.endereco = this.cep.endereco,
+                        this.cliente.bairro = this.cep.bairro,
+                        this.cliente.cidade = this.cep.cidade,
+                        this.cliente.uf = this.cep.uf,
+                        this.cliente.cep = this.cep.cep,
+                        this.cliente.ibge = this.cep.ibge
+                    }
                 },
                 error => console.log(error.message)
         );
@@ -146,8 +148,6 @@ export class ClienteDetalheComponent implements OnInit {
     onSubmit() {
         this.clienteForm.reset;
         this.router.navigateByUrl(`cadastros/clientes`);
-
-        console.log(this.novoCliente);
 
         if (this.novoCliente == 0) { // novo cliente
             this.openSnackBar('Cliente inserido com sucesso', 'OK');

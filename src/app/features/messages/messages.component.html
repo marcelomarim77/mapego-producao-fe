@@ -1,0 +1,3 @@
+<div style="position: absolute; bottom: 5px; right: 5px; color: darkblue; font-size: small;" *ngIf="messageService.messages.length">
+    <div *ngFor='let message of messageService.messages'> {{message}} </div>
+</div>

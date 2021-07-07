@@ -20,7 +20,9 @@ export const routes = [
     { path: 'clientes', component: ClientesComponent },
     { path: 'cliente/:id', component: ClienteDetalheComponent },
     { path: 'fornecedores', component: FornecedoresComponent },
+    { path: 'unidades', component: ProdutosComponent },
     { path: 'produtos', component: ProdutosComponent },
+    { path: 'produto/:id', component: ProdutosComponent },
     { path: 'transportadoras', component: TransportadorasComponent },
 ];
 

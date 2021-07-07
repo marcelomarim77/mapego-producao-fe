@@ -16,3 +16,5 @@
 <div *ngIf="expanded">
     <app-menu-list-item *ngFor="let child of item.children" [item]="child" [depth]="depth+1"></app-menu-list-item>
 </div>
+
+<div style="position: absolute; bottom: 0px; left: 8px; color: darkslateblue; font-size: small;"> {{version}} </div>

@@ -7,6 +7,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { Cliente } from './cliente';
 import { ClienteService } from './cliente.service';
+import { LoaderService } from './../../../services/loader.service';
 
 @Component({
   selector: 'app-clientes',
@@ -36,9 +37,10 @@ export class ClientesComponent implements OnInit {
     
     constructor(private snackBar: MatSnackBar,
                 private router: Router,
-                private clienteService: ClienteService) {
+                private clienteService: ClienteService,
+                private loaderService: LoaderService) {
     }
-    
+
     ngOnInit() {
         // Obtem a lista de clientes
         this.getClientes(1);
@@ -55,12 +57,10 @@ export class ClientesComponent implements OnInit {
     
     btnIncluir() {
         this.router.navigate([`cadastros/cliente/0`]);
-        this.getClientes(1);
     }
     
     btnEdit(cliente: Cliente) {
         this.router.navigate([`cadastros/cliente/${cliente.idCliente}`]);
-        this.getClientes(1);
     }
     
     btnDelete(cliente: Cliente) {
@@ -77,15 +77,18 @@ export class ClientesComponent implements OnInit {
     }
 
     getClientes(idEmpresa: number): void {
+        this.loaderService.show("Carregando clientes");
         this.clienteService.getClientes(idEmpresa)
             .subscribe(
                 response => {
                     this.clientes = response;
+
                     // Assign the data to the data source for the table to render
                     this.dataSource = new MatTableDataSource(response);
                     this.dataSource.paginator = this.paginator;
                     this.dataSource.sort = this.sort;
-            
+
+                    this.loaderService.hide();
                 },
                 error => console.log(error.message)
             );

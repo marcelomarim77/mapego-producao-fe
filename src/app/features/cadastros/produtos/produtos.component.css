@@ -1,0 +1,41 @@
+.titulo {
+    padding-left: 10px;
+    padding-top: 10px;
+    color: rgb(8, 41, 131);
+}
+
+.botao-incluir {
+    margin: 10px;
+    float: inline-end;
+}
+
+table {
+    width: 100%;
+}
+
+.mat-form-field {
+    margin-left: 10px;
+    font-size: 14px;
+    width: 90%;
+    float: left;
+}
+  
+.th-codigo {
+    width: 10%;
+}
+
+.th-descricao {
+    width: 50%;
+}
+
+.th-tipoProduto {
+    width: 15%;
+}
+
+.th-unidadeMedida {
+    width: 10%;
+}
+
+.botao-td {
+    width: 0.5px;
+}

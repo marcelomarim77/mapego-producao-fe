@@ -5,6 +5,11 @@
 export const environment = {
     production: false,
 
+    SOFTWARE: {
+        VERSAO: 'Versão 1.0.0',
+        NOME: 'Sistema de Controle de Produção'
+    },
+
     API_CLIENTE: {
         URL: 'http://localhost:8081',
         CONTENT_TYPE: 'application/json'
@@ -12,6 +17,11 @@ export const environment = {
 
     API_UF: {
         URL: 'http://localhost:8083',
+        CONTENT_TYPE: 'application/json'
+    },
+
+    API_PRODUTO: {
+        URL: 'http://localhost:8084',
         CONTENT_TYPE: 'application/json'
     },
 

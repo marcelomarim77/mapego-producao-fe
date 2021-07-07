@@ -20,11 +20,14 @@ import { AppComponent } from './app.component';
 import { MenuListItemComponent } from './features/ui/menu-list-item/menu-list-item.component';
 import { FeaturesComponent } from './features/features.component';
 import { CustomPaginator } from "./core/custom-paginator";
+import { MessagesComponent } from './features/messages/messages.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     MenuListItemComponent,
     FeaturesComponent,
+    MessagesComponent
   ],
   imports: [
     BrowserModule,

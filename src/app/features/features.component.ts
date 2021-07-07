@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 
 import { NavItem } from './ui/model/nav-item';
 import { menu } from './ui/model/menu';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-features',
@@ -16,7 +17,7 @@ export class FeaturesComponent implements OnDestroy {
     public menu: NavItem[] = menu;
     private mediaWatcher: Subscription;
 
-    softwareName = 'Nome do Software';
+     softwareName = environment.SOFTWARE.NOME;
 
     constructor(private media: MediaObserver) {
         this.mediaWatcher = this.media.media$.subscribe((mediaChange: MediaChange) => {

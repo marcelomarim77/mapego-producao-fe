@@ -17,6 +17,11 @@ export let menu: NavItem[] = [
                 route: 'cadastros/fornecedores'
             },
             {
+                displayName: 'Unidades de Medida',
+                iconName: 'local_drink',
+                route: 'cadastros/unidades'
+            },
+            {
                 displayName: 'Produtos',
                 iconName: 'category',
                 route: 'cadastros/produtos'

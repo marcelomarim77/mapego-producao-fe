@@ -4,8 +4,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, tap } from 'rxjs/operators';
 
 import { Cliente } from "./cliente";
-import { MessageService } from './../../../message.service';
 import { environment } from './../../../../environments/environment';
+import { MessageService } from 'src/app/services/message.service';
 
 @Injectable({
   providedIn: 'root'
@@ -50,7 +50,6 @@ export class ClienteService {
     }
     
     updateCliente(cliente: Cliente): Observable<Cliente> {
-        console.log(cliente);
         const url = `${this.clienteUrl}/id/${cliente.idCliente}`;
         return this.http.put(url, cliente, this.httpOptions)
             .pipe(
@@ -69,7 +68,7 @@ export class ClienteService {
     }
 
     private log(message: string) {
-        this.messageService.add(`ClienteService: ${message}`);
+        this.messageService.add(`cliente.service.ts: ${message}`);
     }
 
     /**

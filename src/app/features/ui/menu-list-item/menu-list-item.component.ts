@@ -4,6 +4,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 
 import { NavItem } from '../model/nav-item';
 import { NavService } from '../service/nav.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
     selector: 'app-menu-list-item',
@@ -20,6 +21,8 @@ import { NavService } from '../service/nav.service';
     ]
 })
 export class MenuListItemComponent implements OnInit {
+
+    version = environment.SOFTWARE.VERSAO;
 
     expanded: boolean = false;
 
