@@ -15,6 +15,11 @@ export const environment = {
         CONTENT_TYPE: 'application/json'
     },
 
+    API_UNIDADE_MEDIDA: {
+        URL: 'http://localhost:8082',
+        CONTENT_TYPE: 'application/json'
+    },
+
     API_UF: {
         URL: 'http://localhost:8083',
         CONTENT_TYPE: 'application/json'
@@ -22,6 +27,11 @@ export const environment = {
 
     API_PRODUTO: {
         URL: 'http://localhost:8084',
+        CONTENT_TYPE: 'application/json'
+    },
+
+    API_TIPO_PRODUTO: {
+        URL: 'http://localhost:8085',
         CONTENT_TYPE: 'application/json'
     },
 

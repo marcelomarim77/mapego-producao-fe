@@ -1,5 +1,6 @@
-import { UnidadeMedida } from './unidade-medida';
 import { TipoProduto } from './tipo-produto';
+import { UnidadeMedida } from './unidade-medida';
+
 export interface Produto {
     idEmpresa: number;
     idProduto: number;

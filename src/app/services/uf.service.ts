@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-import { Uf } from "./../core/uf";
+import { Uf } from "../interfaces/uf";
 import { environment } from '../../environments/environment';
 
 @Injectable({

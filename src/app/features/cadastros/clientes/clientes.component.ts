@@ -5,7 +5,7 @@ import { MatTableDataSource } from "@angular/material/table";
 import { Router } from "@angular/router";
 import { MatSnackBar } from '@angular/material/snack-bar';
 
-import { Cliente } from './cliente';
+import { Cliente } from '../../../interfaces/cliente';
 import { LoaderService } from './../../../services/loader.service';
 import { ClienteService } from "src/app/services/cliente.service";
 

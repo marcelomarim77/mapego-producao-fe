@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-import { Cnpj } from "./../core/cnpj";
+import { Cnpj } from "../interfaces/cnpj";
 import { environment } from './../../environments/environment';
 
 @Injectable({

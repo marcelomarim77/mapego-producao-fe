@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, tap } from 'rxjs/operators';
 
 import { MessageService } from 'src/app/services/message.service';
-import { Cliente } from '../features/cadastros/clientes/cliente';
+import { Cliente } from '../interfaces/cliente';
 import { environment } from 'src/environments/environment';
 
 @Injectable({

@@ -21,21 +21,15 @@
 
         <mat-form-field class="tipo-produto">
             <mat-label>Tipo Produto</mat-label>
-            <mat-select formControlName="tipoProduto" [(ngModel)]="produto.tipoProduto.idTipoProduto">
-                <!--mat-option *ngFor="let uf of ufS" value="{{uf.sigla}}"> {{uf.descricao}} </mat-option-->
-                <mat-option> {{produto.tipoProduto.descricao}} </mat-option>
-                <mat-option>Produto Semi-Acabado</mat-option>
-                <mat-option>Matéria Prima</mat-option>
+            <mat-select formControlName="tipoProduto" [(ngModel)]="produto.tipoProduto.descricao">
+                <mat-option *ngFor="let tipo of tiposProduto" value="{{tipo.descricao}}"> {{tipo.descricao}} </mat-option>
             </mat-select>
         </mat-form-field>
 
         <mat-form-field class="unidade-medida">
             <mat-label>Unidade de Medida</mat-label>
             <mat-select formControlName="unidadeMedida" [(ngModel)]="produto.unidadeMedida.descricao">
-                <!--mat-option *ngFor="let uf of ufS" value="{{uf.sigla}}"> {{uf.descricao}} </mat-option-->
-                <mat-option>Metro</mat-option>
-                <mat-option>Quilo</mat-option>
-                <mat-option>Unidade</mat-option>
+                <mat-option *ngFor="let unidade of unidadesMedida" value="{{unidade.descricao}}"> {{unidade.descricao}} </mat-option>
             </mat-select>
         </mat-form-field>
     </div>
@@ -60,10 +54,6 @@
             <mat-label>Margem de Venda</mat-label>
             <input matInput type="number" placeholder="Margem de Venda" formControlName="margem" [(ngModel)]="produto.margem">
         </mat-form-field>
-
-        <!--mat-form-field class="margem">
-            <mat-checkbox formControlName="controlaEstoque" [(ngModel)]="produto.controlaEstoque">Controla Estoque</mat-checkbox>
-        </mat-form-field-->
     </div>
 
     <div>

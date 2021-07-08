@@ -4,7 +4,11 @@ import { ActivatedRoute, Router, Params } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { ProdutoService } from 'src/app/services/produto.service';
-import { Produto } from '../produtos/produto';
+import { Produto } from '../../../interfaces/produto';
+import { UnidadeMedida } from 'src/app/interfaces/unidade-medida';
+import { UnidadeMedidaService } from 'src/app/services/unidade-medida.service';
+import { TipoProduto } from 'src/app/interfaces/tipo-produto';
+import { TipoProdutoService } from 'src/app/services/tipo-produto.service';
 
 @Component({
   selector: 'app-produto-detalhe',
@@ -15,6 +19,9 @@ export class ProdutoDetalheComponent implements OnInit {
 
     produto: Produto;
     novoProduto: number;
+
+    unidadesMedida: UnidadeMedida[];
+    tiposProduto: TipoProduto[];
 
     produtoForm = this.formBuilder.group({
         codigo: ['', Validators.required],
@@ -32,11 +39,16 @@ export class ProdutoDetalheComponent implements OnInit {
         private router: Router,
         public formBuilder: FormBuilder,
         private route: ActivatedRoute,
-        private produtoService: ProdutoService) { }
+        private produtoService: ProdutoService,
+        private unidadeMedidaService: UnidadeMedidaService,
+        private tipoProdutoService: TipoProdutoService) { }
 
     ngOnInit(): void {
         this.inicializaProduto();
 
+        this.getUnidadeMedida(1);
+        this.getTipoProduto(1);
+    
         this.route.params.forEach((params: Params) => {
             const id: number = params['id'];
             this.novoProduto = id;
@@ -57,6 +69,7 @@ export class ProdutoDetalheComponent implements OnInit {
     };
 
     onSubmit() {
+        console.log(this.produto);
         this.produtoForm.reset;
         this.router.navigateByUrl(`cadastros/produtos`);
 
@@ -102,7 +115,8 @@ export class ProdutoDetalheComponent implements OnInit {
             margem: 0,
             tipoProduto: {
                 idTipoProduto: 0,
-                descricao: ''
+                descricao: '',
+                produtoAcabado: false
             },
             unidadeMedida: {
                 idUnidade: 0,
@@ -110,5 +124,31 @@ export class ProdutoDetalheComponent implements OnInit {
                 descricao: ''
             }
         };
+    }
+
+    getUnidadeMedida(idEmpresa: number) {
+        this.unidadeMedidaService.getUnidadeMedida(idEmpresa)
+            .subscribe(
+                response => {
+                    this.unidadesMedida = response;
+                    this.unidadesMedida.sort(function(a,b) {
+                        return a.descricao < b.descricao ? -1 : a.descricao > b.descricao ? 1 : 0;
+                    });
+                },
+                error => console.log(error.message)
+        );
+    }
+
+    getTipoProduto(idEmpresa: number) {
+        this.tipoProdutoService.getTipoProduto(idEmpresa)
+            .subscribe(
+                response => {
+                    this.tiposProduto = response;
+                    this.tiposProduto.sort(function(a,b) {
+                        return a.descricao < b.descricao ? -1 : a.descricao > b.descricao ? 1 : 0;
+                    });
+                },
+                error => console.log(error.message)
+        );
     }
 }

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-import { Cep } from "./../core/cep";
+import { Cep } from "../interfaces/cep";
 import { environment } from './../../environments/environment';
 
 @Injectable({

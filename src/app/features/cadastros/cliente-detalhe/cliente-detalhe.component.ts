@@ -3,11 +3,11 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
-import { TipoPessoa } from './../../../core/tipo-pessoa';
-import { Cliente } from '../clientes/cliente';
-import { Cep } from './../../../core/cep';
+import { TipoPessoa } from '../../../interfaces/tipo-pessoa';
+import { Cliente } from '../../../interfaces/cliente';
+import { Cep } from '../../../interfaces/cep';
 import { CepService } from 'src/app/services/cep.service';
-import { Uf } from './../../../core/uf';
+import { Uf } from '../../../interfaces/uf';
 import { UfService } from 'src/app/services/uf.service';
 import { CnpjService } from 'src/app/services/cnpj.service';
 import { ClienteService } from 'src/app/services/cliente.service';
