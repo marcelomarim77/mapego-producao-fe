@@ -91,7 +91,7 @@
         <mat-form-field class="pessoa">
             <mat-label>UF</mat-label>
             <mat-select formControlName="uf" [(ngModel)]="cliente.uf">
-                <mat-option *ngFor="let uf of ufS" value="{{uf.sigla}}"> {{uf.descricao}} </mat-option>
+                <mat-option *ngFor="let uf of ufS" [value]="uf.sigla"> {{uf.descricao}} </mat-option>
             </mat-select>
         </mat-form-field>
     </div>

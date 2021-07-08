@@ -31,8 +31,8 @@ export class ProdutoDetalheComponent implements OnInit {
         custoProduto: [''],
         precoVenda: [''],
         margem: [''],
-        tipoProduto: [''],
-        unidadeMedida: [''],
+        tipoProduto: [0, Validators.required],
+        unidadeMedida: [0, Validators.required],
     });
 
     constructor(private snackBar: MatSnackBar,
@@ -69,18 +69,15 @@ export class ProdutoDetalheComponent implements OnInit {
     };
 
     onSubmit() {
-        console.log(this.produto);
-        this.produtoForm.reset;
-        this.router.navigateByUrl(`cadastros/produtos`);
-
         if (this.novoProduto == 0) { // novo produto
-            this.openSnackBar('Produto inserido com sucesso', 'OK');
-//            this.createCliente(this.cliente);
+            this.createProduto(this.produto);
         }
         else {
-            this.openSnackBar('Produto alterado com sucesso', 'OK');
-//            this.updateCliente(this.cliente);
+            this.updateProduto(this.produto);
         };
+
+        this.produtoForm.reset;
+        this.router.navigateByUrl(`cadastros/produtos`);
     };
 
     cancelar() {
@@ -108,21 +105,13 @@ export class ProdutoDetalheComponent implements OnInit {
             idProduto: 0,
             codigo: '',
             descricao: '',
+            idTipoProduto: 0,
+            idUnidadeMedida: 0,
             estoqueMinimo: 0,
             controlaEstoque: false,
             custoProduto: 0,
             precoVenda: 0,
             margem: 0,
-            tipoProduto: {
-                idTipoProduto: 0,
-                descricao: '',
-                produtoAcabado: false
-            },
-            unidadeMedida: {
-                idUnidade: 0,
-                codigo: '',
-                descricao: ''
-            }
         };
     }
 
@@ -150,5 +139,26 @@ export class ProdutoDetalheComponent implements OnInit {
                 },
                 error => console.log(error.message)
         );
+    }
+
+    updateProduto(produto: Produto) {
+        this.produtoService.updateProduto(produto)
+            .subscribe(
+                response => {
+                    this.openSnackBar('Produto alterado com sucesso', 'OK');
+                },
+                error => console.log(error.message)
+            );
+    }
+
+    createProduto(produto: Produto) {
+        produto.idEmpresa = 1;
+        this.produtoService.createProduto(produto)
+            .subscribe(
+                response => {
+                    this.openSnackBar('Produto inserido com sucesso', 'OK');
+                },
+                error => console.log(error.message)
+            );
     }
 }

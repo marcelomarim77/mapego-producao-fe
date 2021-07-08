@@ -164,7 +164,7 @@ export class ClienteDetalheComponent implements OnInit {
 
     openSnackBar(message: string, action: string) {
         this.snackBar.open(message, action, {
-            duration: 2000,
+            duration: 2000
         });
     }
 
@@ -187,6 +187,7 @@ export class ClienteDetalheComponent implements OnInit {
     }
 
     createCliente(cliente: Cliente) {
+        cliente.idEmpresa = 1;
         this.clienteService.createCliente(cliente)
             .subscribe(
                 response => {

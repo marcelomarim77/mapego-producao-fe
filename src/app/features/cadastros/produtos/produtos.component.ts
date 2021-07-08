@@ -63,7 +63,6 @@ export class ProdutosComponent implements OnInit {
     btnDelete(produto: Produto) {
         if (confirm(`Confirma a exclusão do produto <id: ${produto.idProduto}> [${produto.descricao}]`)) {
             this.deleteProduto(produto);
-            this.openSnackBar('Produto excluído com sucesso', 'OK');
         };
     }
 
@@ -95,6 +94,7 @@ export class ProdutosComponent implements OnInit {
         this.produtoService.deleteProduto(produto.idProduto)
             .subscribe(
                 response => {
+                    this.openSnackBar('Produto excluído com sucesso', 'OK');
                     this.getProdutos(1);
                 },
                 error => console.log(error.message)

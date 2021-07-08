@@ -21,15 +21,15 @@
 
         <mat-form-field class="tipo-produto">
             <mat-label>Tipo Produto</mat-label>
-            <mat-select formControlName="tipoProduto" [(ngModel)]="produto.tipoProduto.descricao">
-                <mat-option *ngFor="let tipo of tiposProduto" value="{{tipo.descricao}}"> {{tipo.descricao}} </mat-option>
+            <mat-select formControlName="tipoProduto" [(ngModel)]="produto.idTipoProduto">
+                <mat-option *ngFor="let tipo of tiposProduto" [value]="tipo.idTipo"> {{tipo.descricao}} </mat-option>
             </mat-select>
         </mat-form-field>
 
         <mat-form-field class="unidade-medida">
             <mat-label>Unidade de Medida</mat-label>
-            <mat-select formControlName="unidadeMedida" [(ngModel)]="produto.unidadeMedida.descricao">
-                <mat-option *ngFor="let unidade of unidadesMedida" value="{{unidade.descricao}}"> {{unidade.descricao}} </mat-option>
+            <mat-select formControlName="unidadeMedida" [(ngModel)]="produto.idUnidadeMedida">
+                <mat-option *ngFor="let unidade of unidadesMedida" [value]="unidade.idUnidade"> {{unidade.descricao}} </mat-option>
             </mat-select>
         </mat-form-field>
     </div>

@@ -58,9 +58,9 @@ export class ClienteService {
         );
     }
 
-    createCliente(Cliente: Cliente): Observable<Cliente> {
+    createCliente(cliente: Cliente): Observable<Cliente> {
         const url = `${this.clienteUrl}/id/0`;
-        return this.http.post<Cliente>(url, Cliente, this.httpOptions).
+        return this.http.post<Cliente>(url, cliente, this.httpOptions).
             pipe(
                 tap((newCliente: Cliente) => this.log(`added Cliente with id=${newCliente.idCliente}`)),
                 catchError(this.handleError<Cliente>('addCliente'))

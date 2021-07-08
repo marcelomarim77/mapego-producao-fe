@@ -49,18 +49,18 @@ export class ProdutoService {
         );
     }
     
-    updateProduto(Produto: Produto): Observable<Produto> {
-        const url = `${this.produtoUrl}/id/${Produto.idProduto}`;
-        return this.http.put(url, Produto, this.httpOptions)
+    updateProduto(produto: Produto): Observable<Produto> {
+        const url = `${this.produtoUrl}/id/${produto.idProduto}`;
+        return this.http.put(url, produto, this.httpOptions)
             .pipe(
-                tap(_ => this.log(`updated Produto id=${Produto.idProduto}`)),
+                tap(_ => this.log(`updated Produto id=${produto.idProduto}`)),
                 catchError(this.handleError<any>('updateProduto'))
         );
     }
 
-    createProduto(Produto: Produto): Observable<Produto> {
+    createProduto(produto: Produto): Observable<Produto> {
         const url = `${this.produtoUrl}/id/0`;
-        return this.http.post<Produto>(url, Produto, this.httpOptions).
+        return this.http.post<Produto>(url, produto, this.httpOptions).
             pipe(
                 tap((newProduto: Produto) => this.log(`added Produto with id=${newProduto.idProduto}`)),
                 catchError(this.handleError<Produto>('addProduto'))

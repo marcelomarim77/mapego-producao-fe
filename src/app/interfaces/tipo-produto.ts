@@ -1,5 +1,6 @@
 export interface TipoProduto {
-    idTipoProduto: number;
+    idEmpresa: number;
+    idTipo: number;
     descricao: string;
     produtoAcabado: boolean;
 }
