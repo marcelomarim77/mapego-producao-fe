@@ -22,18 +22,46 @@ table {
   
 .th-codigo {
     width: 10%;
+    color: rgb(8, 41, 131);
 }
 
 .th-descricao {
-    width: 60%;
+    width: 30%;
+    color: rgb(8, 41, 131);
 }
 
 .th-tipoProduto {
     width: 15%;
+    color: rgb(8, 41, 131);
 }
 
 .th-unidadeMedida {
     width: 10%;
+    color: rgb(8, 41, 131);
+}
+
+.th-custo {
+    width: 10%;
+    color: rgb(8, 41, 131);
+    text-align: right;
+}
+
+.th-preco {
+    width: 10%;
+    color: rgb(8, 41, 131);
+    text-align: right;
+}
+
+.th-controla-estoque {
+    width: 50%;
+    color: rgb(8, 41, 131);
+    text-align: center;
+}
+
+.th-est-min {
+    width: 10%;
+    color: rgb(8, 41, 131);
+    text-align: center;
 }
 
 .botao-td {

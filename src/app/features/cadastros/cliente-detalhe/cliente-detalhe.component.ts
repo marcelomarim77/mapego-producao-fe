@@ -180,8 +180,12 @@ export class ClienteDetalheComponent implements OnInit {
         this.clienteService.updateCliente(cliente)
             .subscribe(
                 response => {
-                    this.openSnackBar('Cliente alterado com sucesso', 'OK');
-                },
+                    if (response) {
+                        this.openSnackBar('Cliente alterado com sucesso', 'OK');
+                    } else {
+                        this.openSnackBar('Falha ao alterar o cliente', 'OK');
+                    }
+            },
                 error => console.log(error.message)
             );
     }
@@ -191,7 +195,11 @@ export class ClienteDetalheComponent implements OnInit {
         this.clienteService.createCliente(cliente)
             .subscribe(
                 response => {
-                    this.openSnackBar('Cliente inserido com sucesso', 'OK');
+                    if (response) {
+                        this.openSnackBar('Cliente inserido com sucesso', 'OK');
+                    } else {
+                        this.openSnackBar('Falha ao incluir o cliente', 'OK');
+                    }
                 },
                 error => console.log(error.message)
             );

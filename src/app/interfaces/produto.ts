@@ -1,3 +1,5 @@
+import { TipoProduto } from './tipo-produto';
+import { UnidadeMedida } from './unidade-medida';
 export interface Produto {
     idEmpresa: number;
     idProduto: number;
@@ -9,5 +11,7 @@ export interface Produto {
 	controlaEstoque: boolean;
 	custoProduto: number;
 	precoVenda: number;
-	margem: number
+	margem: number;
+    tipoProduto: TipoProduto;
+    unidadeMedida: UnidadeMedida;
 }

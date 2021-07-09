@@ -1,0 +1,28 @@
+<form [formGroup]="unidadeForm" >
+
+    <h2 class="titulo"><strong>Cadastro de Unidade de Medida</strong></h2>
+
+    <div>
+        <mat-form-field class="codigo">
+            <mat-label>Código</mat-label>
+            <input matInput type="text" placeholder="Código" formControlName="codigo" maxlength="20" required [(ngModel)]="unidade.codigo">
+            <mat-error *ngFor="let validation of validationMessages.codigo">
+                <mat-error class="error-message" *ngIf="unidadeForm.get('codigo').hasError(validation.type) && (unidadeForm.get('codigo').dirty || unidadeForm.get('codigo').touched)">{{validation.message}}</mat-error>
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="descricao">
+            <mat-label>Descrição da Unidade</mat-label>
+            <input matInput type="text" placeholder="Descrição da Unidade de Medida" formControlName="descricao" maxlength="30" required [(ngModel)]="unidade.descricao">
+            <mat-error *ngFor="let validation of validationMessages.descricao">
+                <mat-error class="error-message" *ngIf="unidadeForm.get('descricao').hasError(validation.type) && (unidadeForm.get('descricao').dirty || unidadeForm.get('descricao').touched)">{{validation.message}}</mat-error>
+            </mat-error>
+        </mat-form-field>
+    </div>
+
+    <div>
+        <button class="submit-btn botoes" color="primary" mat-raised-button type="submit" [disabled]="!unidadeForm.valid" (click)=onSubmit()>Salvar</button>
+        <button class="botoes" color="warn" mat-raised-button type="reset" (click)=cancelar()>Cancelar</button>
+    </div>
+
+</form>

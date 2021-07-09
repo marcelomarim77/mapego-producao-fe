@@ -18,7 +18,9 @@
                 <mat-error class="error-message" *ngIf="produtoForm.get('descricao').hasError(validation.type) && (produtoForm.get('descricao').dirty || produtoForm.get('descricao').touched)">{{validation.message}}</mat-error>
             </mat-error>
         </mat-form-field>
+    </div>
 
+    <div>
         <mat-form-field class="tipo-produto">
             <mat-label>Tipo Produto</mat-label>
             <mat-select formControlName="tipoProduto" [(ngModel)]="produto.idTipoProduto">
@@ -31,6 +33,11 @@
             <mat-select formControlName="unidadeMedida" [(ngModel)]="produto.idUnidadeMedida">
                 <mat-option *ngFor="let unidade of unidadesMedida" [value]="unidade.idUnidade"> {{unidade.descricao}} </mat-option>
             </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="margem">
+            <mat-checkbox class="example-margin" formControlName="controlaEstoque" [(ngModel)]="produto.controlaEstoque">Controla Estoque</mat-checkbox>
+            <input matInput formControlName="controlaEstoque" [(ngModel)]="produto.controlaEstoque">
         </mat-form-field>
     </div>
 
@@ -54,6 +61,22 @@
             <mat-label>Margem de Venda</mat-label>
             <input matInput type="number" placeholder="Margem de Venda" formControlName="margem" [(ngModel)]="produto.margem">
         </mat-form-field>
+    </div>
+
+    <div>
+        <mat-tab-group animationDuration="1500ms">
+            <mat-tab label="Composição">
+                <mat-form-field class="margem">
+                    <mat-label>Estoque Mínimo</mat-label>
+                    <input matInput type="number" placeholder="Estoque Mínimo" formControlName="estoqueMinimo" [(ngModel)]="produto.estoqueMinimo">
+                </mat-form-field>
+
+                <button class="botoes" color="warn" mat-raised-button>Cancelar</button>
+
+            </mat-tab>
+            <mat-tab label="Fornecedores">Content 2</mat-tab>
+            <mat-tab label="Movimentação">Content 3</mat-tab>
+        </mat-tab-group>
     </div>
 
     <div>

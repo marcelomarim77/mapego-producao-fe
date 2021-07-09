@@ -48,7 +48,7 @@ export class ProdutoService {
                 catchError(this.handleError<Produto>('deleteProduto'))
         );
     }
-    
+
     updateProduto(produto: Produto): Observable<Produto> {
         const url = `${this.produtoUrl}/id/${produto.idProduto}`;
         return this.http.put(url, produto, this.httpOptions)

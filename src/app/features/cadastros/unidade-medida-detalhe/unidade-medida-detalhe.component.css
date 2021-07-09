@@ -1,0 +1,23 @@
+.titulo {
+    padding-left: 10px;
+    padding-top: 10px;
+    color: rgb(8, 41, 131);
+}
+
+.codigo {
+    width: 7%;
+    margin: 10px;
+    padding: 6px;
+}
+
+.descricao {
+    width: 50%;
+    margin: 10px;
+    padding: 6px;
+}
+
+.botoes {
+    margin-left: 10px;
+    padding-left: 10px;
+    width: 100px;
+}

@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, DEFAULT_CURRENCY_CODE, LOCALE_ID } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -14,6 +14,8 @@ import { MatPaginatorIntl } from "@angular/material/paginator";
 import { MatPaginatorModule } from "@angular/material/paginator";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MatNativeDateModule } from "@angular/material/core";
+import ptBr from '@angular/common/locales/pt';
+import { registerLocaleData } from '@angular/common';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -21,6 +23,8 @@ import { MenuListItemComponent } from './features/ui/menu-list-item/menu-list-it
 import { FeaturesComponent } from './features/features.component';
 import { CustomPaginator } from "./core/custom-paginator";
 import { MessagesComponent } from './features/messages/messages.component';
+
+registerLocaleData(ptBr);
 
 @NgModule({
   declarations: [
@@ -52,6 +56,7 @@ import { MessagesComponent } from './features/messages/messages.component';
  ],
   providers: [
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: "fill" } },
+    { provide: LOCALE_ID, useValue: 'pt' },
     { provide: MatPaginatorIntl, useValue: CustomPaginator() }
   ],
   bootstrap: [AppComponent]

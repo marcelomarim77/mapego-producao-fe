@@ -46,7 +46,7 @@ export class ProdutoDetalheComponent implements OnInit {
     ngOnInit(): void {
         this.inicializaProduto();
 
-        this.getUnidadeMedida(1);
+        this.getUnidadesMedida(1);
         this.getTipoProduto(1);
     
         this.route.params.forEach((params: Params) => {
@@ -112,11 +112,23 @@ export class ProdutoDetalheComponent implements OnInit {
             custoProduto: 0,
             precoVenda: 0,
             margem: 0,
+            tipoProduto: {
+                idEmpresa: 0,
+                idTipo: 0,
+                descricao: '',
+                produtoAcabado: false
+            },
+            unidadeMedida: {
+                idEmpresa: 0,
+                idUnidade: 0,
+                codigo: '',
+                descricao: ''
+            }
         };
     }
 
-    getUnidadeMedida(idEmpresa: number) {
-        this.unidadeMedidaService.getUnidadeMedida(idEmpresa)
+    getUnidadesMedida(idEmpresa: number) {
+        this.unidadeMedidaService.getUnidadesMedida(idEmpresa)
             .subscribe(
                 response => {
                     this.unidadesMedida = response;
@@ -145,7 +157,11 @@ export class ProdutoDetalheComponent implements OnInit {
         this.produtoService.updateProduto(produto)
             .subscribe(
                 response => {
-                    this.openSnackBar('Produto alterado com sucesso', 'OK');
+                    if (response) {
+                        this.openSnackBar('Produto alterado com sucesso', 'OK');
+                    } else {
+                        this.openSnackBar('Falha ao alterar o produto', 'OK');
+                    }
                 },
                 error => console.log(error.message)
             );
@@ -156,8 +172,12 @@ export class ProdutoDetalheComponent implements OnInit {
         this.produtoService.createProduto(produto)
             .subscribe(
                 response => {
-                    this.openSnackBar('Produto inserido com sucesso', 'OK');
-                },
+                    if (response) {
+                        this.openSnackBar('Produto inserido com sucesso', 'OK');
+                    } else {
+                        this.openSnackBar('Falha ao incluir o produto', 'OK');
+                    }
+            },
                 error => console.log(error.message)
             );
     }

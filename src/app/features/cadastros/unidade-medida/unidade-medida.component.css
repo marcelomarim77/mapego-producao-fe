@@ -20,23 +20,13 @@ table {
     float: left;
 }
   
-.th-cnpj {
+.th-codigo {
     width: 10%;
     color: rgb(8, 41, 131);
 }
 
-.th-nome {
-    width: 18%;
-    color: rgb(8, 41, 131);
-}
-
-.th-contato {
-    width: 15%;
-    color: rgb(8, 41, 131);
-}
-
-.th-fone {
-    width: 10%;
+.th-descricao {
+    width: 30%;
     color: rgb(8, 41, 131);
 }
 

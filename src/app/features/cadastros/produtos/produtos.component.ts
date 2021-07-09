@@ -6,8 +6,8 @@ import { Router } from "@angular/router";
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { Produto } from '../../../interfaces/produto';
-import { LoaderService } from './../../../services/loader.service';
 import { ProdutoService } from "src/app/services/produto.service";
+import { LoaderService } from './../../../services/loader.service';
 
 @Component({
   selector: 'app-produtos',
@@ -23,15 +23,19 @@ export class ProdutosComponent implements OnInit {
         "descricao",
         "descricaoTipoProduto",
         "descricaoUnidadeMedida",
+        "custoProduto",
+        "precoVenda",
+        "controlaEstoque",
+        "estoqueMinimo",
         "botaoEditar",
         "botaoExcluir"
     ];
 
     dataSource: MatTableDataSource<Produto>;
-    
+
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
-    
+
     constructor(private snackBar: MatSnackBar,
                 private router: Router,
                 private produtoService: ProdutoService,
@@ -94,8 +98,13 @@ export class ProdutosComponent implements OnInit {
         this.produtoService.deleteProduto(produto.idProduto)
             .subscribe(
                 response => {
-                    this.openSnackBar('Produto excluído com sucesso', 'OK');
-                    this.getProdutos(1);
+                    console.log(response);
+                    if (response) {
+                        this.openSnackBar('Produto excluído com sucesso', 'OK');
+                        this.getProdutos(1);
+                    } else {
+                        this.openSnackBar('Falha ao excluir o produto', 'OK');
+                    }
                 },
                 error => console.log(error.message)
             );
