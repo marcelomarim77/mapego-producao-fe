@@ -48,7 +48,7 @@ export class ClienteService {
                 catchError(this.handleError<Cliente>('deleteCliente'))
         );
     }
-    
+
     updateCliente(cliente: Cliente): Observable<Cliente> {
         const url = `${this.clienteUrl}/id/${cliente.idCliente}`;
         return this.http.put(url, cliente, this.httpOptions)

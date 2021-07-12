@@ -35,6 +35,11 @@ export const environment = {
         CONTENT_TYPE: 'application/json'
     },
 
+    API_FORNECEDOR: {
+        URL: 'http://localhost:8086',
+        CONTENT_TYPE: 'application/json'
+    },
+
     API_CNPJ: {
         URL: 'https://www.receitaws.com.br/v1/cnpj/',
         CONTENT_TYPE: 'application/json',

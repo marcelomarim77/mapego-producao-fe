@@ -1,1 +1,87 @@
-<p>fornecedores works!</p>
+<h2 class="titulo"><strong>Cadastro de Fornecedores</strong></h2>
+
+<mat-form-field>
+    <mat-label>Pesquise por nome, razão social, apelido ou contato</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Exemplo" #input />
+</mat-form-field>
+  
+<button class="botao-incluir" mat-mini-fab color="primary" (click)="btnIncluir()">
+    <mat-icon>add</mat-icon>
+</button>
+
+<div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort>
+
+        <!-- CPF/CNPJ Column -->
+        <ng-container matColumnDef="cpfCnpj">
+            <th class="th-cnpj" mat-header-cell *matHeaderCellDef>CPF/CNPJ</th>
+            <td mat-cell *matCellDef="let row">{{row.cpfCnpj}}</td>
+        </ng-container>
+  
+        <!-- Razao Social Column -->
+        <ng-container matColumnDef="razaoSocial">
+            <th class="th-nome" mat-header-cell *matHeaderCellDef mat-sort-header>Razão Social</th>
+            <td mat-cell *matCellDef="let row">{{row.razaoSocial}}</td>
+        </ng-container>
+  
+        <!-- Nome Fantasia Column -->
+        <ng-container matColumnDef="nomeFantasia">
+            <th class="th-nome" mat-header-cell *matHeaderCellDef mat-sort-header>Nome Fantasia</th>
+            <td mat-cell *matCellDef="let row">{{row.nomeFantasia}}</td>
+        </ng-container>
+
+        <!-- Apelido Column -->
+        <ng-container matColumnDef="apelido">
+            <th class="th-nome" mat-header-cell *matHeaderCellDef mat-sort-header>Apelido</th>
+            <td mat-cell *matCellDef="let row">{{row.apelido}}</td>
+        </ng-container>
+
+        <!-- Contato Column -->
+        <ng-container matColumnDef="contato">
+            <th class="th-contato" mat-header-cell *matHeaderCellDef mat-sort-header>Contato</th>
+            <td mat-cell *matCellDef="let row">{{row.contato}}</td>
+        </ng-container>
+
+        <!-- Telefone Column -->
+        <ng-container matColumnDef="telefone">
+            <th class="th-fone" mat-header-cell *matHeaderCellDef>Telefone</th>
+            <td mat-cell *matCellDef="let row">{{row.telefone}}</td>
+        </ng-container>
+
+        <!-- Celular Column -->
+        <ng-container matColumnDef="celular">
+            <th class="th-fone" mat-header-cell *matHeaderCellDef>Celular</th>
+            <td mat-cell *matCellDef="let row">{{row.celular}}</td>
+        </ng-container>
+
+        <!-- Edit Column -->
+        <ng-container matColumnDef="botaoEditar">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let row">
+                <button mat-icon-button color="primary" (click)="btnEdit(row)">
+                    <mat-icon>edit</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+  
+        <!-- Delete Column -->
+        <ng-container matColumnDef="botaoExcluir">
+            <th class="botao-td" mat-header-cell *matHeaderCellDef></th>
+            <td class="botao-td" mat-cell *matCellDef="let row">
+                <button mat-icon-button color="warn" (click)="btnDelete(row)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+  
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  
+        <!-- Row shown when there is no matching data. -->
+        <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="4">Nenhum fornecedor encontrado com o filtro "{{input.value}}"</td>
+        </tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[10, 25, 50, 100]" showFirstLastButtons></mat-paginator>
+</div>
