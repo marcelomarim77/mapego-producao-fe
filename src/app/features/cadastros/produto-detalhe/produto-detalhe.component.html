@@ -36,8 +36,11 @@
         </mat-form-field>
 
         <mat-form-field class="margem">
-            <mat-checkbox class="example-margin" formControlName="controlaEstoque" [(ngModel)]="produto.controlaEstoque">Controla Estoque</mat-checkbox>
-            <input matInput formControlName="controlaEstoque" [(ngModel)]="produto.controlaEstoque">
+            <mat-label>Controla Estoque</mat-label>
+            <mat-select formControlName="controlaEstoque" [(ngModel)]="produto.controlaEstoque">
+                <mat-option [value]="true"> SIM </mat-option>
+                <mat-option [value]="false"> NÃO </mat-option>
+            </mat-select>
         </mat-form-field>
     </div>
 

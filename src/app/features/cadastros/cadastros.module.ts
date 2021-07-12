@@ -17,12 +17,14 @@ import { TableMaterialModule } from './../../core/material-module';
 import { ProdutoDetalheComponent } from './produto-detalhe/produto-detalhe.component';
 import { UnidadeMedidaComponent } from './unidade-medida/unidade-medida.component';
 import { UnidadeMedidaDetalheComponent } from './unidade-medida-detalhe/unidade-medida-detalhe.component';
+import { FornecedorDetalheComponent } from './fornecedor-detalhe/fornecedor-detalhe.component';
 
 export const routes = [
     { path: '', pathMatch: 'full', redirectTo: 'clientes' },
     { path: 'clientes', component: ClientesComponent },
     { path: 'cliente/:id', component: ClienteDetalheComponent },
     { path: 'fornecedores', component: FornecedoresComponent },
+    { path: 'fornecedor/:id', component: FornecedorDetalheComponent },
     { path: 'unidades', component: UnidadeMedidaComponent },
     { path: 'unidade/:id', component: UnidadeMedidaDetalheComponent },
     { path: 'produtos', component: ProdutosComponent },
@@ -39,7 +41,8 @@ export const routes = [
         ClienteDetalheComponent,
         ProdutoDetalheComponent,
         UnidadeMedidaComponent,
-        UnidadeMedidaDetalheComponent
+        UnidadeMedidaDetalheComponent,
+        FornecedorDetalheComponent
     ],
     imports: [
         CommonModule,

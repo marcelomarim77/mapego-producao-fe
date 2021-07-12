@@ -49,7 +49,7 @@ export class FornecedorService {
         );
     }
 
-    updateCliente(fornecedor: Fornecedor): Observable<Fornecedor> {
+    updateFornecedor(fornecedor: Fornecedor): Observable<Fornecedor> {
         const url = `${this.fornecedorUrl}/id/${fornecedor.idFornecedor}`;
         return this.http.put(url, fornecedor, this.httpOptions)
             .pipe(

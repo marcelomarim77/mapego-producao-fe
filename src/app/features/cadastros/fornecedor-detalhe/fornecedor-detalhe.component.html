@@ -1,0 +1,138 @@
+<form [formGroup]="fornecedorForm" >
+
+    <h2 class="titulo"><strong>Cadastro de Fornecedores</strong></h2>
+
+    <div>
+        <mat-form-field class="pessoa">
+            <mat-label>Pessoa</mat-label>
+            <mat-select formControlName="pessoa" required [(ngModel)]="fornecedor.pessoa">
+                <mat-option *ngFor="let tipoPessoa of tiposPessoa" value="{{tipoPessoa.value}}"> {{tipoPessoa.viewValue}} </mat-option>
+            </mat-select>
+            <mat-error *ngFor="let validation of validationMessages.pessoa">
+                <mat-error class="error-message" *ngIf="fornecedorForm.get('pessoa').hasError(validation.type) && (fornecedorForm.get('pessoa').dirty || fornecedorForm.get('pessoa').touched)">{{validation.message}}</mat-error>
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="cpf-cnpj">
+            <mat-label>CPF ou CNPJ</mat-label>
+            <input matInput type="text" placeholder="CPF/CNPJ" formControlName="cpfCnpj" maxlength="14" required [(ngModel)]="fornecedor.cpfCnpj">
+            <mat-error *ngFor="let validation of validationMessages.cpfCnpj">
+                <mat-error class="error-message" *ngIf="fornecedorForm.get('cpfCnpj').hasError(validation.type) && (fornecedorForm.get('cpfCnpj').dirty || fornecedorForm.get('cpfCnpj').touched)">{{validation.message}}</mat-error>
+            </mat-error>
+        </mat-form-field>
+
+        <button mat-mini-fab color="primary" (click)="pesquisaCnpj()">
+            <mat-icon>search</mat-icon>
+        </button>
+
+        <mat-form-field class="rg-ie">
+            <mat-label>RG ou IE</mat-label>
+            <input matInput type="text" placeholder="RG/IE" formControlName="rgIe" maxlength="14" [(ngModel)]="fornecedor.rgIe">
+        </mat-form-field>
+    </div>
+
+    <div>
+        <mat-form-field class="razao-social">
+            <mat-label>Razão Social</mat-label>
+            <input matInput type="text" placeholder="Nome ou Razão Social" formControlName="razaoSocial" maxlength="60" required [(ngModel)]="fornecedor.razaoSocial">
+            <mat-error *ngFor="let validation of validationMessages.razaoSocial">
+                <mat-error class="error-message" *ngIf="fornecedorForm.get('razaoSocial').hasError(validation.type) && (fornecedorForm.get('razaoSocial').dirty || fornecedorForm.get('razaoSocial').touched)">{{validation.message}}</mat-error>
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="nome-fantasia">
+            <mat-label>Nome Fantasia</mat-label>
+            <input matInput type="text" placeholder="Nome Fantasia" formControlName="nomeFantasia" maxlength="60"  [(ngModel)]="fornecedor.nomeFantasia">
+        </mat-form-field>
+    
+        <mat-form-field class="apelido">
+            <mat-label>Apelido</mat-label>
+            <input matInput type="text" placeholder="Apelido" formControlName="apelido" maxlength="60" [(ngModel)]="fornecedor.apelido">
+        </mat-form-field>
+    </div>
+ 
+    <div>
+        <mat-form-field class="cep">
+            <mat-label>CEP</mat-label>
+            <input matInput type="text" placeholder="CEP" formControlName="cep" maxlength="8" [(ngModel)]="fornecedor.cep">
+        </mat-form-field>
+
+        <button mat-mini-fab color="primary" (click)="pesquisaCep()">
+            <mat-icon>search</mat-icon>
+        </button>
+
+        <mat-form-field class="endereco">
+            <mat-label>Endereço</mat-label>
+            <input matInput type="text" placeholder="Endereço" formControlName="endereco" maxlength="60" [(ngModel)]="fornecedor.endereco">
+        </mat-form-field>
+
+        <mat-form-field class="numero">
+            <mat-label>Número</mat-label>
+            <input matInput type="text" placeholder="Número" formControlName="numero" maxlength="10" [(ngModel)]="fornecedor.numero">
+        </mat-form-field>
+
+        <mat-form-field class="complemento">
+            <mat-label>Complemento</mat-label>
+            <input matInput type="text" placeholder="Complemento" formControlName="complemento" maxlength="60" [(ngModel)]="fornecedor.complemento">
+        </mat-form-field>
+    </div>
+
+    <div>
+        <mat-form-field class="bairro">
+            <mat-label>Bairro</mat-label>
+            <input matInput type="text" placeholder="Bairro" formControlName="bairro" maxlength="60" [(ngModel)]="fornecedor.bairro">
+        </mat-form-field>
+
+        <mat-form-field class="cidade">
+            <mat-label>Cidade</mat-label>
+            <input matInput type="text" placeholder="Cidade" formControlName="cidade" maxlength="60" [(ngModel)]="fornecedor.cidade">
+        </mat-form-field>
+
+        <mat-form-field class="pessoa">
+            <mat-label>UF</mat-label>
+            <mat-select formControlName="uf" [(ngModel)]="fornecedor.uf">
+                <mat-option *ngFor="let uf of ufS" [value]="uf.sigla"> {{uf.descricao}} </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <div>
+        <mat-form-field class="contato">
+            <mat-label>Contato</mat-label>
+            <input matInput type="text" placeholder="Contato" formControlName="contato" maxlength="60" [(ngModel)]="fornecedor.contato">
+        </mat-form-field>
+
+        <mat-form-field class="telefone">
+            <mat-label>Telefone</mat-label>
+            <input matInput type="text" placeholder="Telefone" formControlName="telefone" maxlength="20" [(ngModel)]="fornecedor.telefone">
+        </mat-form-field>
+
+        <mat-form-field class="celular">
+            <mat-label>Celular</mat-label>
+            <input matInput type="text" placeholder="Celular" formControlName="celular" maxlength="20" [(ngModel)]="fornecedor.celular">
+        </mat-form-field>
+    </div>
+
+    <div>
+        <mat-form-field class="email">
+            <mat-label>E-mail</mat-label>
+            <input matInput type="email" placeholder="E-mail" formControlName="email" maxlength="60" required [(ngModel)]="fornecedor.email">
+            <mat-error *ngFor="let validation of validationMessages.email">
+                <mat-error class="error-message" *ngIf="fornecedorForm.get('email').hasError(validation.type) && (fornecedorForm.get('email').dirty || fornecedorForm.get('email').touched)">{{validation.message}}</mat-error>
+            </mat-error>
+        </mat-form-field>
+    </div>
+ 
+    <div>
+        <mat-form-field class="dados-adicionais">
+            <mat-label>Dados Adicionais</mat-label>
+            <textarea matInput type="text" maxlength="255" placeholder="Informações adicionais do fornecedor" formControlName="dadosAdicionais" [(ngModel)]="fornecedor.dadosAdicionais"></textarea>
+        </mat-form-field>
+    </div>
+
+    <div>
+        <button class="submit-btn botoes" color="primary" mat-raised-button type="submit" [disabled]="!fornecedorForm.valid" (click)=onSubmit()>Salvar</button>
+        <button class="botoes" color="warn" mat-raised-button type="reset" (click)=cancelar()>Cancelar</button>
+    </div>
+
+</form>
