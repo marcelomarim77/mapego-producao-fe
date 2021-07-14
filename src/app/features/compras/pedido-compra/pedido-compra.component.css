@@ -1,0 +1,45 @@
+.titulo {
+    padding-left: 10px;
+    padding-top: 10px;
+    color: rgb(8, 41, 131);
+}
+
+.botao-incluir {
+    margin: 10px;
+    float: inline-end;
+}
+
+table {
+    width: 100%;
+}
+
+.mat-form-field {
+    margin-left: 10px;
+    font-size: 14px;
+    width: 90%;
+    float: left;
+}
+  
+.th-cnpj {
+    width: 10%;
+    color: rgb(8, 41, 131);
+}
+
+.th-nome {
+    width: 18%;
+    color: rgb(8, 41, 131);
+}
+
+.th-contato {
+    width: 15%;
+    color: rgb(8, 41, 131);
+}
+
+.th-fone {
+    width: 10%;
+    color: rgb(8, 41, 131);
+}
+
+.botao-td {
+    width: 0.5px;
+}

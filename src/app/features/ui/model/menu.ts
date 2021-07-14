@@ -35,8 +35,15 @@ export let menu: NavItem[] = [
     },
     {
         displayName: 'Compras',
-        iconName: 'shopping_cart',
-        route: 'compras'
+        iconName: 'storefront',
+        route: 'compras',
+        children: [
+            {
+                displayName: 'Pedido de Compra',
+                iconName: 'shopping_cart',
+                route: 'compras/pedido-compra'
+            },
+        ]
     },
     {
         displayName: 'Vendas',

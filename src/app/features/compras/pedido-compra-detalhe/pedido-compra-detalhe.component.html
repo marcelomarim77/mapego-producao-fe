@@ -1,0 +1,155 @@
+<form [formGroup]="pedidoCompraForm" >
+
+    <h2 class="titulo"><strong>Pedido de Compra</strong></h2>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Fornecedor</mat-label>
+        <input type="text"
+                placeholder="Informe o fornecedor"
+                aria-label="Number"
+                matInput
+                formControlName="razaoSocial"
+                [formControl]="myControl"
+                [matAutocomplete]="auto">
+        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+        <mat-option *ngFor="let fornecedor of fornecedores | async" [value]="fornecedor.idFornecedor">
+            {{fornecedor.razaoSocial}}
+        </mat-option>
+        </mat-autocomplete>
+    </mat-form-field>
+
+<!--
+    <div>
+        <mat-form-field class="pessoa">
+            <mat-label>Pessoa</mat-label>
+            <mat-select formControlName="pessoa" required [(ngModel)]="cliente.pessoa">
+                <mat-option *ngFor="let tipoPessoa of tiposPessoa" value="{{tipoPessoa.value}}"> {{tipoPessoa.viewValue}} </mat-option>
+            </mat-select>
+            <mat-error *ngFor="let validation of validationMessages.pessoa">
+                <mat-error class="error-message" *ngIf="clienteForm.get('pessoa').hasError(validation.type) && (clienteForm.get('pessoa').dirty || clienteForm.get('pessoa').touched)">{{validation.message}}</mat-error>
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="cpf-cnpj">
+            <mat-label>CPF ou CNPJ</mat-label>
+            <input matInput type="text" placeholder="CPF/CNPJ" formControlName="cpfCnpj" maxlength="14" required [(ngModel)]="cliente.cpfCnpj">
+            <mat-error *ngFor="let validation of validationMessages.cpfCnpj">
+                <mat-error class="error-message" *ngIf="clienteForm.get('cpfCnpj').hasError(validation.type) && (clienteForm.get('cpfCnpj').dirty || clienteForm.get('cpfCnpj').touched)">{{validation.message}}</mat-error>
+            </mat-error>
+        </mat-form-field>
+
+        <button mat-mini-fab color="primary" (click)="pesquisaCnpj()">
+            <mat-icon>search</mat-icon>
+        </button>
+
+        <mat-form-field class="rg-ie">
+            <mat-label>RG ou IE</mat-label>
+            <input matInput type="text" placeholder="RG/IE" formControlName="rgIe" maxlength="14" [(ngModel)]="cliente.rgIe">
+        </mat-form-field>
+    </div>
+
+    <div>
+        <mat-form-field class="razao-social">
+            <mat-label>Razão Social</mat-label>
+            <input matInput type="text" placeholder="Nome ou Razão Social" formControlName="razaoSocial" maxlength="60" required [(ngModel)]="cliente.razaoSocial">
+            <mat-error *ngFor="let validation of validationMessages.razaoSocial">
+                <mat-error class="error-message" *ngIf="clienteForm.get('razaoSocial').hasError(validation.type) && (clienteForm.get('razaoSocial').dirty || clienteForm.get('razaoSocial').touched)">{{validation.message}}</mat-error>
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="nome-fantasia">
+            <mat-label>Nome Fantasia</mat-label>
+            <input matInput type="text" placeholder="Nome Fantasia" formControlName="nomeFantasia" maxlength="60"  [(ngModel)]="cliente.nomeFantasia">
+        </mat-form-field>
+    
+        <mat-form-field class="apelido">
+            <mat-label>Apelido</mat-label>
+            <input matInput type="text" placeholder="Apelido" formControlName="apelido" maxlength="60" [(ngModel)]="cliente.apelido">
+        </mat-form-field>
+    </div>
+ 
+    <div>
+        <mat-form-field class="cep">
+            <mat-label>CEP</mat-label>
+            <input matInput type="text" placeholder="CEP" formControlName="cep" maxlength="8" [(ngModel)]="cliente.cep">
+        </mat-form-field>
+
+        <button mat-mini-fab color="primary" (click)="pesquisaCep()">
+            <mat-icon>search</mat-icon>
+        </button>
+
+        <mat-form-field class="endereco">
+            <mat-label>Endereço</mat-label>
+            <input matInput type="text" placeholder="Endereço" formControlName="endereco" maxlength="60" [(ngModel)]="cliente.endereco">
+        </mat-form-field>
+
+        <mat-form-field class="numero">
+            <mat-label>Número</mat-label>
+            <input matInput type="text" placeholder="Número" formControlName="numero" maxlength="10" [(ngModel)]="cliente.numero">
+        </mat-form-field>
+
+        <mat-form-field class="complemento">
+            <mat-label>Complemento</mat-label>
+            <input matInput type="text" placeholder="Complemento" formControlName="complemento" maxlength="60" [(ngModel)]="cliente.complemento">
+        </mat-form-field>
+    </div>
+
+    <div>
+        <mat-form-field class="bairro">
+            <mat-label>Bairro</mat-label>
+            <input matInput type="text" placeholder="Bairro" formControlName="bairro" maxlength="60" [(ngModel)]="cliente.bairro">
+        </mat-form-field>
+
+        <mat-form-field class="cidade">
+            <mat-label>Cidade</mat-label>
+            <input matInput type="text" placeholder="Cidade" formControlName="cidade" maxlength="60" [(ngModel)]="cliente.cidade">
+        </mat-form-field>
+
+        <mat-form-field class="pessoa">
+            <mat-label>UF</mat-label>
+            <mat-select formControlName="uf" [(ngModel)]="cliente.uf">
+                <mat-option *ngFor="let uf of ufS" [value]="uf.sigla"> {{uf.descricao}} </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <div>
+        <mat-form-field class="contato">
+            <mat-label>Contato</mat-label>
+            <input matInput type="text" placeholder="Contato" formControlName="contato" maxlength="60" [(ngModel)]="cliente.contato">
+        </mat-form-field>
+
+        <mat-form-field class="telefone">
+            <mat-label>Telefone</mat-label>
+            <input matInput type="text" placeholder="Telefone" formControlName="telefone" maxlength="20" [(ngModel)]="cliente.telefone">
+        </mat-form-field>
+
+        <mat-form-field class="celular">
+            <mat-label>Celular</mat-label>
+            <input matInput type="text" placeholder="Celular" formControlName="celular" maxlength="20" [(ngModel)]="cliente.celular">
+        </mat-form-field>
+    </div>
+
+    <div>
+        <mat-form-field class="email">
+            <mat-label>E-mail</mat-label>
+            <input matInput type="email" placeholder="E-mail" formControlName="email" maxlength="60" required [(ngModel)]="cliente.email">
+            <mat-error *ngFor="let validation of validationMessages.email">
+                <mat-error class="error-message" *ngIf="clienteForm.get('email').hasError(validation.type) && (clienteForm.get('email').dirty || clienteForm.get('email').touched)">{{validation.message}}</mat-error>
+            </mat-error>
+        </mat-form-field>
+    </div>
+ 
+    <div>
+        <mat-form-field class="dados-adicionais">
+            <mat-label>Dados Adicionais</mat-label>
+            <textarea matInput type="text" maxlength="255" placeholder="Informações adicionais do cliente" formControlName="dadosAdicionais" [(ngModel)]="cliente.dadosAdicionais"></textarea>
+        </mat-form-field>
+    </div>
+
+    <div>
+        <button class="submit-btn botoes" color="primary" mat-raised-button type="submit" [disabled]="!clienteForm.valid" (click)=onSubmit()>Salvar</button>
+        <button class="botoes" color="warn" mat-raised-button type="reset" (click)=cancelar()>Cancelar</button>
+    </div>
+-->
+</form>

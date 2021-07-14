@@ -7,13 +7,13 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatPaginatorModule } from "@angular/material/paginator";
+import { TableMaterialModule } from './../../core/material-module';
 
 import { ClientesComponent } from './clientes/clientes.component';
 import { FornecedoresComponent } from './fornecedores/fornecedores.component';
 import { ProdutosComponent } from './produtos/produtos.component';
 import { TransportadorasComponent } from './transportadoras/transportadoras.component';
 import { ClienteDetalheComponent } from './cliente-detalhe/cliente-detalhe.component';
-import { TableMaterialModule } from './../../core/material-module';
 import { ProdutoDetalheComponent } from './produto-detalhe/produto-detalhe.component';
 import { UnidadeMedidaComponent } from './unidade-medida/unidade-medida.component';
 import { UnidadeMedidaDetalheComponent } from './unidade-medida-detalhe/unidade-medida-detalhe.component';

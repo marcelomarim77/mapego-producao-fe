@@ -54,7 +54,7 @@ export class ClientesComponent implements OnInit {
             this.dataSource.paginator.firstPage();
         }
     }
-    
+
     btnIncluir() {
         this.router.navigate([`cadastros/cliente/0`]);
     }
