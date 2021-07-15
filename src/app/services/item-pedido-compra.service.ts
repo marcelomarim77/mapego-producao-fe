@@ -5,12 +5,12 @@ import { catchError, tap } from 'rxjs/operators';
 
 import { MessageService } from 'src/app/services/message.service';
 import { environment } from 'src/environments/environment';
-import { PedidoCompra } from '../interfaces/pedido-compra';
+import { ItemPedidoCompra } from '../interfaces/item-pedido-compra';
 
 @Injectable({
   providedIn: 'root'
 })
-export class PedidoCompraService {
+export class ItemPedidoCompraService {
 
     private pedidoCompraURL = environment.API_PEDIDO_COMPRA.URL;
     private httpOptions = {
@@ -22,24 +22,16 @@ export class PedidoCompraService {
         private messageService: MessageService
     ) {}
 
-    getPedidosCompraByEmpresa(idEmpresa: number): Observable<PedidoCompra[]> {
-        const url = `${this.pedidoCompraURL}/pedido-compra/idEmpresa/${idEmpresa}`;
-        return this.http.get<PedidoCompra[]>(url)
+    getItemPedidoCompra(id: number): Observable<ItemPedidoCompra[]> {
+        const url = `${this.pedidoCompraURL}/item-pedido-compra/id/${id}`;
+        return this.http.get<ItemPedidoCompra[]>(url)
             .pipe(
-                tap(_ => this.log(`Fetched Pedidos de Compra with PedidoCompra API <${url}>`)),
-                catchError(this.handleError<PedidoCompra[]>('getPedidosCompraByEmpresa', []))
+                tap(_ => this.log(`fetched Item Pedido de Compra idPedidoCompra=${id}`)),
+                catchError(this.handleError<ItemPedidoCompra[]>(`getItemPedidoCompra idPedidoCompra=${id}`))
             );
     }
 
-    getPedidoCompra(id: number): Observable<PedidoCompra> {
-        const url = `${this.pedidoCompraURL}/pedido-compra/id/${id}`;
-        return this.http.get<PedidoCompra>(url)
-            .pipe(
-                tap(_ => this.log(`fetched Pedido de Compra idPedidoCompra=${id}`)),
-                catchError(this.handleError<PedidoCompra>(`getPedidoCompra idPedidoCompra=${id}`))
-            );
-    }
-
+/*
     updatePedidoCompra(pedidoCompra: PedidoCompra): Observable<PedidoCompra> {
         const url = `${this.pedidoCompraURL}/pedido-compra/id/${pedidoCompra.idPedidoCompra}`;
         return this.http.put(url, pedidoCompra, this.httpOptions)
@@ -49,7 +41,6 @@ export class PedidoCompraService {
         );
     }
 
-/*
     getProduto(id: number): Observable<Produto> {
         const url = `${this.produtoUrl}/id/${id}`;
         return this.http.get<Produto>(url)

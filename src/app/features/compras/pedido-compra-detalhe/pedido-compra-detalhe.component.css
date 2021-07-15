@@ -4,125 +4,86 @@
     color: rgb(8, 41, 131);
 }
 
-.pessoa {
-    width: 7%;
-    margin: 10px;
-    padding: 6px;
+mat-form-field {
+    margin-left: 12px;
+    margin-right: 12px;
 }
 
-.cpf-cnpj {
-    width: 12%;
-    margin: 10px;
-    padding: 6px;
-}
-
-.rg-ie {
-    width: 12%;
-    margin: 10px;
-    padding: 6px;
-}
-
-.razao-social {
-    width: 35%;
-    margin: 10px;
-    padding: 6px;
-}
-
-.nome-fantasia {
-    width: 30%;
-    margin: 10px;
-    padding: 6px;
-}
-
-.apelido {
-    width: 25%;
-    margin: 10px;
-    padding: 6px;
-}
-
-.cep {
-    width: 5%;
-    margin: 10px;
-    padding: 6px;
-}
-
-.endereco {
-    width: 50%;
-    margin: 10px;
-    padding: 6px;
-}
-
-.numero {
-    width: 10%;
-    margin: 10px;
-    padding: 6px;
-}
-
-.complemento {
+.usuario {
     width: 20%;
-    margin: 10px;
-    padding: 6px;
 }
 
-.bairro {
-    width: 40%;
-    margin: 10px;
-    padding: 6px;
-}
-
-.cidade {
-    width: 40%;
-    margin: 10px;
-    padding: 6px;
-}
-
-.uf {
-    width: 5%;
-    margin: 10px;
-    padding: 6px;
-}
-
-.contato {
+.fornecedor {
     width: 35%;
-    margin: 10px;
-    padding: 6px;
 }
 
-.telefone {
-    width: 15%;
-    margin: 10px;
-    padding: 6px;
-}
-
-.celular {
-    width: 15%;
-    margin: 10px;
-    padding: 6px;
-}
-
-.email {
-    width: 35%;
-    margin: 10px;
-    padding: 6px;
-}
-
-.dados-adicionais {
+.observacao {
     width: 60%;
-    margin: 10px;
-    padding: 6px;
 }
 
 .botoes {
-    margin-left: 8px;
+    margin-left: 12px;
+    margin-right: 4px;
+    margin-top: 12px;
     width: 100px;
 }
 
-.example-form {
-    min-width: 150px;
-    max-width: 500px;
+.demo-table {
     width: 100%;
 }
   
-.example-full-width {
-    width: 100%;
+.mat-row .mat-cell {
+    border-bottom: 1px solid transparent;
+    border-top: 1px solid transparent;
+}
+  
+.mat-row:hover .mat-cell {
+    border-color: #3232FF;
+    color: #3232FF;
+    background-color:#FFFF99;
+    font-weight: bold;
+}
+  
+.mat-column-idItemPedidoCompra {
+    padding-right: 24px;
+    text-align: center;
+}
+
+.mat-column-tipoProduto {
+    padding-left: 16px;
+}
+
+.mat-column-codigo {
+    padding-left: 16px;
+}
+
+.mat-column-descricao {
+    padding-left: 16px;
+}
+
+.mat-column-unidadeMedida {
+    padding-left: 16px;
+}
+
+.mat-column-quantidade {
+    padding-left: 16px;
+    text-align: right;
+}
+
+.mat-column-precoUnitario {
+    padding-left: 16px;
+    text-align: right;
+}
+
+.mat-column-total {
+    text-align: right;
+}
+
+.mat-column-botaoEditar {
+    padding-left: 32px;
+    text-align: right;
+}
+
+.mat-column-botaoExcluir {
+    text-align: right;
 }

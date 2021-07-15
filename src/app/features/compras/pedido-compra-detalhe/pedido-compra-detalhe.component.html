@@ -1,155 +1,148 @@
 <form [formGroup]="pedidoCompraForm" >
 
-    <h2 class="titulo"><strong>Pedido de Compra</strong></h2>
-
-    <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>Fornecedor</mat-label>
-        <input type="text"
-                placeholder="Informe o fornecedor"
-                aria-label="Number"
-                matInput
-                formControlName="razaoSocial"
-                [formControl]="myControl"
-                [matAutocomplete]="auto">
-        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-        <mat-option *ngFor="let fornecedor of fornecedores | async" [value]="fornecedor.idFornecedor">
-            {{fornecedor.razaoSocial}}
-        </mat-option>
-        </mat-autocomplete>
-    </mat-form-field>
-
-<!--
+    <!-- Dados do Pedido de Compra -->
     <div>
-        <mat-form-field class="pessoa">
-            <mat-label>Pessoa</mat-label>
-            <mat-select formControlName="pessoa" required [(ngModel)]="cliente.pessoa">
-                <mat-option *ngFor="let tipoPessoa of tiposPessoa" value="{{tipoPessoa.value}}"> {{tipoPessoa.viewValue}} </mat-option>
-            </mat-select>
-            <mat-error *ngFor="let validation of validationMessages.pessoa">
-                <mat-error class="error-message" *ngIf="clienteForm.get('pessoa').hasError(validation.type) && (clienteForm.get('pessoa').dirty || clienteForm.get('pessoa').touched)">{{validation.message}}</mat-error>
-            </mat-error>
-        </mat-form-field>
+        <h2 class="titulo"><strong>Pedido de Compra</strong></h2>
 
-        <mat-form-field class="cpf-cnpj">
-            <mat-label>CPF ou CNPJ</mat-label>
-            <input matInput type="text" placeholder="CPF/CNPJ" formControlName="cpfCnpj" maxlength="14" required [(ngModel)]="cliente.cpfCnpj">
-            <mat-error *ngFor="let validation of validationMessages.cpfCnpj">
-                <mat-error class="error-message" *ngIf="clienteForm.get('cpfCnpj').hasError(validation.type) && (clienteForm.get('cpfCnpj').dirty || clienteForm.get('cpfCnpj').touched)">{{validation.message}}</mat-error>
-            </mat-error>
-        </mat-form-field>
+        <div>
+            <mat-form-field>
+                <mat-label>N° Pedido</mat-label>
+                <input matInput type="text" formControlName="idPedidoCompra" [(ngModel)]="pedidoCompra.idPedidoCompra" [disabled]="isDisabled">
+            </mat-form-field>
 
-        <button mat-mini-fab color="primary" (click)="pesquisaCnpj()">
-            <mat-icon>search</mat-icon>
-        </button>
+            <mat-form-field color="accent" appearance="fill">
+                <mat-label>Data do Pedido</mat-label>
+                <input matInput [matDatepicker]="pickerDtPedido" formControlName="dataPedido" [(ngModel)]="pedidoCompra.dataPedido">
+                <mat-datepicker-toggle matSuffix [for]="pickerDtPedido"></mat-datepicker-toggle>
+                <mat-datepicker #pickerDtPedido color="primary"></mat-datepicker>
+            </mat-form-field>
 
-        <mat-form-field class="rg-ie">
-            <mat-label>RG ou IE</mat-label>
-            <input matInput type="text" placeholder="RG/IE" formControlName="rgIe" maxlength="14" [(ngModel)]="cliente.rgIe">
-        </mat-form-field>
+            <mat-form-field color="accent" appearance="fill">
+                <mat-label>Previsão Entrega</mat-label>
+                <input matInput [matDatepicker]="pickerDtPrev" formControlName="dataPrevisaoEntrega" [(ngModel)]="pedidoCompra.dataPrevisaoEntrega">
+                <mat-datepicker-toggle matSuffix [for]="pickerDtPrev"></mat-datepicker-toggle>
+                <mat-datepicker #pickerDtPrev color="primary"></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field class="usuario">
+                <mat-label>Criado Por</mat-label>
+                <input matInput type="text" formControlName="nomeUsuario" [(ngModel)]="pedidoCompra.usuario.nomeUsuario">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Status</mat-label>
+                <input matInput type="text" formControlName="status" [(ngModel)]="pedidoCompra.statusPedido">
+            </mat-form-field>
+        </div>
+
+        <div>
+            <mat-form-field class="fornecedor">
+                <mat-label>Fornecedor</mat-label>
+                <mat-select formControlName="nomeFornecedor" [(ngModel)]="pedidoCompra.idFornecedor">
+                    <mat-option *ngFor="let fornecedor of fornecedores" [value]="fornecedor.idFornecedor"> {{fornecedor.razaoSocial}} </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div>
+            <mat-form-field class="observacao">
+                <mat-label>Observações</mat-label>
+                <textarea matInput type="text" maxlength="255" placeholder="Observações do pedido" formControlName="observacao" [(ngModel)]="pedidoCompra.observacao"></textarea>
+            </mat-form-field>
+        </div>
     </div>
 
+    <!-- Itens do Pedido de Compra -->
     <div>
-        <mat-form-field class="razao-social">
-            <mat-label>Razão Social</mat-label>
-            <input matInput type="text" placeholder="Nome ou Razão Social" formControlName="razaoSocial" maxlength="60" required [(ngModel)]="cliente.razaoSocial">
-            <mat-error *ngFor="let validation of validationMessages.razaoSocial">
-                <mat-error class="error-message" *ngIf="clienteForm.get('razaoSocial').hasError(validation.type) && (clienteForm.get('razaoSocial').dirty || clienteForm.get('razaoSocial').touched)">{{validation.message}}</mat-error>
-            </mat-error>
-        </mat-form-field>
+        <h4 class="titulo"><strong>Itens do Pedidos de Compra</strong></h4>
 
-        <mat-form-field class="nome-fantasia">
-            <mat-label>Nome Fantasia</mat-label>
-            <input matInput type="text" placeholder="Nome Fantasia" formControlName="nomeFantasia" maxlength="60"  [(ngModel)]="cliente.nomeFantasia">
-        </mat-form-field>
-    
-        <mat-form-field class="apelido">
-            <mat-label>Apelido</mat-label>
-            <input matInput type="text" placeholder="Apelido" formControlName="apelido" maxlength="60" [(ngModel)]="cliente.apelido">
-        </mat-form-field>
-    </div>
- 
-    <div>
-        <mat-form-field class="cep">
-            <mat-label>CEP</mat-label>
-            <input matInput type="text" placeholder="CEP" formControlName="cep" maxlength="8" [(ngModel)]="cliente.cep">
-        </mat-form-field>
+        <div class="mat-elevation-z8">
+            <table mat-table [dataSource]="dataSource" matSort class="demo-table">
+        
+                <!-- Item Pedido Column -->
+                <ng-container matColumnDef="idItemPedidoCompra">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Item</th>
+                    <td mat-cell *matCellDef="let row">{{row.idItemPedidoCompra}}</td>
+                </ng-container>
 
-        <button mat-mini-fab color="primary" (click)="pesquisaCep()">
-            <mat-icon>search</mat-icon>
-        </button>
+                <!-- Tipo Produto Column -->
+                <ng-container matColumnDef="tipoProduto">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Tipo Produto</th>
+                    <td mat-cell *matCellDef="let row">{{row.tipoProduto}}</td>
+                </ng-container>
 
-        <mat-form-field class="endereco">
-            <mat-label>Endereço</mat-label>
-            <input matInput type="text" placeholder="Endereço" formControlName="endereco" maxlength="60" [(ngModel)]="cliente.endereco">
-        </mat-form-field>
+                <!-- Codigo Produto Column -->
+                <ng-container matColumnDef="codigo">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Código</th>
+                    <td mat-cell *matCellDef="let row">{{row.codigo}}</td>
+                </ng-container>
 
-        <mat-form-field class="numero">
-            <mat-label>Número</mat-label>
-            <input matInput type="text" placeholder="Número" formControlName="numero" maxlength="10" [(ngModel)]="cliente.numero">
-        </mat-form-field>
+                <!-- Descrição Produto Column -->
+                <ng-container matColumnDef="descricao">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Descrição</th>
+                    <td mat-cell *matCellDef="let row">{{row.descricao}}</td>
+                </ng-container>
 
-        <mat-form-field class="complemento">
-            <mat-label>Complemento</mat-label>
-            <input matInput type="text" placeholder="Complemento" formControlName="complemento" maxlength="60" [(ngModel)]="cliente.complemento">
-        </mat-form-field>
-    </div>
+                <!-- Unidade Medida Produto Column -->
+                <ng-container matColumnDef="unidadeMedida">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Unidade Medida</th>
+                    <td mat-cell *matCellDef="let row">{{row.unidadeMedida}}</td>
+                </ng-container>
 
-    <div>
-        <mat-form-field class="bairro">
-            <mat-label>Bairro</mat-label>
-            <input matInput type="text" placeholder="Bairro" formControlName="bairro" maxlength="60" [(ngModel)]="cliente.bairro">
-        </mat-form-field>
+                <!-- Quantidade Produto Column -->
+                <ng-container matColumnDef="quantidade">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Quantidade</th>
+                    <td mat-cell *matCellDef="let row">{{row.quantidade | number}}</td>
+                </ng-container>
 
-        <mat-form-field class="cidade">
-            <mat-label>Cidade</mat-label>
-            <input matInput type="text" placeholder="Cidade" formControlName="cidade" maxlength="60" [(ngModel)]="cliente.cidade">
-        </mat-form-field>
+                <!-- Preco Unitario Produto Column -->
+                <ng-container matColumnDef="precoUnitario">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Preço Unitário</th>
+                    <td mat-cell *matCellDef="let row">{{row.precoUnitario | currency:'BRL'}}</td>
+                </ng-container>
 
-        <mat-form-field class="pessoa">
-            <mat-label>UF</mat-label>
-            <mat-select formControlName="uf" [(ngModel)]="cliente.uf">
-                <mat-option *ngFor="let uf of ufS" [value]="uf.sigla"> {{uf.descricao}} </mat-option>
-            </mat-select>
-        </mat-form-field>
-    </div>
+                <!-- Total Produto Column -->
+                <ng-container matColumnDef="total">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Total</th>
+                    <td mat-cell *matCellDef="let row">{{row.total | currency:'BRL'}}</td>
+                </ng-container>
 
-    <div>
-        <mat-form-field class="contato">
-            <mat-label>Contato</mat-label>
-            <input matInput type="text" placeholder="Contato" formControlName="contato" maxlength="60" [(ngModel)]="cliente.contato">
-        </mat-form-field>
+                <!-- Edit Column -->
+                <ng-container matColumnDef="botaoEditar">
+                    <th mat-header-cell *matHeaderCellDef></th>
+                    <td mat-cell *matCellDef="let row">
+                        <button mat-icon-button color="primary" (click)="btnEditItem(row)">
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                    </td>
+                </ng-container>
 
-        <mat-form-field class="telefone">
-            <mat-label>Telefone</mat-label>
-            <input matInput type="text" placeholder="Telefone" formControlName="telefone" maxlength="20" [(ngModel)]="cliente.telefone">
-        </mat-form-field>
-
-        <mat-form-field class="celular">
-            <mat-label>Celular</mat-label>
-            <input matInput type="text" placeholder="Celular" formControlName="celular" maxlength="20" [(ngModel)]="cliente.celular">
-        </mat-form-field>
-    </div>
-
-    <div>
-        <mat-form-field class="email">
-            <mat-label>E-mail</mat-label>
-            <input matInput type="email" placeholder="E-mail" formControlName="email" maxlength="60" required [(ngModel)]="cliente.email">
-            <mat-error *ngFor="let validation of validationMessages.email">
-                <mat-error class="error-message" *ngIf="clienteForm.get('email').hasError(validation.type) && (clienteForm.get('email').dirty || clienteForm.get('email').touched)">{{validation.message}}</mat-error>
-            </mat-error>
-        </mat-form-field>
-    </div>
- 
-    <div>
-        <mat-form-field class="dados-adicionais">
-            <mat-label>Dados Adicionais</mat-label>
-            <textarea matInput type="text" maxlength="255" placeholder="Informações adicionais do cliente" formControlName="dadosAdicionais" [(ngModel)]="cliente.dadosAdicionais"></textarea>
-        </mat-form-field>
-    </div>
+                <!-- Delete Column -->
+                <ng-container matColumnDef="botaoExcluir">
+                    <th mat-header-cell *matHeaderCellDef></th>
+                    <td mat-cell *matCellDef="let row">
+                        <button mat-icon-button color="warn" (click)="btnDeleteItem(row)">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </td>
+                </ng-container>
+        
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        
+                <!-- Row shown when there is no matching data. -->
+                <tr class="mat-row" *matNoDataRow>
+                    <td class="mat-cell" colspan="4">Nenhum pedido de compra encontrado com o filtro "{{input.value}}"</td>
+                </tr>
+            </table>
+        
+            <mat-paginator [pageSizeOptions]="[10, 25, 50, 100]" showFirstLastButtons></mat-paginator>
+        </div>
+    </div>   
 
     <div>
-        <button class="submit-btn botoes" color="primary" mat-raised-button type="submit" [disabled]="!clienteForm.valid" (click)=onSubmit()>Salvar</button>
+        <button class="submit-btn botoes" color="primary" mat-raised-button type="submit" [disabled]="!pedidoCompraForm.valid" (click)=onSubmit()>Salvar</button>
         <button class="botoes" color="warn" mat-raised-button type="reset" (click)=cancelar()>Cancelar</button>
     </div>
--->
+
 </form>

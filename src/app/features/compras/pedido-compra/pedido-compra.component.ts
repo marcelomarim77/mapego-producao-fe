@@ -28,7 +28,7 @@ export class PedidoCompraComponent implements OnInit {
     ];
 
     dataSource: MatTableDataSource<PedidoCompra>;
-    
+
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
     

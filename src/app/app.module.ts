@@ -9,13 +9,15 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from "@angular/material/form-field";
+import { MatFormFieldModule, MAT_FORM_FIELD_DEFAULT_OPTIONS } from "@angular/material/form-field";
 import { MatPaginatorIntl } from "@angular/material/paginator";
 import { MatPaginatorModule } from "@angular/material/paginator";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MatNativeDateModule } from "@angular/material/core";
 import ptBr from '@angular/common/locales/pt';
 import { registerLocaleData } from '@angular/common';
+import { MatInputModule } from '@angular/material/input';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -23,6 +25,7 @@ import { MenuListItemComponent } from './features/ui/menu-list-item/menu-list-it
 import { FeaturesComponent } from './features/features.component';
 import { CustomPaginator } from "./core/custom-paginator";
 import { MessagesComponent } from './features/messages/messages.component';
+import { ItemPedidoCompraDialogComponent } from './dialogs/item-pedido-compra-dialog/item-pedido-compra-dialog.component';
 
 registerLocaleData(ptBr);
 
@@ -31,7 +34,8 @@ registerLocaleData(ptBr);
     AppComponent,
     MenuListItemComponent,
     FeaturesComponent,
-    MessagesComponent
+    MessagesComponent,
+    ItemPedidoCompraDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -52,7 +56,10 @@ registerLocaleData(ptBr);
     HttpClientModule,
     MatNativeDateModule,
     ReactiveFormsModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatAutocompleteModule
  ],
   providers: [
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: "fill" } },
