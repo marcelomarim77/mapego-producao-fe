@@ -31,6 +31,24 @@ export class ItemPedidoCompraService {
             );
     }
 
+    deleteItemPedidoCompra(id: number): Observable<ItemPedidoCompra> {
+        const url = `${this.pedidoCompraURL}/item-pedido-compra/delete/${id}`;
+        return this.http.delete<ItemPedidoCompra>(url, this.httpOptions)
+            .pipe(
+                tap(_ => this.log(`deleted ItemPedidoCompra id=${id}`)),
+                catchError(this.handleError<ItemPedidoCompra>('deleteItemPedidoCompra'))
+        );
+    }
+
+    addItemPedidoCompra(id: number, itemPedidoCompra: ItemPedidoCompra): Observable<ItemPedidoCompra> {
+        const url = `${this.pedidoCompraURL}/item-pedido-compra/id/${id}`;
+        return this.http.post<ItemPedidoCompra>(url, itemPedidoCompra, this.httpOptions).
+            pipe(
+                tap(_ => this.log(`added ItemPedidoCompra`)),
+                catchError(this.handleError<ItemPedidoCompra>('addItemPedidoCompra'))
+        );
+    }
+
 /*
     updatePedidoCompra(pedidoCompra: PedidoCompra): Observable<PedidoCompra> {
         const url = `${this.pedidoCompraURL}/pedido-compra/id/${pedidoCompra.idPedidoCompra}`;
@@ -50,14 +68,6 @@ export class ItemPedidoCompraService {
             );
     }
 
-    createProduto(produto: Produto): Observable<Produto> {
-        const url = `${this.produtoUrl}/id/0`;
-        return this.http.post<Produto>(url, produto, this.httpOptions).
-            pipe(
-                tap((newProduto: Produto) => this.log(`added Produto with id=${newProduto.idProduto}`)),
-                catchError(this.handleError<Produto>('addProduto'))
-        );
-    }
 */
 
     private log(message: string) {

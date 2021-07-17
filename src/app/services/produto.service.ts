@@ -40,6 +40,15 @@ export class ProdutoService {
             );
     }
 
+    getProdutoByCodigo(codigo: string): Observable<Produto> {
+        const url = `${this.produtoUrl}/codigo/${codigo}`;
+        return this.http.get<Produto>(url)
+            .pipe(
+                tap(_ => this.log(`fetched Produto codigo=${codigo}`)),
+                catchError(this.handleError<Produto>(`getProdutoByCodigo codigo=${codigo}`))
+            );
+    }
+
     deleteProduto(id: number): Observable<Produto> {
         const url = `${this.produtoUrl}/id/${id}`;
         return this.http.delete<Produto>(url, this.httpOptions)

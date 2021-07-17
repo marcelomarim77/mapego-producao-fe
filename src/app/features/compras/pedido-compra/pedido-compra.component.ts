@@ -54,7 +54,7 @@ export class PedidoCompraComponent implements OnInit {
 
     btnIncluir() {
     }
-    
+
     btnEdit(pedidoCompra: PedidoCompra) {
         this.router.navigate([`compras/pedido-compra/${pedidoCompra.idPedidoCompra}`]);
     }

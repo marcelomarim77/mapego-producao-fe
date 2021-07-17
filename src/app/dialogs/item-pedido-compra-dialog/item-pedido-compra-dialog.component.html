@@ -18,13 +18,12 @@
 
     <!-- Item do Pedido de Compra -->
     <div>
-
-        <mat-form-field>
+        <mat-form-field class="medium">
             <mat-label>Código</mat-label>
             <input matInput
                    [(ngModel)]="data.codigo"
                    [matAutocomplete]="auto"
-                   formControlName="codigo">
+                   formControlName="codigo" (blur)="onBlurCodigo()">
             <mat-autocomplete #auto="matAutocomplete">
                 <mat-option *ngFor="let produto of filteredProdutos | async" [value]="produto.codigo">
                     {{produto.codigo}}
@@ -32,40 +31,40 @@
             </mat-autocomplete>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="large">
             <mat-label>Produto</mat-label>
             <input matInput type="text" formControlName="descricao" [(ngModel)]="data.descricao">
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="medium">
             <mat-label>Tipo Produto</mat-label>
             <input matInput type="text" formControlName="tipoProduto" [(ngModel)]="data.tipoProduto">
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="medium">
             <mat-label>Unidade Medida</mat-label>
             <input matInput type="text" formControlName="unidadeMedida" [(ngModel)]="data.unidadeMedida">
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="valores">
             <mat-label>Quantidade</mat-label>
-            <input matInput type="text" formControlName="quantidade" [(ngModel)]="data.quantidade">
+            <input matInput type="text" formControlName="quantidade" [(ngModel)]="data.quantidade" (blur)="onBlurQtdePrecoUnitario()">
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="valores">
             <mat-label>Preço Unitário</mat-label>
-            <input matInput type="text" formControlName="precoUnitario" [(ngModel)]="data.precoUnitario">
+            <input matInput type="text" formControlName="precoUnitario" [(ngModel)]="data.precoUnitario" (blur)="onBlurQtdePrecoUnitario()">
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="valores">
             <mat-label>Total</mat-label>
             <input matInput type="text" formControlName="total" [(ngModel)]="data.total">
         </mat-form-field>
     </div>
 
-    <div>
-        <button class="submit-btn botoes" color="primary" mat-raised-button type="submit" [disabled]="!itemPedidoCompraForm.valid" (click)=onSubmit()>Salvar</button>
-        <button color="warn" mat-raised-button (click)="onNoClick()">Cancelar</button>
+    <div mat-dialog-actions class="boxfloat">
+        <button class="salvar" mat-button [mat-dialog-close]="data">Salvar</button>
+        <button class="cancelar" mat-button (click)="onNoClick()">Cancelar</button>
     </div>
 
 </form>

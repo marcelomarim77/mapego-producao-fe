@@ -3,7 +3,6 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatPaginator } from "@angular/material/paginator";
-import { MatSort } from "@angular/material/sort";
 import { MatTableDataSource } from "@angular/material/table";
 import { MatDialog } from '@angular/material/dialog';
 
@@ -28,6 +27,7 @@ export class PedidoCompraDetalheComponent implements OnInit {
     pedidoCompra: PedidoCompra;
     itensPedidoCompra: ItemPedidoCompra[] = [];
     novoPedido: number;
+    totalPedido: number = 0;
 
     fornecedores: Fornecedor[];
 
@@ -44,7 +44,6 @@ export class PedidoCompraDetalheComponent implements OnInit {
     });
 
     displayedColumns: string[] = [
-        "idItemPedidoCompra",
         "tipoProduto",
         "codigo",
         "descricao",
@@ -56,10 +55,14 @@ export class PedidoCompraDetalheComponent implements OnInit {
         "botaoExcluir"
     ];
 
+    displayedFooterColumns: string[] = [
+        "precoUnitario",
+        "total"
+    ];
+
     dataSource: MatTableDataSource<ItemPedidoCompra>;
 
     @ViewChild(MatPaginator) paginator: MatPaginator;
-    @ViewChild(MatSort) sort: MatSort;
 
     constructor(private snackBar: MatSnackBar,
         private router: Router,
@@ -108,7 +111,6 @@ export class PedidoCompraDetalheComponent implements OnInit {
                     // Assign the data to the data source for the table to render
                     this.dataSource = new MatTableDataSource(response);
                     this.dataSource.paginator = this.paginator;
-                    this.dataSource.sort = this.sort;
 
                     this.loaderService.hide();
                     
@@ -237,11 +239,12 @@ export class PedidoCompraDetalheComponent implements OnInit {
         });
     }
 
-    btnEditItem(itemPedidoCompra: ItemPedidoCompra) {
+    addEditItem(itemPedidoCompra: ItemPedidoCompra) {
         const dialogRef = this.dialog.open(ItemPedidoCompraDialogComponent, {
             width: '1500px',
-            height: '150px',
+            height: '200px',
             data: {
+                idEmpresa: this.pedidoCompra.idEmpresa,
                 idItemPedidoCompra: itemPedidoCompra.idItemPedidoCompra,
                 idProduto: itemPedidoCompra.idProduto,
                 quantidade: itemPedidoCompra.quantidade,
@@ -256,8 +259,69 @@ export class PedidoCompraDetalheComponent implements OnInit {
       
         dialogRef.afterClosed().subscribe(
             result => {
-                this.getItensPedidoCompra(this.pedidoCompra.idPedidoCompra);
+                if (result) {
+                    this.itemPedidoCompraService.addItemPedidoCompra(this.pedidoCompra.idPedidoCompra, result)
+                        .subscribe(
+                            response => {
+                                if (response) {
+                                    this.getItensPedidoCompra(this.pedidoCompra.idPedidoCompra);
+                                }
+                            },
+                            error => console.log(error.message)
+                        );
+                }
             }
-        );        
+        );
+    }
+
+    btnEditItem(itemPedidoCompra: ItemPedidoCompra) {
+        this.addEditItem(itemPedidoCompra);
+    }
+
+    btnIncluirItem(itemPedidoCompra: ItemPedidoCompra) {
+        itemPedidoCompra = {
+            idEmpresa: 0,
+            idPedidoCompra: 0,
+            idItemPedidoCompra: 0,
+            idProduto: 0,
+            quantidade: 0,
+            precoUnitario: 0,
+            total: 0,
+            codigo: '',
+            descricao: '',
+            tipoProduto: '',
+            unidadeMedida: ''
+        }
+
+        this.addEditItem(itemPedidoCompra);
+    }
+
+    btnDeleteItem(itemPedidoCompra: ItemPedidoCompra) {
+        if (confirm(`Confirma a exclusão do item?`)) {
+            this.deleteItemPedidoCompra(itemPedidoCompra.idItemPedidoCompra);
+        };
+    }
+
+    deleteItemPedidoCompra(id: number): void {
+        this.itemPedidoCompraService.deleteItemPedidoCompra(id)
+            .subscribe(
+                response => {
+                    if (response) {
+                        this.openSnackBar('Item excluído com sucesso', 'OK');
+                        this.getItensPedidoCompra(this.pedidoCompra.idPedidoCompra);
+                    } else {
+                        this.openSnackBar('Falha ao excluir o item', 'OK');
+                    }
+                },
+                error => console.log(error.message)
+            );
+    }
+
+    getTotalPedido() {
+        for (let item of this.itensPedidoCompra) {
+            console.log(item);
+            this.totalPedido += item.quantidade * item.precoUnitario;
+        }
+        return this.totalPedido;
     }
 }

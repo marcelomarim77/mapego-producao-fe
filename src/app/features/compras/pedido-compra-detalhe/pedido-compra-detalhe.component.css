@@ -87,3 +87,7 @@ mat-form-field {
 .mat-column-botaoExcluir {
     text-align: right;
 }
+
+.mat-footer-row {
+    font-weight: bold;
+}

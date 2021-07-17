@@ -1,9 +1,46 @@
-.example-form {
-    min-width: 150px;
-    max-width: 500px;
-    width: 100%;
-  }
-  
-.example-full-width {
-    width: 100%;
+.mat-form-field {
+    padding-left: 16px;
+}
+
+.medium {
+    width: 10%;
+}
+
+.large {
+    width: 30%;
+}
+
+.valores {
+    width: 10%;
+}
+
+.boxfloat {
+    float: left;
+    padding-left: 16px;
+}
+
+.salvar {
+    color: white;
+    background: #3F51B5;
+    text-align: center;
+    width: 100px;
+    height: 30px;
+    margin-left: 12px;
+    margin-right: 4px;
+    margin-top: 12px;
+    border-radius: 5px;
+    border: 0px;
+}
+
+.cancelar {
+    color: white;
+    background: #FF5252;
+    text-align: center;
+    width: 100px;
+    height: 30px;
+    margin-left: 12px;
+    margin-right: 4px;
+    margin-top: 12px;
+    border-radius: 5px;
+    border: 0px;
 }

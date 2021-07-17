@@ -14,10 +14,11 @@ import { MatPaginatorIntl } from "@angular/material/paginator";
 import { MatPaginatorModule } from "@angular/material/paginator";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MatNativeDateModule } from "@angular/material/core";
-import ptBr from '@angular/common/locales/pt';
 import { registerLocaleData } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatDialogModule } from '@angular/material/dialog';
+import ptBr from '@angular/common/locales/pt';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -59,7 +60,8 @@ registerLocaleData(ptBr);
     MatPaginatorModule,
     MatInputModule,
     MatFormFieldModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatDialogModule
  ],
   providers: [
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: "fill" } },
