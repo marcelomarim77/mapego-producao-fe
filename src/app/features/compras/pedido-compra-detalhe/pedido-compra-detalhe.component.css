@@ -31,19 +31,19 @@ mat-form-field {
 .demo-table {
     width: 100%;
 }
-  
+
 .mat-row .mat-cell {
     border-bottom: 1px solid transparent;
     border-top: 1px solid transparent;
 }
-  
+
 .mat-row:hover .mat-cell {
     border-color: #3232FF;
     color: #3232FF;
-    background-color:#FFFF99;
+    background-color:#e6e6aa;
     font-weight: bold;
 }
-  
+
 .mat-column-idItemPedidoCompra {
     padding-right: 24px;
     text-align: center;

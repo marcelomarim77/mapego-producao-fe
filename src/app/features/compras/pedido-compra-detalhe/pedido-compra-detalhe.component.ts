@@ -318,8 +318,8 @@ export class PedidoCompraDetalheComponent implements OnInit {
     }
 
     getTotalPedido() {
+        this.totalPedido = 0;
         for (let item of this.itensPedidoCompra) {
-            console.log(item);
             this.totalPedido += item.quantidade * item.precoUnitario;
         }
         return this.totalPedido;
