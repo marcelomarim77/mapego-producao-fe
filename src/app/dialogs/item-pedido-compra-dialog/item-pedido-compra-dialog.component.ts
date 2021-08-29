@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit, Optional } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 
 import { ItemPedidoCompra } from 'src/app/interfaces/item-pedido-compra';
 import { Produto } from 'src/app/interfaces/produto';
@@ -18,6 +18,7 @@ export class ItemPedidoCompraDialogComponent implements OnInit {
 
     produtos: Produto[] = [];
 
+    produtoCtrl = new FormControl();
     filteredProdutos: Observable<Produto[]>;
 
     itemPedidoCompra: ItemPedidoCompra;
@@ -39,27 +40,24 @@ export class ItemPedidoCompraDialogComponent implements OnInit {
         private produtoService: ProdutoService,
         private loaderService: LoaderService,
         @Optional() public dialogRef: MatDialogRef<ItemPedidoCompraDialogComponent>,
-        @Optional() @Inject(MAT_DIALOG_DATA) public data: ItemPedidoCompra) {}
-
-    ngOnInit(): void {
-        this.inicializaItemPedidoCompra();
+        @Optional() @Inject(MAT_DIALOG_DATA) public data: ItemPedidoCompra) {
 
         this.getProdutos(1);
 
-        this.filteredProdutos = this.itemPedidoCompraForm.get('codigo').valueChanges
+        this.filteredProdutos = this.produtoCtrl.valueChanges
             .pipe(
                 startWith(''),
                 map(produto => produto ? this._filterProdutos(produto) : this.produtos.slice())
-        );        
+        );
+    }
+
+    ngOnInit(): void {
+        this.inicializaItemPedidoCompra();
     }
 
     private _filterProdutos(value: string): Produto[] {
         const filterValue = value.toLowerCase();
-        return this.produtos.filter(produto => 
-            {
-                produto.codigo.toLowerCase().includes(filterValue);
-            }
-        );
+        return this.produtos.filter(produto => produto.codigo.toLowerCase().includes(filterValue));
     }
 
     inicializaItemPedidoCompra() {
@@ -96,20 +94,21 @@ export class ItemPedidoCompraDialogComponent implements OnInit {
 
     onBlurCodigo() {
         if (this.data.codigo === '') { return };
+
         let idProduto = 0;
         idProduto = this.produtos.find(produto => produto.codigo === this.data.codigo).idProduto;
         if (idProduto === undefined) { return }
         this.produtoService.getProduto(idProduto)
-        .subscribe(
-            response => {
-                this.data.idProduto = response.idProduto;
-                this.data.descricao = response.descricao;
-                this.data.tipoProduto = response.tipoProduto.descricao;
-                this.data.unidadeMedida = response.unidadeMedida.descricao;
-                this.data.precoUnitario = response.custoProduto;
-            },
-            error => console.log(error.message)
-        );
+            .subscribe(
+                response => {
+                    this.data.idProduto = response.idProduto;
+                    this.data.descricao = response.descricao;
+                    this.data.tipoProduto = response.tipoProduto.descricao;
+                    this.data.unidadeMedida = response.unidadeMedida.descricao;
+                    this.data.precoUnitario = response.custoProduto;
+                },
+                error => console.log(error.message)
+            );
     }
 
     onBlurQtdePrecoUnitario() {

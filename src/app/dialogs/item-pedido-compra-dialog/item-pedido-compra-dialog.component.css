@@ -2,12 +2,16 @@
     padding-left: 16px;
 }
 
-.medium {
+.small {
     width: 10%;
 }
 
+.medium {
+    width: 15%;
+}
+
 .large {
-    width: 30%;
+    width: 25%;
 }
 
 .valores {

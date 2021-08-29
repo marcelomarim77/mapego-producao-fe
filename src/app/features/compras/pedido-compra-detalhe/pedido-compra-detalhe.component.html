@@ -7,7 +7,7 @@
         <div>
             <mat-form-field>
                 <mat-label>N° Pedido</mat-label>
-                <input matInput type="text" formControlName="idPedidoCompra" [(ngModel)]="pedidoCompra.idPedidoCompra" [disabled]="isDisabled">
+                <input matInput type="text" formControlName="idPedidoCompra" [ngModel]="pedidoCompra.idPedidoCompra">
             </mat-form-field>
 
             <mat-form-field color="accent" appearance="fill">
@@ -31,7 +31,7 @@
 
             <mat-form-field>
                 <mat-label>Status</mat-label>
-                <input matInput type="text" formControlName="status" [(ngModel)]="pedidoCompra.statusPedido">
+                <input matInput type="text" formControlName="status" [ngModel]="pedidoCompra.statusPedido">
             </mat-form-field>
         </div>
 

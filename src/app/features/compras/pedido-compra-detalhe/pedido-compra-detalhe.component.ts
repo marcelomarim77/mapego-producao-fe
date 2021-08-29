@@ -22,8 +22,6 @@ import { ItemPedidoCompraDialogComponent } from 'src/app/dialogs/item-pedido-com
 })
 export class PedidoCompraDetalheComponent implements OnInit {
 
-    isDisabled: true;
-
     pedidoCompra: PedidoCompra;
     itensPedidoCompra: ItemPedidoCompra[] = [];
     novoPedido: number;
@@ -32,7 +30,7 @@ export class PedidoCompraDetalheComponent implements OnInit {
     fornecedores: Fornecedor[];
 
     pedidoCompraForm = this.formBuilder.group({
-        idPedidoCompra: [0, {disabled: true}],
+        idPedidoCompra: [0],
         nomeUsuario: [''],
         status: [''],
         dataPedido: [''],
@@ -79,6 +77,9 @@ export class PedidoCompraDetalheComponent implements OnInit {
         this.getFornecedores(1);
 
         this.inicializaPedidoCompra();
+
+        this.pedidoCompraForm.controls['idPedidoCompra'].disable();
+        this.pedidoCompraForm.controls['status'].disable();
 
         this.route.params.forEach((params: Params) => {
             const id: number = params['id'];
@@ -260,7 +261,8 @@ export class PedidoCompraDetalheComponent implements OnInit {
         dialogRef.afterClosed().subscribe(
             result => {
                 if (result) {
-                    this.itemPedidoCompraService.addItemPedidoCompra(this.pedidoCompra.idPedidoCompra, result)
+                    if(result.idItemPedidoCompra === 0) { // inclusao item pedido de compra
+                        this.itemPedidoCompraService.addItemPedidoCompra(this.pedidoCompra.idPedidoCompra, result)
                         .subscribe(
                             response => {
                                 if (response) {
@@ -269,6 +271,18 @@ export class PedidoCompraDetalheComponent implements OnInit {
                             },
                             error => console.log(error.message)
                         );
+                    }
+                    else { // alteracao item pedido de compra
+                        this.itemPedidoCompraService.updateItemPedidoCompra(result)
+                        .subscribe(
+                            response => {
+                                if (response) {
+                                    this.getItensPedidoCompra(this.pedidoCompra.idPedidoCompra);
+                                }
+                            },
+                            error => console.log(error.message)
+                        );
+                    }
                 }
             }
         );

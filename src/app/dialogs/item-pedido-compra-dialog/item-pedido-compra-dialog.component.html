@@ -23,10 +23,12 @@
             <input matInput
                    [(ngModel)]="data.codigo"
                    [matAutocomplete]="auto"
+                   [formControl]="produtoCtrl"
                    formControlName="codigo" (blur)="onBlurCodigo()">
             <mat-autocomplete #auto="matAutocomplete">
                 <mat-option *ngFor="let produto of filteredProdutos | async" [value]="produto.codigo">
-                    {{produto.codigo}}
+                    <small>{{produto.codigo}}</small> -
+                    <small><font size="1">{{produto.descricao}}</font></small>
                 </mat-option>
             </mat-autocomplete>
         </mat-form-field>
@@ -36,12 +38,12 @@
             <input matInput type="text" formControlName="descricao" [(ngModel)]="data.descricao">
         </mat-form-field>
 
-        <mat-form-field class="medium">
+        <mat-form-field class="small">
             <mat-label>Tipo Produto</mat-label>
             <input matInput type="text" formControlName="tipoProduto" [(ngModel)]="data.tipoProduto">
         </mat-form-field>
 
-        <mat-form-field class="medium">
+        <mat-form-field class="small">
             <mat-label>Unidade Medida</mat-label>
             <input matInput type="text" formControlName="unidadeMedida" [(ngModel)]="data.unidadeMedida">
         </mat-form-field>

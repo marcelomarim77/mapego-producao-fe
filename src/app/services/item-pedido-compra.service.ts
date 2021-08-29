@@ -49,16 +49,16 @@ export class ItemPedidoCompraService {
         );
     }
 
-/*
-    updatePedidoCompra(pedidoCompra: PedidoCompra): Observable<PedidoCompra> {
-        const url = `${this.pedidoCompraURL}/pedido-compra/id/${pedidoCompra.idPedidoCompra}`;
-        return this.http.put(url, pedidoCompra, this.httpOptions)
+    updateItemPedidoCompra(itemPedidoCompra: ItemPedidoCompra): Observable<ItemPedidoCompra> {
+        const url = `${this.pedidoCompraURL}/item-pedido-compra/idItemPedidoCompra`;
+        return this.http.put(url, itemPedidoCompra, this.httpOptions)
             .pipe(
-                tap(_ => this.log(`updated PedidoCompra id=${pedidoCompra.idPedidoCompra}`)),
-                catchError(this.handleError<any>('updatePedidoCompra'))
+                tap(_ => this.log(`updated ItemPedidoCompra id=${itemPedidoCompra.idPedidoCompra}`)),
+                catchError(this.handleError<any>('updateItemPedidoCompra'))
         );
     }
 
+/*
     getProduto(id: number): Observable<Produto> {
         const url = `${this.produtoUrl}/id/${id}`;
         return this.http.get<Produto>(url)

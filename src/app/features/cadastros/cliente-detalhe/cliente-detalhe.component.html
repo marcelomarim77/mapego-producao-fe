@@ -13,15 +13,23 @@
             </mat-error>
         </mat-form-field>
 
-        <mat-form-field class="cpf-cnpj">
-            <mat-label>CPF ou CNPJ</mat-label>
-            <input matInput type="text" placeholder="CPF/CNPJ" formControlName="cpfCnpj" maxlength="14" required [(ngModel)]="cliente.cpfCnpj">
+        <mat-form-field class="cpf-cnpj" *ngIf="cliente.pessoa !== 'F'">
+            <mat-label>CNPJ</mat-label>
+            <input matInput type="text" onkeypress="$(this).mask('00.000.000/0000-00')" placeholder="00.000.000/0000-00" formControlName="cpfCnpj" required [(ngModel)]="cliente.cpfCnpj">
             <mat-error *ngFor="let validation of validationMessages.cpfCnpj">
                 <mat-error class="error-message" *ngIf="clienteForm.get('cpfCnpj').hasError(validation.type) && (clienteForm.get('cpfCnpj').dirty || clienteForm.get('cpfCnpj').touched)">{{validation.message}}</mat-error>
             </mat-error>
         </mat-form-field>
 
-        <button mat-mini-fab color="primary" (click)="pesquisaCnpj()">
+        <mat-form-field class="cpf-cnpj" *ngIf="cliente.pessoa === 'F'">
+            <mat-label>CPF</mat-label>
+            <input matInput type="text" onkeypress="$(this).mask('000.000.000-00');" placeholder="000.000.000-00" formControlName="cpfCnpj" required [(ngModel)]="cliente.cpfCnpj">
+            <mat-error *ngFor="let validation of validationMessages.cpfCnpj">
+                <mat-error class="error-message" *ngIf="clienteForm.get('cpfCnpj').hasError(validation.type) && (clienteForm.get('cpfCnpj').dirty || clienteForm.get('cpfCnpj').touched)">{{validation.message}}</mat-error>
+            </mat-error>
+        </mat-form-field>
+
+        <button mat-mini-fab color="primary" (click)="pesquisaCnpj()" *ngIf="cliente.pessoa !== 'F'">
             <mat-icon>search</mat-icon>
         </button>
 
@@ -54,7 +62,7 @@
     <div>
         <mat-form-field class="cep">
             <mat-label>CEP</mat-label>
-            <input matInput type="text" placeholder="CEP" formControlName="cep" maxlength="8" [(ngModel)]="cliente.cep">
+            <input matInput type="text" onkeypress="$(this).mask('00000-000')" placeholder="CEP" formControlName="cep" maxlength="9" [(ngModel)]="cliente.cep">
         </mat-form-field>
 
         <button mat-mini-fab color="primary" (click)="pesquisaCep()">
@@ -104,12 +112,12 @@
 
         <mat-form-field class="telefone">
             <mat-label>Telefone</mat-label>
-            <input matInput type="text" placeholder="Telefone" formControlName="telefone" maxlength="20" [(ngModel)]="cliente.telefone">
+            <input matInput type="text" onkeypress="$(this).mask('(00) 0000-0009')" placeholder="Telefone" formControlName="telefone" maxlength="20" [(ngModel)]="cliente.telefone">
         </mat-form-field>
 
         <mat-form-field class="celular">
             <mat-label>Celular</mat-label>
-            <input matInput type="text" placeholder="Celular" formControlName="celular" maxlength="20" [(ngModel)]="cliente.celular">
+            <input matInput type="text" onkeypress="$(this).mask('(00) 0 0000-0009')" placeholder="Celular" formControlName="celular" maxlength="20" [(ngModel)]="cliente.celular">
         </mat-form-field>
     </div>
 

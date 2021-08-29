@@ -80,6 +80,7 @@ export class ClienteDetalheComponent implements OnInit {
             const id: number = params['id'];
             this.novoCliente = id;
 
+            this.cliente.pessoa = 'J';
             if (id != 0) { // novo cliente
                 this.getCliente(id);
             }
@@ -116,7 +117,8 @@ export class ClienteDetalheComponent implements OnInit {
 
         this.cnpjService.getCnpj(this.cliente.cpfCnpj)
             .subscribe(
-                response => { console.log(response)
+                response => {
+                    console.log(response)
                 },
                 error => console.log(error.message)
         );
@@ -137,11 +139,12 @@ export class ClienteDetalheComponent implements OnInit {
                         this.cliente.bairro = this.cep.bairro,
                         this.cliente.cidade = this.cep.cidade,
                         this.cliente.uf = this.cep.uf,
-                        this.cliente.cep = this.cep.cep,
                         this.cliente.ibge = this.cep.ibge
                     }
                 },
-                error => console.log(error.message)
+                error => {
+                    alert(error.message);
+                }
         );
     };
 
