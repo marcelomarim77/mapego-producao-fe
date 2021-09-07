@@ -36,14 +36,13 @@ registerLocaleData(ptBr);
     MenuListItemComponent,
     FeaturesComponent,
     MessagesComponent,
-    ItemPedidoCompraDialogComponent
+    ItemPedidoCompraDialogComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FlexLayoutModule,
     HttpClientModule,
-    AppRoutingModule,
     BrowserAnimationsModule,
     MatToolbarModule,
     MatSidenavModule,

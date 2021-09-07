@@ -1,0 +1,61 @@
+<div cdkDropListGroup>
+
+    <div>
+        <h2 class="titulo"><strong>Composição do Produto: {{ produto }}</strong></h2>
+    </div>
+
+    <div class="example-container">
+        <h2>Matéria Prima</h2>
+
+        <div
+            class="example-list"
+            cdkDropList
+            [cdkDropListData]="materiaPrima"
+            cdkDropListSortingDisabled
+            (cdkDropListDropped)="drop($event)">
+            <div class="example-box" *ngFor="let item of materiaPrima" cdkDrag [cdkDragData]="item">
+                <mat-card class="example-card">
+                    <mat-card-title-group>
+                        <mat-card-title>{{ item.descricao }}</mat-card-title>
+                    </mat-card-title-group>
+                    <mat-card-content>
+                        <p>Tipo de Produto: {{ item.tipoProduto.descricao }}</p>
+                        <p>Unidade de Medida: {{ item.unidadeMedida.descricao }}</p>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+  
+    <div class="example-container">
+        <h2>Composição</h2>
+        <div
+            class="example-list"
+            cdkDropList
+            [cdkDropListData]="composicaoProduto"
+            (cdkDropListDropped)="drop($event)"
+            (cdkDropListEntered)="entered($event)"
+            (cdkDropListExited)="exited($event)">
+            <div class="example-box2" *ngFor="let item of composicaoProduto" cdkDrag [cdkDragData]="item">
+                <mat-card class="example-card">
+                    <mat-card-title-group>
+                        <mat-card-title>{{ item.descricao }}</mat-card-title>
+                    </mat-card-title-group>
+                    <mat-card-content>
+                        <p>Tipo de Produto: {{ item.tipoProduto.descricao }}</p>
+                        <p>Unidade de Medida: {{ item.unidadeMedida.descricao }}</p>
+                        Quantidade
+                        <input matInput type="text">
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+
+    <div class="example-container">
+        <h2>Resumo</h2>
+        <div class="example-box2" *ngFor="let item of composicaoProduto">
+            <p>{{ item.descricao }} - Quantidade: {{ item.quantidade }}</p>
+        </div>
+    </div>
+</div>

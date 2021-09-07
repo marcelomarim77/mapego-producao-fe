@@ -49,6 +49,15 @@ export class ProdutoService {
             );
     }
 
+    getMateriaPrima(idEmpresa: number): Observable<Produto[]> {
+        const url = `${this.produtoUrl}/materia-prima/${idEmpresa}`;
+        return this.http.get<Produto[]>(url)
+            .pipe(
+                tap(_ => this.log(`Fetched Produtos with Produtos API <${url}>`)),
+                catchError(this.handleError<Produto[]>('getMateriaPrima', []))
+            );
+    }
+
     deleteProduto(id: number): Observable<Produto> {
         const url = `${this.produtoUrl}/id/${id}`;
         return this.http.delete<Produto>(url, this.httpOptions)

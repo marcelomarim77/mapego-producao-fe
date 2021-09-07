@@ -34,6 +34,23 @@ export let menu: NavItem[] = [
         ]
     },
     {
+        displayName: 'Produção',
+        iconName: 'content_paste',
+        route: 'producao',
+        children: [
+            {
+                displayName: 'Composição de Produtos',
+                iconName: 'construction',
+                route: 'producao/produto-composicao'
+            },
+            {
+                displayName: 'Ordem de Produção',
+                iconName: 'engineering',
+                route: 'producao/ordem-producao'
+            },
+        ]
+    },
+    {
         displayName: 'Compras',
         iconName: 'storefront',
         route: 'compras',
