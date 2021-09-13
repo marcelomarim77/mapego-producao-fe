@@ -1,28 +1,33 @@
+<div>
+    <h2 class="titulo"><strong>Composição do Produto</strong></h2>
+</div>
+
+<mat-form-field>
+    <mat-label>Digite o produto a ser feita a composição</mat-label>
+    <input matInput
+           [(ngModel)]="value"
+           [matAutocomplete]="auto"
+           [formControl]="produtoCtrl" (blur)="onBlur()">
+    <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="limpar()">
+        <mat-icon>close</mat-icon>
+    </button>
+    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+        <mat-option *ngFor="let produto of filteredProdutos | async" [value]="produto">
+            <small>{{produto.descricao}} [{{produto.codigo}}]</small>
+        </mat-option>
+    </mat-autocomplete>
+</mat-form-field>
+
 <div cdkDropListGroup>
-
-    <div>
-        <h2 class="titulo"><strong>Composição do Produto: {{ produto }}</strong></h2>
-    </div>
-
     <div class="example-container">
         <h2>Matéria Prima</h2>
-
         <div
             class="example-list"
             cdkDropList
             [cdkDropListData]="materiaPrima"
-            cdkDropListSortingDisabled
             (cdkDropListDropped)="drop($event)">
             <div class="example-box" *ngFor="let item of materiaPrima" cdkDrag [cdkDragData]="item">
-                <mat-card class="example-card">
-                    <mat-card-title-group>
-                        <mat-card-title>{{ item.descricao }}</mat-card-title>
-                    </mat-card-title-group>
-                    <mat-card-content>
-                        <p>Tipo de Produto: {{ item.tipoProduto.descricao }}</p>
-                        <p>Unidade de Medida: {{ item.unidadeMedida.descricao }}</p>
-                    </mat-card-content>
-                </mat-card>
+                {{ item.descricao }}
             </div>
         </div>
     </div>
@@ -37,25 +42,8 @@
             (cdkDropListEntered)="entered($event)"
             (cdkDropListExited)="exited($event)">
             <div class="example-box2" *ngFor="let item of composicaoProduto" cdkDrag [cdkDragData]="item">
-                <mat-card class="example-card">
-                    <mat-card-title-group>
-                        <mat-card-title>{{ item.descricao }}</mat-card-title>
-                    </mat-card-title-group>
-                    <mat-card-content>
-                        <p>Tipo de Produto: {{ item.tipoProduto.descricao }}</p>
-                        <p>Unidade de Medida: {{ item.unidadeMedida.descricao }}</p>
-                        Quantidade
-                        <input matInput type="text">
-                    </mat-card-content>
-                </mat-card>
+                {{ item.descricao }}
             </div>
-        </div>
-    </div>
-
-    <div class="example-container">
-        <h2>Resumo</h2>
-        <div class="example-box2" *ngFor="let item of composicaoProduto">
-            <p>{{ item.descricao }} - Quantidade: {{ item.quantidade }}</p>
         </div>
     </div>
 </div>

@@ -1,13 +1,13 @@
 import { Component, Inject, OnInit, Optional } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 
 import { ItemPedidoCompra } from 'src/app/interfaces/item-pedido-compra';
 import { Produto } from 'src/app/interfaces/produto';
 import { ProdutoService } from 'src/app/services/produto.service';
 import { LoaderService } from 'src/app/services/loader.service';
-import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
 
 @Component({
   selector: 'app-item-pedido-compra-dialog',
@@ -41,9 +41,6 @@ export class ItemPedidoCompraDialogComponent implements OnInit {
         private loaderService: LoaderService,
         @Optional() public dialogRef: MatDialogRef<ItemPedidoCompraDialogComponent>,
         @Optional() @Inject(MAT_DIALOG_DATA) public data: ItemPedidoCompra) {
-
-        this.getProdutos(1);
-
         this.filteredProdutos = this.produtoCtrl.valueChanges
             .pipe(
                 startWith(''),
@@ -53,6 +50,7 @@ export class ItemPedidoCompraDialogComponent implements OnInit {
 
     ngOnInit(): void {
         this.inicializaItemPedidoCompra();
+        this.getProdutos(1);
     }
 
     private _filterProdutos(value: string): Produto[] {
