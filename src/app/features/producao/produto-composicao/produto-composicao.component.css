@@ -4,6 +4,11 @@
     color: rgb(8, 41, 131);
 }
 
+.titulo2 {
+    margin-left: 12px;
+    color: rgb(8, 51, 4);
+}
+
 .example-container {
     width: 300px;
     max-width: 100%;
@@ -20,6 +25,8 @@
     border-radius: 4px;
     overflow: hidden;
     display: block;
+    height:400px;
+    overflow-y: scroll
 }
 
 .example-box {
@@ -77,4 +84,23 @@
 .mat-form-field {
     padding-left: 16px;
     width: 650px;
+}
+
+.filtro {
+    padding-left: 6px;
+    width: 280px;
+}
+
+/* configuracao do scrollbar */
+::-webkit-scrollbar-track {
+    background-color: #F4F4F4;
+}
+
+::-webkit-scrollbar {
+    width: 4px;
+    background: #F4F4F4;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #dad7d7;
 }

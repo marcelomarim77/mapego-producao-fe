@@ -20,20 +20,44 @@
 
 <div cdkDropListGroup>
     <div class="example-container">
-        <h2>Matéria Prima</h2>
+        <h2 class="titulo2">Matéria Prima</h2>
+
+        <mat-form-field class="filtro">
+            <mat-label>Pesquisa de Matéria-Prima</mat-label>
+            <input matInput
+                   [(ngModel)]="pesqMatPrima"
+                   [disabled]="pesquisaDisabled"
+                   (keyup)="pesqMatPrima = $event.target.value">
+            <button *ngIf="pesqMatPrima" matSuffix mat-icon-button aria-label="Clear" (click)="limparPesqMatPrima()">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field>
+
         <div
             class="example-list"
             cdkDropList
             [cdkDropListData]="materiaPrima"
             (cdkDropListDropped)="drop($event)">
-            <div class="example-box" *ngFor="let item of materiaPrima" cdkDrag [cdkDragData]="item">
+            <div class="example-box" *ngFor="let item of (materiaPrima | arrayFiltroProduto:pesqMatPrima)" cdkDrag [cdkDragData]="item">
                 {{ item.descricao }}
             </div>
         </div>
     </div>
   
     <div class="example-container">
-        <h2>Composição</h2>
+        <h2 class="titulo2">Composição</h2>
+
+        <mat-form-field class="filtro">
+            <mat-label>Pesquisa de Produto Composto</mat-label>
+            <input matInput
+                   [(ngModel)]="pesqComposicao"
+                   [disabled]="pesquisaDisabled"
+                   (keyup)="pesqComposicao = $event.target.value">
+            <button *ngIf="pesqComposicao" matSuffix mat-icon-button aria-label="Clear" (click)="limparPesqComposicao()">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field>
+
         <div
             class="example-list"
             cdkDropList
@@ -41,7 +65,7 @@
             (cdkDropListDropped)="drop($event)"
             (cdkDropListEntered)="entered($event)"
             (cdkDropListExited)="exited($event)">
-            <div class="example-box2" *ngFor="let item of composicaoProduto" cdkDrag [cdkDragData]="item">
+            <div class="example-box2" *ngFor="let item of (composicaoProduto | arrayFiltroProduto:pesqComposicao)" cdkDrag [cdkDragData]="item">
                 {{ item.descricao }}
             </div>
         </div>

@@ -18,6 +18,8 @@ import { ComposicaoProduto } from 'src/app/interfaces/composicao-produto';
 })
 export class ProdutoComposicaoComponent implements OnInit {
 
+    pesquisaDisabled = true;
+
     produtos: Produto[] = [];
     materiaPrima: Produto[] = [];
     composicaoProduto: Produto[] = [];
@@ -25,6 +27,9 @@ export class ProdutoComposicaoComponent implements OnInit {
     produtoCtrl = new FormControl();
     filteredProdutos: Observable<Produto[]>;
     value = '';
+
+    pesqMatPrima = '';
+    pesqComposicao = '';
 
     constructor(private produtoService: ProdutoService,
                 private composicaoProdutoService: ComposicaoProdutoService,
@@ -101,6 +106,10 @@ export class ProdutoComposicaoComponent implements OnInit {
                             event.previousIndex,
                             event.currentIndex);
         } else {
+            console.log(event.previousContainer.data);
+            console.log(event.container.data);
+            console.log(event.previousIndex);
+            console.log(event.currentIndex);
             transferArrayItem(event.previousContainer.data,
                               event.container.data,
                               event.previousIndex,
@@ -159,11 +168,27 @@ export class ProdutoComposicaoComponent implements OnInit {
         this.composicaoProduto = [];
         this.getComposicaoProduto(1, id);
         this.getMateriaPrima(1, id);
+        this.pesquisaDisabled = false;
     }
 
     limpar() {
+        this.pesquisaDisabled = true;
         this.value = '';
         this.materiaPrima = [];
         this.composicaoProduto = [];
+    }
+
+    limparPesqMatPrima() {
+        this.pesqMatPrima = '';
+        this.materiaPrima = [];
+        const id = this.produtoCtrl.value.idProduto;
+        this.getMateriaPrima(1, id);
+    }
+
+    limparPesqComposicao() {
+        this.pesqComposicao = '';
+        const id = this.produtoCtrl.value.idProduto;
+        this.composicaoProduto = [];
+        this.getComposicaoProduto(1, id);
     }
 }
