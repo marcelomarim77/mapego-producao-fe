@@ -20,28 +20,32 @@ table {
     float: left;
 }
   
+th {
+    color: rgb(8, 41, 131);
+}
+
 .th-cnpj {
     width: 10%;
-    color: rgb(8, 41, 131);
 }
 
 .th-nome {
     width: 18%;
-    color: rgb(8, 41, 131);
 }
 
 .th-contato {
     width: 15%;
-    color: rgb(8, 41, 131);
 }
 
 .th-fone {
     width: 10%;
-    color: rgb(8, 41, 131);
 }
 
 .botao-td {
     width: 0.5px;
+}
+
+.mat-row {
+    font-size: 12px;
 }
 
 .mat-row .mat-cell {
@@ -52,6 +56,7 @@ table {
 .mat-row:hover .mat-cell {
     border-color: #3232FF;
     color: #3232FF;
-    background-color:#e6e6aa;
+    background-color:#ededb7;
     font-weight: bold;
+    cursor: pointer;
 }

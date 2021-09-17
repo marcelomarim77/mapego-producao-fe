@@ -5,8 +5,13 @@
 }
 
 .titulo2 {
-    margin-left: 12px;
-    color: rgb(8, 51, 4);
+    margin-left: 2px;
+    background-color: rgb(8, 41, 131);
+    color: white;
+    text-align: center;
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+    border-width: 0px;
 }
 
 .example-container {
@@ -97,7 +102,7 @@
 }
 
 ::-webkit-scrollbar {
-    width: 4px;
+    width: 2px;
     background: #F4F4F4;
 }
 

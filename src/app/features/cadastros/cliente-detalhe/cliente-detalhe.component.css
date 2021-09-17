@@ -5,13 +5,13 @@
 }
 
 .pessoa {
-    width: 7%;
+    width: 150px;
     margin: 10px;
     padding: 6px;
 }
 
 .cpf-cnpj {
-    width: 12%;
+    width: 200px;
     margin: 10px;
     padding: 6px;
 }
@@ -41,7 +41,7 @@
 }
 
 .cep {
-    width: 5%;
+    width: 100px;
     margin: 10px;
     padding: 6px;
 }

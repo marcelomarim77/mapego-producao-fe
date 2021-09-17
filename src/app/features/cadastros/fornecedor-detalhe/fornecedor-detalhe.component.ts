@@ -80,6 +80,7 @@ export class FornecedorDetalheComponent implements OnInit {
             const id: number = params['id'];
             this.novoFornecedor = id;
 
+            this.fornecedor.pessoa = 'J';
             if (id != 0) { // novo fornecedor
                 this.getFornecedor(id);
             }
@@ -132,18 +133,20 @@ export class FornecedorDetalheComponent implements OnInit {
             .subscribe(
                 response => {
                     this.cep = response;
-                    if (this.novoFornecedor == 0) { // novo fornecedor
-                        this.fornecedor.endereco = this.cep.endereco,
-                        this.fornecedor.bairro = this.cep.bairro,
-                        this.fornecedor.cidade = this.cep.cidade,
-                        this.fornecedor.uf = this.cep.uf,
-                        this.fornecedor.cep = this.cep.cep,
-                        this.fornecedor.ibge = this.cep.ibge
-                    }
+                    this.atualizaCep();
                 },
                 error => console.log(error.message)
         );
     };
+
+    atualizaCep() {
+        this.fornecedor.endereco = this.cep.endereco,
+        this.fornecedor.bairro = this.cep.bairro,
+        this.fornecedor.cidade = this.cep.cidade,
+        this.fornecedor.uf = this.cep.uf,
+        this.fornecedor.cep = this.cep.cep,
+        this.fornecedor.ibge = this.cep.ibge
+    }
 
     onSubmit() {
         this.fornecedorForm.reset;

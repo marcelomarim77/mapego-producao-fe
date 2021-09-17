@@ -18,6 +18,9 @@ import { ProdutoDetalheComponent } from './produto-detalhe/produto-detalhe.compo
 import { UnidadeMedidaComponent } from './unidade-medida/unidade-medida.component';
 import { UnidadeMedidaDetalheComponent } from './unidade-medida-detalhe/unidade-medida-detalhe.component';
 import { FornecedorDetalheComponent } from './fornecedor-detalhe/fornecedor-detalhe.component';
+import { FormataCpfCnpjPipe } from 'src/app/core/formata-cpf-cnpj.pipe';
+import { FormataFonePipe } from 'src/app/core/formata-fone.pipe';
+import { FormataCepPipe } from 'src/app/core/formata-cep.pipe';
 
 export const routes = [
     { path: '', pathMatch: 'full', redirectTo: 'clientes' },
@@ -42,7 +45,10 @@ export const routes = [
         ProdutoDetalheComponent,
         UnidadeMedidaComponent,
         UnidadeMedidaDetalheComponent,
-        FornecedorDetalheComponent
+        FornecedorDetalheComponent,
+        FormataCpfCnpjPipe,
+        FormataFonePipe,
+        FormataCepPipe,
     ],
     imports: [
         CommonModule,

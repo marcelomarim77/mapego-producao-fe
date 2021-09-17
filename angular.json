@@ -65,7 +65,7 @@
           "options": {
             "browserTarget": "mapego-producao-fe:build",
             "disableHostCheck": true
-        },
+          },
           "configurations": {
             "production": {
               "browserTarget": "mapego-producao-fe:build:production"
@@ -124,5 +124,8 @@
       }
     }
   },
-  "defaultProject": "mapego-producao-fe"
+  "defaultProject": "mapego-producao-fe",
+  "cli": {
+    "analytics": false
+  }
 }

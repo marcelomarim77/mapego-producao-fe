@@ -13,28 +13,49 @@
             </mat-error>
         </mat-form-field>
 
-        <mat-form-field class="cpf-cnpj">
-            <mat-label>CPF ou CNPJ</mat-label>
-            <input matInput type="text" placeholder="CPF/CNPJ" formControlName="cpfCnpj" maxlength="14" required [(ngModel)]="fornecedor.cpfCnpj">
+        <mat-form-field class="cpf-cnpj" *ngIf="fornecedor.pessoa !== 'F'">
+            <mat-label>CNPJ</mat-label>
+            <input matInput type="text" placeholder="00.000.000/0000-00" formControlName="cpfCnpj" maxlength="18" required [ngModel]="fornecedor.cpfCnpj | formataCpfCnpj" (ngModelChange)="fornecedor.cpfCnpj=$event">
             <mat-error *ngFor="let validation of validationMessages.cpfCnpj">
                 <mat-error class="error-message" *ngIf="fornecedorForm.get('cpfCnpj').hasError(validation.type) && (fornecedorForm.get('cpfCnpj').dirty || fornecedorForm.get('cpfCnpj').touched)">{{validation.message}}</mat-error>
             </mat-error>
         </mat-form-field>
 
-        <button mat-mini-fab color="primary" (click)="pesquisaCnpj()">
+        <mat-form-field class="cpf-cnpj" *ngIf="fornecedor.pessoa === 'F'">
+            <mat-label>CPF</mat-label>
+            <input matInput type="text" placeholder="000.000.000-00" formControlName="cpfCnpj" maxlength="14" required [ngModel]="fornecedor.cpfCnpj | formataCpfCnpj" (ngModelChange)="fornecedor.cpfCnpj=$event">
+            <mat-error *ngFor="let validation of validationMessages.cpfCnpj">
+                <mat-error class="error-message" *ngIf="fornecedorForm.get('cpfCnpj').hasError(validation.type) && (fornecedorForm.get('cpfCnpj').dirty || fornecedorForm.get('cpfCnpj').touched)">{{validation.message}}</mat-error>
+            </mat-error>
+        </mat-form-field>
+
+        <button mat-mini-fab color="primary" (click)="pesquisaCnpj()"  *ngIf="fornecedor.pessoa !== 'F'">
             <mat-icon>search</mat-icon>
         </button>
 
-        <mat-form-field class="rg-ie">
-            <mat-label>RG ou IE</mat-label>
-            <input matInput type="text" placeholder="RG/IE" formControlName="rgIe" maxlength="14" [(ngModel)]="fornecedor.rgIe">
+        <mat-form-field class="rg-ie" *ngIf="fornecedor.pessoa !== 'F'">
+            <mat-label>IE</mat-label>
+            <input matInput type="text" placeholder="IE" formControlName="rgIe" maxlength="14" [(ngModel)]="fornecedor.rgIe">
+        </mat-form-field>
+
+        <mat-form-field class="rg-ie" *ngIf="fornecedor.pessoa === 'F'">
+            <mat-label>RG</mat-label>
+            <input matInput type="text" placeholder="RG" formControlName="rgIe" maxlength="14" [(ngModel)]="fornecedor.rgIe">
         </mat-form-field>
     </div>
 
     <div>
-        <mat-form-field class="razao-social">
+        <mat-form-field class="razao-social" *ngIf="fornecedor.pessoa !== 'F'">
             <mat-label>Razão Social</mat-label>
-            <input matInput type="text" placeholder="Nome ou Razão Social" formControlName="razaoSocial" maxlength="60" required [(ngModel)]="fornecedor.razaoSocial">
+            <input matInput type="text" placeholder="Razão Social" formControlName="razaoSocial" maxlength="60" required [(ngModel)]="fornecedor.razaoSocial">
+            <mat-error *ngFor="let validation of validationMessages.razaoSocial">
+                <mat-error class="error-message" *ngIf="fornecedorForm.get('razaoSocial').hasError(validation.type) && (fornecedorForm.get('razaoSocial').dirty || fornecedorForm.get('razaoSocial').touched)">{{validation.message}}</mat-error>
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="razao-social" *ngIf="fornecedor.pessoa === 'F'">
+            <mat-label>Nome</mat-label>
+            <input matInput type="text" placeholder="Nome" formControlName="razaoSocial" maxlength="60" required [(ngModel)]="fornecedor.razaoSocial">
             <mat-error *ngFor="let validation of validationMessages.razaoSocial">
                 <mat-error class="error-message" *ngIf="fornecedorForm.get('razaoSocial').hasError(validation.type) && (fornecedorForm.get('razaoSocial').dirty || fornecedorForm.get('razaoSocial').touched)">{{validation.message}}</mat-error>
             </mat-error>
@@ -54,7 +75,7 @@
     <div>
         <mat-form-field class="cep">
             <mat-label>CEP</mat-label>
-            <input matInput type="text" placeholder="CEP" formControlName="cep" maxlength="8" [(ngModel)]="fornecedor.cep">
+            <input matInput type="text" placeholder="00000-000" formControlName="cep" maxlength="9" [ngModel]="fornecedor.cep | formataCep" (ngModelChange)="fornecedor.cep=$event">
         </mat-form-field>
 
         <button mat-mini-fab color="primary" (click)="pesquisaCep()">
@@ -104,12 +125,12 @@
 
         <mat-form-field class="telefone">
             <mat-label>Telefone</mat-label>
-            <input matInput type="text" placeholder="Telefone" formControlName="telefone" maxlength="20" [(ngModel)]="fornecedor.telefone">
+            <input matInput type="text" placeholder="Telefone" formControlName="telefone" maxlength="20"  [ngModel]="fornecedor.telefone | formataFone" (ngModelChange)="fornecedor.telefone=$event">
         </mat-form-field>
 
         <mat-form-field class="celular">
             <mat-label>Celular</mat-label>
-            <input matInput type="text" placeholder="Celular" formControlName="celular" maxlength="20" [(ngModel)]="fornecedor.celular">
+            <input matInput type="text" placeholder="Celular" formControlName="celular" maxlength="20" [ngModel]="fornecedor.celular | formataFone" (ngModelChange)="fornecedor.celular=$event">
         </mat-form-field>
     </div>
 

@@ -134,19 +134,21 @@ export class ClienteDetalheComponent implements OnInit {
             .subscribe(
                 response => {
                     this.cep = response;
-                    if (this.novoCliente == 0) { // novo cliente
-                        this.cliente.endereco = this.cep.endereco,
-                        this.cliente.bairro = this.cep.bairro,
-                        this.cliente.cidade = this.cep.cidade,
-                        this.cliente.uf = this.cep.uf,
-                        this.cliente.ibge = this.cep.ibge
-                    }
+                    this.atualizaCep();
                 },
                 error => {
                     alert(error.message);
                 }
         );
     };
+
+    atualizaCep() {
+        this.cliente.endereco = this.cep.endereco,
+        this.cliente.bairro = this.cep.bairro,
+        this.cliente.cidade = this.cep.cidade,
+        this.cliente.uf = this.cep.uf,
+        this.cliente.ibge = this.cep.ibge
+    }
 
     onSubmit() {
         this.clienteForm.reset;
