@@ -9,12 +9,6 @@ body {
     font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-mat-input .decimal-number {
-    text-align: right;
-    color: white;
-    background-color: blue;
-}
-
 /* configuracao do scrollbar */
 ::-webkit-scrollbar-track {
     background-color: #F4F4F4;

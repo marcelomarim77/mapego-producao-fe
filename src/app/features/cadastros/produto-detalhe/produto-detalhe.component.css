@@ -69,3 +69,7 @@
     display: block;
     overflow-y: scroll
 }
+
+.decimal-number {
+    text-align: right;
+}

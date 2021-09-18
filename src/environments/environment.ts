@@ -11,42 +11,42 @@ export const environment = {
     },
 
     API_CLIENTE: {
-        URL: 'http://192.168.0.14:8081',
+        URL: 'http://192.168.0.10:8081',
         CONTENT_TYPE: 'application/json'
     },
 
     API_UNIDADE_MEDIDA: {
-        URL: 'http://192.168.0.14:8082',
+        URL: 'http://192.168.0.10:8082',
         CONTENT_TYPE: 'application/json'
     },
 
     API_UF: {
-        URL: 'http://192.168.0.14:8083',
+        URL: 'http://192.168.0.10:8083',
         CONTENT_TYPE: 'application/json'
     },
 
     API_PRODUTO: {
-        URL: 'http://192.168.0.14:8084',
+        URL: 'http://192.168.0.10:8084',
         CONTENT_TYPE: 'application/json'
     },
 
     API_TIPO_PRODUTO: {
-        URL: 'http://192.168.0.14:8085',
+        URL: 'http://192.168.0.10:8085',
         CONTENT_TYPE: 'application/json'
     },
 
     API_FORNECEDOR: {
-        URL: 'http://192.168.0.14:8086',
+        URL: 'http://192.168.0.10:8086',
         CONTENT_TYPE: 'application/json'
     },
 
     API_PEDIDO_COMPRA: {
-        URL: 'http://192.168.0.14:8087',
+        URL: 'http://192.168.0.10:8087',
         CONTENT_TYPE: 'application/json'
     },
 
     API_COMPOSICAO_PRODUTO: {
-        URL: 'http://192.168.0.14:8088',
+        URL: 'http://192.168.0.10:8088',
         CONTENT_TYPE: 'application/json'
     },
 

@@ -28,7 +28,7 @@ export class ProdutoDetalheComponent implements OnInit {
     composicaoProduto: Produto[] = [];
 
     produtoForm = this.formBuilder.group({
-        codigo: ['', Validators.required],
+        codigo: [''],
         descricao: ['', Validators.required],
         estoqueMinimo: [''],
         controlaEstoque: [''],
@@ -66,9 +66,6 @@ export class ProdutoDetalheComponent implements OnInit {
     }
 
     validationMessages = {
-        'codigo': [
-            { type: 'required', message: 'Informe o código do produto' },
-        ],
         'descricao': [
             { type: 'required', message: 'Informe a descrição do produto' },
         ],

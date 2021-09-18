@@ -12,6 +12,9 @@
     border-top-left-radius: 7px;
     border-top-right-radius: 7px;
     border-width: 0px;
+    margin: 0;
+    height: 50px;
+    line-height: 50px;
 }
 
 .example-container {

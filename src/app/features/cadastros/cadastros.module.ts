@@ -18,10 +18,11 @@ import { ProdutoDetalheComponent } from './produto-detalhe/produto-detalhe.compo
 import { UnidadeMedidaComponent } from './unidade-medida/unidade-medida.component';
 import { UnidadeMedidaDetalheComponent } from './unidade-medida-detalhe/unidade-medida-detalhe.component';
 import { FornecedorDetalheComponent } from './fornecedor-detalhe/fornecedor-detalhe.component';
+import { TipoProdutoComponent } from './tipo-produto/tipo-produto.component';
 import { FormataCpfCnpjPipe } from 'src/app/core/formata-cpf-cnpj.pipe';
 import { FormataFonePipe } from 'src/app/core/formata-fone.pipe';
 import { FormataCepPipe } from 'src/app/core/formata-cep.pipe';
-import { FormataDecimalPipe } from './core/formata-decimal.pipe';
+import { FormataDecimalPipe } from 'src/app/core/formata-decimal.pipe';
 
 export const routes = [
     { path: '', pathMatch: 'full', redirectTo: 'clientes' },
@@ -29,6 +30,7 @@ export const routes = [
     { path: 'cliente/:id', component: ClienteDetalheComponent },
     { path: 'fornecedores', component: FornecedoresComponent },
     { path: 'fornecedor/:id', component: FornecedorDetalheComponent },
+    { path: 'tipos-produto', component: TipoProdutoComponent },
     { path: 'unidades', component: UnidadeMedidaComponent },
     { path: 'unidade/:id', component: UnidadeMedidaDetalheComponent },
     { path: 'produtos', component: ProdutosComponent },
@@ -40,6 +42,7 @@ export const routes = [
     declarations: [
         ClientesComponent,
         FornecedoresComponent,
+        TipoProdutoComponent,
         ProdutosComponent,
         TransportadorasComponent,
         ClienteDetalheComponent,

@@ -170,8 +170,10 @@ export class ProdutoComposicaoComponent implements OnInit {
     limpar() {
         this.pesquisaDisabled = true;
         this.value = '';
+        this.pesqMatPrima = '';
         this.materiaPrima = [];
         this.composicaoProduto = [];
+        this.pesqComposicao = '';
     }
 
     limparPesqMatPrima() {
@@ -183,8 +185,8 @@ export class ProdutoComposicaoComponent implements OnInit {
 
     limparPesqComposicao() {
         this.pesqComposicao = '';
-        const id = this.produtoCtrl.value.idProduto;
         this.composicaoProduto = [];
+        const id = this.produtoCtrl.value.idProduto;
         this.getComposicaoProduto(1, id);
     }
 

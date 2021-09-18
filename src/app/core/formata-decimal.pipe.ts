@@ -1,24 +1,38 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
+const PADDING = "000000";
+
 @Pipe({
   name: 'formataDecimal'
 })
 export class FormataDecimalPipe implements PipeTransform {
 
-    transform(value: string): string {
-        if (!value) {
-            return null;
-        }
-        const numero = value.replace(/[^0-9]/g, '');
-    
-        if (numero.length === 11) {
-            return numero.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/g, "\$1.\$2.\$3\-\$4");
-        } else if (numero.length === 14) {
-            return numero.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/g, "\$1.\$2.\$3\/\$4\-\$5");
-        }
-    
-//        return value;
-        return numero
+    private DECIMAL_SEPARATOR: string;
+    private THOUSANDS_SEPARATOR: string;
+
+    constructor() {
+        // TODO comes from configuration settings
+        this.DECIMAL_SEPARATOR = ".";
+        this.THOUSANDS_SEPARATOR = "'";
     }
 
+    transform(value: number | string, fractionSize: number = 2): string {
+        let [ integer, fraction = "" ] = (value || "").toString().split(this.DECIMAL_SEPARATOR);
+
+        fraction = fractionSize > 0 ? this.DECIMAL_SEPARATOR + (fraction + PADDING).substring(0, fractionSize) : "";
+
+        integer = integer.replace(/\B(?=(\d{3})+(?!\d))/g, this.THOUSANDS_SEPARATOR);
+
+        return integer + fraction;
+    }
+
+    parse(value: string, fractionSize: number = 2): string {
+        let [ integer, fraction = "" ] = (value || "").split(this.DECIMAL_SEPARATOR);
+
+        integer = integer.replace(new RegExp(this.THOUSANDS_SEPARATOR, "g"), "");
+
+        fraction = parseInt(fraction, 10) > 0 && fractionSize > 0 ? this.DECIMAL_SEPARATOR + (fraction + PADDING).substring(0, fractionSize) : "";
+
+        return integer + fraction;
+    }
 }
