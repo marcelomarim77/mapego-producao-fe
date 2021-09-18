@@ -21,6 +21,7 @@ import { FornecedorDetalheComponent } from './fornecedor-detalhe/fornecedor-deta
 import { FormataCpfCnpjPipe } from 'src/app/core/formata-cpf-cnpj.pipe';
 import { FormataFonePipe } from 'src/app/core/formata-fone.pipe';
 import { FormataCepPipe } from 'src/app/core/formata-cep.pipe';
+import { FormataDecimalPipe } from './core/formata-decimal.pipe';
 
 export const routes = [
     { path: '', pathMatch: 'full', redirectTo: 'clientes' },
@@ -49,6 +50,7 @@ export const routes = [
         FormataCpfCnpjPipe,
         FormataFonePipe,
         FormataCepPipe,
+        FormataDecimalPipe,
     ],
     imports: [
         CommonModule,

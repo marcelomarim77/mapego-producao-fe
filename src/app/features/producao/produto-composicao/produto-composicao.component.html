@@ -38,7 +38,7 @@
             cdkDropList
             [cdkDropListData]="materiaPrima"
             (cdkDropListDropped)="drop($event)">
-            <div class="example-box" *ngFor="let item of (materiaPrima | arrayFiltroProduto:pesqMatPrima)" cdkDrag [cdkDragData]="item">
+            <div class="example-box" *ngFor="let item of filtrarMateriaPrima()" cdkDrag [cdkDragData]="item">
                 {{ item.descricao }}
             </div>
         </div>
@@ -61,11 +61,11 @@
         <div
             class="example-list"
             cdkDropList
-            [cdkDropListData]="composicaoProduto"
+            [cdkDropListData]="filtrarComposicaoProduto()"
             (cdkDropListDropped)="drop($event)"
             (cdkDropListEntered)="entered($event)"
             (cdkDropListExited)="exited($event)">
-            <div class="example-box2" *ngFor="let item of (composicaoProduto | arrayFiltroProduto:pesqComposicao)" cdkDrag [cdkDragData]="item">
+            <div class="example-box2" *ngFor="let item of filtrarComposicaoProduto()" cdkDrag [cdkDragData]="item">
                 {{ item.descricao }}
             </div>
         </div>

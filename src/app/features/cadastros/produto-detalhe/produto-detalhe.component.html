@@ -52,12 +52,12 @@
 
         <mat-form-field class="custo-produto">
             <mat-label>Preço de Custo</mat-label>
-            <input matInput type="number" placeholder="Preço de Custo" formControlName="custoProduto" [(ngModel)]="produto.custoProduto">
+            <input matInput type="text" placeholder="Preço de Custo" formControlName="custoProduto" [(ngModel)]="produto.custoProduto">
         </mat-form-field>
 
         <mat-form-field class="preco-venda">
             <mat-label>Preço de Venda</mat-label>
-            <input matInput type="number" placeholder="Preço de Venda" formControlName="precoVenda" [(ngModel)]="produto.precoVenda">
+            <input matInput class="decimal-number" type="text" placeholder="Preço de Venda" formControlName="precoVenda" [ngModel]="produto.precoVenda | formataDecimal" (ngModelChange)="produto.precoVenda=$event">
         </mat-form-field>
 
         <mat-form-field class="margem">
@@ -67,24 +67,30 @@
     </div>
 
     <div>
-        <mat-tab-group animationDuration="1500ms">
-            <mat-tab label="Composição">
-                <mat-form-field class="margem">
-                    <mat-label>Estoque Mínimo</mat-label>
-                    <input matInput type="number" placeholder="Estoque Mínimo" formControlName="estoqueMinimo" [(ngModel)]="produto.estoqueMinimo">
-                </mat-form-field>
-
-                <button class="botoes" color="warn" mat-raised-button>Cancelar</button>
-
-            </mat-tab>
-            <mat-tab label="Fornecedores">Content 2</mat-tab>
-            <mat-tab label="Movimentação">Content 3</mat-tab>
-        </mat-tab-group>
-    </div>
-
-    <div>
         <button class="submit-btn botoes" color="primary" mat-raised-button type="submit" [disabled]="!produtoForm.valid" (click)=onSubmit()>Salvar</button>
         <button class="botoes" color="warn" mat-raised-button type="reset" (click)=cancelar()>Cancelar</button>
     </div>
 
+    <br>
+
+    <div>
+        <mat-tab-group animationDuration="1500ms">
+            <mat-tab label="Composição">
+                <div class="barra-scroll">
+                    <mat-card *ngIf="composicaoProduto.length === 0">Nenhuma composição encontrada para o produto</mat-card>
+
+                    <div *ngFor="let item of composicaoProduto">
+                        <mat-card>
+                            <mat-card-header>
+                                <mat-card-title>{{ item.descricao }}</mat-card-title>
+                                <mat-card-subtitle>{{ item.tipoProduto.descricao }}</mat-card-subtitle>
+                            </mat-card-header>
+                        </mat-card>
+                    </div>
+                </div>
+            </mat-tab>
+            <mat-tab label="Fornecedores">Fornecedores do Produto</mat-tab>
+            <mat-tab label="Movimentação">Movimentação do Produto</mat-tab>
+        </mat-tab-group>
+    </div>
 </form>

@@ -53,7 +53,7 @@ export class ProdutoComposicaoComponent implements OnInit {
     }
 
     getProdutos(idEmpresa: number): void {
-        this.loaderService.show("Carregando produtos");
+        this.loaderService.show('Carregando produtos');
         this.produtoService.getProdutos(idEmpresa)
             .subscribe(
                 response => {
@@ -77,7 +77,7 @@ export class ProdutoComposicaoComponent implements OnInit {
     }
 
     getComposicaoProduto(idEmpresa: number, idProduto: number): void {
-        this.loaderService.show("Carregando composição do produto");
+        this.loaderService.show('Carregando composição do produto');
         this.composicaoProdutoService.getComposicaoProdutoByCodigo(idEmpresa, idProduto)
             .subscribe(
                 response => {
@@ -89,7 +89,7 @@ export class ProdutoComposicaoComponent implements OnInit {
     }
 
     getMateriaPrima(idEmpresa: number, idProduto: number): void {
-        this.loaderService.show("Carregando matéria-prima");
+        this.loaderService.show('Carregando matéria-prima');
         this.produtoService.getMateriaPrima(idEmpresa, idProduto)
             .subscribe(
                 response => {
@@ -106,10 +106,6 @@ export class ProdutoComposicaoComponent implements OnInit {
                             event.previousIndex,
                             event.currentIndex);
         } else {
-            console.log(event.previousContainer.data);
-            console.log(event.container.data);
-            console.log(event.previousIndex);
-            console.log(event.currentIndex);
             transferArrayItem(event.previousContainer.data,
                               event.container.data,
                               event.previousIndex,
@@ -136,7 +132,7 @@ export class ProdutoComposicaoComponent implements OnInit {
                 error => console.log(error.message)
             );
     }
-       
+
     exited(event: CdkDragExit<Produto>) {
         this.composicaoProdutoService.deleteComposicaoProduto(event.item.data.idEmpresa, this.produtoCtrl.value.idProduto, event.item.data.idProduto)
             .subscribe(
@@ -160,7 +156,7 @@ export class ProdutoComposicaoComponent implements OnInit {
     displayFn(produto: Produto): string {
         return produto && produto.descricao ? produto.descricao : '';
     }
-    
+
     onBlur() {
         const id = this.produtoCtrl.value.idProduto;
         if (id === 0 || id === undefined) { return };
@@ -190,5 +186,19 @@ export class ProdutoComposicaoComponent implements OnInit {
         const id = this.produtoCtrl.value.idProduto;
         this.composicaoProduto = [];
         this.getComposicaoProduto(1, id);
+    }
+
+    filtrarMateriaPrima() {
+        if (this.materiaPrima.length === 0 || this.pesqMatPrima === undefined || this.pesqMatPrima.length === 0) {
+            return this.materiaPrima;
+        }
+        return this.materiaPrima.filter(materiaPrima => materiaPrima.descricao.toLowerCase().includes(this.pesqMatPrima));
+    }
+
+    filtrarComposicaoProduto() {
+        if (this.composicaoProduto.length === 0 || this.pesqComposicao === undefined || this.pesqComposicao.length === 0) {
+            return this.composicaoProduto;
+        }
+        return this.composicaoProduto.filter(composicaoProduto => composicaoProduto.descricao.toLowerCase().includes(this.pesqComposicao));
     }
 }

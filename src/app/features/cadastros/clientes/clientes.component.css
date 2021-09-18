@@ -40,10 +40,6 @@ th {
     width: 10%;
 }
 
-.botao-td {
-    width: 0.5px;
-}
-
 .mat-row {
     font-size: 12px;
 }
@@ -58,5 +54,4 @@ th {
     color: #3232FF;
     background-color:#ededb7;
     font-weight: bold;
-    cursor: pointer;
 }

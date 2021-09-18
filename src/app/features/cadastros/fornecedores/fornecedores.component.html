@@ -66,8 +66,8 @@
   
         <!-- Delete Column -->
         <ng-container matColumnDef="botaoExcluir">
-            <th class="botao-td" mat-header-cell *matHeaderCellDef></th>
-            <td class="botao-td" mat-cell *matCellDef="let row">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let row">
                 <button mat-icon-button color="warn" (click)="btnDelete(row)">
                     <mat-icon>delete</mat-icon>
                 </button>

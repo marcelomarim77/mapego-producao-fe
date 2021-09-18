@@ -10,7 +10,6 @@ import { MatPaginatorModule } from "@angular/material/paginator";
 import { TableMaterialModule } from './../../core/material-module';
 
 import { ProdutoComposicaoComponent } from './produto-composicao/produto-composicao.component';
-import { ArrayFiltroProdutoPipe } from 'src/app/core/array-filtro-produto.pipe';
 
 export const routes = [
     { path: '', pathMatch: 'full', redirectTo: 'composicao' },
@@ -20,7 +19,6 @@ export const routes = [
 @NgModule({
   declarations: [
       ProdutoComposicaoComponent,
-      ArrayFiltroProdutoPipe,
   ],
   imports: [
     CommonModule,

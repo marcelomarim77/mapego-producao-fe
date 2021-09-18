@@ -9,6 +9,9 @@ import { UnidadeMedida } from 'src/app/interfaces/unidade-medida';
 import { UnidadeMedidaService } from 'src/app/services/unidade-medida.service';
 import { TipoProduto } from 'src/app/interfaces/tipo-produto';
 import { TipoProdutoService } from 'src/app/services/tipo-produto.service';
+import { LoaderService } from 'src/app/services/loader.service';
+import { ComposicaoProdutoService } from 'src/app/services/composicao-produto.service';
+import { ComposicaoProduto } from 'src/app/interfaces/composicao-produto';
 
 @Component({
   selector: 'app-produto-detalhe',
@@ -22,6 +25,7 @@ export class ProdutoDetalheComponent implements OnInit {
 
     unidadesMedida: UnidadeMedida[];
     tiposProduto: TipoProduto[];
+    composicaoProduto: Produto[] = [];
 
     produtoForm = this.formBuilder.group({
         codigo: ['', Validators.required],
@@ -36,6 +40,8 @@ export class ProdutoDetalheComponent implements OnInit {
     });
 
     constructor(private snackBar: MatSnackBar,
+        private composicaoProdutoService: ComposicaoProdutoService,
+        private loaderService: LoaderService,
         private router: Router,
         public formBuilder: FormBuilder,
         private route: ActivatedRoute,
@@ -94,7 +100,10 @@ export class ProdutoDetalheComponent implements OnInit {
     getProduto(idProduto: number): void {
         this.produtoService.getProduto(idProduto)
             .subscribe(
-                response => this.produto = response,
+                response => {
+                    this.produto = response,
+                    this.getComposicaoProduto(this.produto)
+                },
                 error => console.log(error.message)
             );
     }
@@ -180,5 +189,27 @@ export class ProdutoDetalheComponent implements OnInit {
             },
                 error => console.log(error.message)
             );
+    }
+
+    getComposicaoProduto(produto: Produto) {
+        this.composicaoProdutoService.getComposicaoProdutoByCodigo(produto.idEmpresa, produto.idProduto)
+            .subscribe(
+                response => {
+                    this.getCompostos(response);
+                },
+                error => console.log(error.message)
+            );
+    }
+
+    getCompostos(compostos: ComposicaoProduto[]): void {
+        for(let produto of compostos) {
+            this.produtoService.getProduto(produto.idMateriaPrima)
+            .subscribe(
+                response => {
+                    this.composicaoProduto.push(response);
+                },
+                error => console.log(error.message)
+            );
+        } 
     }
 }
