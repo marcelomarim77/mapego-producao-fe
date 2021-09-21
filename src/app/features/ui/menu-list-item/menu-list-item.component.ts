@@ -22,8 +22,6 @@ import { environment } from 'src/environments/environment';
 })
 export class MenuListItemComponent implements OnInit {
 
-    version = environment.SOFTWARE.VERSAO;
-
     expanded: boolean = false;
 
     @HostBinding('attr.aria-expanded') ariaExpanded = this.expanded;

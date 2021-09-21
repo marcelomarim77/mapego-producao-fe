@@ -20,11 +20,3 @@
 .mat-list-item.active {
     background-color: #e8eaf6;
 }
-
-.versao {
-    position: absolute;
-    bottom: 0px;
-    left: 8px;
-    color: darkslateblue;
-    font-size: small;
-}

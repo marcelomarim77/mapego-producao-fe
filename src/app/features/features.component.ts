@@ -17,7 +17,8 @@ export class FeaturesComponent implements OnDestroy {
     public menu: NavItem[] = menu;
     private mediaWatcher: Subscription;
 
-     softwareName = environment.SOFTWARE.NOME;
+    softwareName = environment.SOFTWARE.NOME;
+    version = environment.SOFTWARE.VERSAO;
 
     constructor(private media: MediaObserver) {
         this.mediaWatcher = this.media.media$.subscribe((mediaChange: MediaChange) => {

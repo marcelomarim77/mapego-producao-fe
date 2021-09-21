@@ -209,4 +209,18 @@ export class ProdutoDetalheComponent implements OnInit {
             );
         } 
     }
+
+    calcularPercentual() {
+        const valorMargem = Number(this.produto.precoVenda) - Number(this.produto.custoProduto);
+        this.produto.margem = valorMargem / Number(this.produto.custoProduto) * 100;
+    }
+
+    calcularValorVenda() {
+        this.produto.precoVenda = Number(this.produto.custoProduto) + ((Number(this.produto.custoProduto) * Number(this.produto.margem) / 100));
+    }
+
+    somenteNumeros(event: KeyboardEvent) {
+        return event.charCode >= 48 && event.charCode <= 57;
+    }
+
 }

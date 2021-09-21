@@ -14,7 +14,7 @@
                         <mat-label>Descrição do Produto</mat-label>
                         <input matInput type="text" placeholder="Descrição do Produto" formControlName="descricao" maxlength="30" required [(ngModel)]="produto.descricao">
                         <mat-error *ngFor="let validation of validationMessages.descricao">
-                            <mat-error class="error-message" *ngIf="produtoForm.get('descricao').hasError(validation.type) && (produtoForm.get('descricao').dirty || produtoForm.get('descricao').touched)">{{validation.message}}</mat-error>
+                            <mat-error class="error-message" *ngIf="produtoForm.get('descricao').hasError(validation.type) && (produtoForm.get('descricao').dirty || produtoForm.get('descricao').touched)">{{ validation.message }}</mat-error>
                         </mat-error>
                     </mat-form-field>
                 </div>
@@ -23,7 +23,7 @@
                     <mat-form-field class="tipo-produto">
                         <mat-label>Tipo Produto</mat-label>
                         <mat-select formControlName="tipoProduto" [(ngModel)]="produto.idTipoProduto">
-                            <mat-option *ngFor="let tipo of tiposProduto" [value]="tipo.idTipo"> {{tipo.descricao}} </mat-option>
+                            <mat-option *ngFor="let tipo of tiposProduto" [value]="tipo.idTipo"> {{ tipo.descricao }} </mat-option>
                         </mat-select>
                     </mat-form-field>
             
@@ -46,22 +46,44 @@
                 <div>
                     <mat-form-field class="estoque-minimo">
                         <mat-label>Estoque Mínimo</mat-label>
-                        <input matInput class="decimal-number" type="text" placeholder="Estoque Mínimo" formControlName="estoqueMinimo" [(ngModel)]="produto.estoqueMinimo">
+                        <input matInput class="decimal-number"
+                                        type="text"
+                                        placeholder="Estoque Mínimo"
+                                        formControlName="estoqueMinimo"
+                                        [(ngModel)]="produto.estoqueMinimo"
+                                        (keypress)="somenteNumeros($event)">
                     </mat-form-field>
             
                     <mat-form-field class="custo-produto">
                         <mat-label>Preço de Custo</mat-label>
-                        <input matInput class="decimal-number" type="text" placeholder="Preço de Custo" formControlName="custoProduto" [(ngModel)]="produto.custoProduto">
+                        <input matInput class="decimal-number"
+                                        type="text"
+                                        placeholder="Preço de Custo"
+                                        formControlName="custoProduto"
+                                        [(ngModel)]="produto.custoProduto"
+                                        (keypress)="somenteNumeros($event)">
                     </mat-form-field>
             
                     <mat-form-field class="preco-venda">
                         <mat-label>Preço de Venda</mat-label>
-                        <input matInput class="decimal-number" type="text" placeholder="Preço de Venda" formControlName="precoVenda" [ngModel]="produto.precoVenda" (ngModelChange)="produto.precoVenda=$event">
+                        <input matInput class="decimal-number"
+                                        type="text"
+                                        placeholder="Preço de Venda"
+                                        formControlName="precoVenda"
+                                        [(ngModel)]="produto.precoVenda"
+                                        (blur)="calcularPercentual()"
+                                        (keypress)="somenteNumeros($event)">
                     </mat-form-field>
             
                     <mat-form-field class="margem">
-                        <mat-label>Margem de Venda</mat-label>
-                        <input matInput class="decimal-number" type="text" placeholder="Margem de Venda" formControlName="margem" [(ngModel)]="produto.margem">
+                        <mat-label>% Margem de Venda</mat-label>
+                        <input matInput class="decimal-number"
+                                        type="text"
+                                        placeholder="Margem de Venda"
+                                        formControlName="margem"
+                                        [(ngModel)]="produto.margem"
+                                        (blur)="calcularValorVenda()"
+                                        (keypress)="somenteNumeros($event)">
                     </mat-form-field>
                 </div>
             
