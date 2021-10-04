@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 import { EstoqueComponent } from './estoque.component';
 
-export const routes = [
+export const ROUTES: Routes = [
     { path: '', component: EstoqueComponent, pathMatch: 'full' }
 ];
 
@@ -12,7 +12,7 @@ export const routes = [
   declarations: [EstoqueComponent],
   imports: [
     CommonModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(ROUTES)
   ]
 })
 export class EstoqueModule { }

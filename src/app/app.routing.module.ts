@@ -3,10 +3,9 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { FeaturesComponent } from './features/features.component';
 
-const routes: Routes = [
+const ROUTES: Routes = [
     {
-        path: '',
-        component: FeaturesComponent,
+        path: '', component: FeaturesComponent,
         children: [
             { path: 'cadastros', loadChildren: () => import('./features/cadastros/cadastros.module').then(m => m.CadastrosModule) },
             { path: 'producao', loadChildren: () => import('./features/producao/producao.module').then(m => m.ProducaoModule) },
@@ -19,7 +18,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(ROUTES)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

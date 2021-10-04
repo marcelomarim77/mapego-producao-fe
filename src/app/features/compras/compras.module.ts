@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatIconModule } from '@angular/material/icon';
@@ -12,7 +12,7 @@ import { TableMaterialModule } from './../../core/material-module';
 import { PedidoCompraComponent } from './pedido-compra/pedido-compra.component';
 import { PedidoCompraDetalheComponent } from './pedido-compra-detalhe/pedido-compra-detalhe.component';
 
-export const routes = [
+export const ROUTES: Routes = [
     { path: '', pathMatch: 'full', redirectTo: 'pedido-compra' },
     { path: 'pedido-compra', component: PedidoCompraComponent },
     { path: 'pedido-compra/:id', component: PedidoCompraDetalheComponent },
@@ -33,7 +33,7 @@ export const routes = [
         ReactiveFormsModule,
         MatPaginatorModule,
         TableMaterialModule,
-        RouterModule.forChild(routes)
+        RouterModule.forChild(ROUTES)
       ]
 })
 export class ComprasModule { }

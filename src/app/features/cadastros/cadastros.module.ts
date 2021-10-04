@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatIconModule } from '@angular/material/icon';
@@ -24,7 +24,7 @@ import { FormataFonePipe } from 'src/app/core/formata-fone.pipe';
 import { FormataCepPipe } from 'src/app/core/formata-cep.pipe';
 import { FormataDecimalPipe } from 'src/app/core/formata-decimal.pipe';
 
-export const routes = [
+export const ROUTES: Routes = [
     { path: '', pathMatch: 'full', redirectTo: 'clientes' },
     { path: 'clientes', component: ClientesComponent },
     { path: 'cliente/:id', component: ClienteDetalheComponent },
@@ -65,7 +65,7 @@ export const routes = [
         ReactiveFormsModule,
         MatPaginatorModule,
         TableMaterialModule,
-        RouterModule.forChild(routes)
+        RouterModule.forChild(ROUTES)
     ]
 })
 export class CadastrosModule { }

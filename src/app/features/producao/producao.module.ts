@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatIconModule } from '@angular/material/icon';
@@ -11,7 +11,7 @@ import { TableMaterialModule } from './../../core/material-module';
 
 import { ProdutoComposicaoComponent } from './produto-composicao/produto-composicao.component';
 
-export const routes = [
+export const ROUTES: Routes = [
     { path: '', pathMatch: 'full', redirectTo: 'composicao' },
     { path: 'produto-composicao', component: ProdutoComposicaoComponent },
 ];
@@ -30,7 +30,7 @@ export const routes = [
     ReactiveFormsModule,
     MatPaginatorModule,
     TableMaterialModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(ROUTES)
   ]
 })
 export class ProducaoModule { }
