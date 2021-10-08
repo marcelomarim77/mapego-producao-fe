@@ -20,7 +20,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatDialogModule } from '@angular/material/dialog';
 import ptBr from '@angular/common/locales/pt';
 
-import { AppRoutingModule } from './app.routing.module';
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MenuListItemComponent } from './features/ui/menu-list-item/menu-list-item.component';
 import { FeaturesComponent } from './features/features.component';
